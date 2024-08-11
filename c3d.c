@@ -1,21 +1,4 @@
-
-
 #include "cub3d.h"
-
-
-void	array(int x, int y, int map_x, int map_y, void *mlx, void *mlx_win)
-{
-	if (x * TILE_SIZE > TILE_SIZE && x * TILE_SIZE < (map_x * TILE_SIZE) && y * TILE_SIZE > TILE_SIZE && y * TILE_SIZE < (map_y * TILE_SIZE))
-	{
-		x = x * TILE_SIZE;
-		y = y * TILE_SIZE;
-		while (x < map_x * TILE_SIZE)
-		{	
-			mlx_pixel_put(mlx, mlx_win, x, y, RED);
-			x++;
-		}
-	}
-}
 
 int main(int argc, char **argv)
 {
