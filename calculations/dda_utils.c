@@ -105,7 +105,16 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 
 
 //verifico se sono punti di impatto.
-
+if (first_impact_point_with_sx.x >= 0 && first_impact_point_with_sx.x <= c3d->map_fm_file.w * TILE_SIZE && first_impact_point_with_sx.y >= 0 && first_impact_point_with_sx.y <= c3d->map_fm_file.h * TILE_SIZE)
+{
+    printf("ok o ok ok ok ok ok ok ok ok ok ok \n");
+}   
+else
+{
+    printf("AAAAAAAAAAAAAAAA EXIT\n");
+    exit(1);
+}
+    
     if (c3d->map_fm_file.grid[first_impact_point_with_sx.y / TILE_SIZE][first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto
     {
         printf("Yes! first impact point with sx is a wall\n");

@@ -9,7 +9,7 @@ double    calculation_of_temporarySX(t_c3d *c3d, t_ray *ray, double alpha)
         ray->SxTemp= ray->DxTemp / cos(alpha);
     if (fabs(ray->SxTemp) > (c3d->map_fm_file.w * TILE_SIZE))
         ray->SxTemp= c3d->map_fm_file.w * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-   // printf("ipotenusa tramite dx: %f\n", ray->SxTemp);
+    printf("calculation temporarySX %f\n", ray->SxTemp);
     return (ray->SxTemp);
 }
 
@@ -21,7 +21,7 @@ double	calculation_of_temporarySY(t_c3d *c3d,  t_ray *ray, double alpha)
         ray->SyTemp = ray->DyTemp / sin(alpha);
 	if (fabs(ray->SyTemp) > (c3d->map_fm_file.h * TILE_SIZE))
          ray->SyTemp = c3d->map_fm_file.h * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-  //  printf("ipotenusa tramite dy: %f\n",  ray->SyTemp);
+    printf("calculation temporarySY %f\n",  ray->SyTemp);
 	return ( ray->SyTemp);
 }
 
@@ -65,7 +65,20 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
         
                 printf("end_point_to_check: (%d, %d)\n", ray->end_point_to_check.x, ray->end_point_to_check.y);
                 printf("cella di impatto: %d, %d\n", ray->end_point_to_check.x / TILE_SIZE, ray->end_point_to_check.y / TILE_SIZE);
-
+/*#################ECCO trovato il segmentation fault 
+devo trovare un modo per gestirlo. potrei dire che quando la cella di impatto arriva a tali coordinate 
+allora deve fermarsi nella iterazione. cioè non deve reiterare la y o la x oltre i limiti dellamappa...che è poi l'iterazione che stavo costruendo nella
+parte finale del ray casting. Quindi un while in cui dico itera fino a quando i valori non hanno superato i confini della mappa o quando sono muri.
+##########################*/
+if (ray->end_point_to_check.x >= 0 && ray->end_point_to_check.x <= c3d->map_fm_file.w * TILE_SIZE && ray->end_point_to_check.y >= 0 && ray->end_point_to_check.y <= c3d->map_fm_file.h * TILE_SIZE)
+{
+    printf("ok o ok ok ok ok ok ok ok ok ok ok \n");
+}   
+else
+{
+    printf("AAAAAAAAAAAAAAAA EXIT\n");
+    exit(1);
+}
                 if (c3d->map_fm_file.grid[ray->end_point_to_check.y / TILE_SIZE][((ray->end_point_to_check.x - 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[(ray->end_point_to_check.y + 1) / TILE_SIZE][(ray->end_point_to_check.x / TILE_SIZE)] == '1')
                 {
                     printf("ma attenzione che le celle affianco sono muri!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
