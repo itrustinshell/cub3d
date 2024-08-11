@@ -112,7 +112,7 @@ if (first_impact_point_with_sx.x >= 0 && first_impact_point_with_sx.x <= c3d->ma
 else
 {
     printf("AAAAAAAAAAAAAAAA EXIT\n");
-    exit(1);
+    return;
 }
     
     if (c3d->map_fm_file.grid[first_impact_point_with_sx.y / TILE_SIZE][first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto

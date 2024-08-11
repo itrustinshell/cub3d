@@ -61,9 +61,9 @@ void	draw_map(t_c3d *c3d)
         while (x < starting_drawing_x + c3d->map_fm_file.w)
         {
            if(c3d->map_fm_file.grid[y][x] == '1')
-                draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, BLUE, c3d);              
+                draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, GRAY, c3d);              
             else if (c3d->map_fm_file.grid[y][x] == '0') 
-                draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, GREEN, c3d);            
+                draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, WHITE, c3d);            
             else 
                 draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, RED, c3d);
             x++;

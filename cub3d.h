@@ -21,6 +21,7 @@
 #define YELLOW 0xffff00
 #define WHITE 0xffffff
 #define PURPLE 0x800080
+#define GRAY 0x808080
 
 //keycode
 #define KEY_W 13

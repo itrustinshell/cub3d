@@ -140,7 +140,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                     ray->sy = ray->SyTemp; 
                     ray->end_point.x = ray->end_point_to_check.x;
                     ray->end_point.y = ray->end_point_to_check.y;
-                    bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, WHITE);
+                    bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, GREEN);
                     printf("print along dist_y\n");
                 }
                 else
@@ -152,7 +152,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                     {
                         ray->end_point.x = ray->end_point_to_check.x;
                         ray->end_point.y = ray->end_point_to_check.y;
-                        bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, WHITE);
+                        bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, GREEN);
                         break;
                     }
                     else
