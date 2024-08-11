@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "algorithm": "c",
+        "complex": "c",
+        "__locale": "c"
+    }
+}
