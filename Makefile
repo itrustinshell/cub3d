@@ -4,6 +4,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(DIR)
 
 SRC = 	c3d.c \
+		initializing/initializing.c \
 		moving/moving.c moving/moving_utils_press_release_position.c moving/moving_utils_press_release_rotation.c moving/moving_utils_collision.c moving/moving_utils_update_rotation.c moving/moving_utils_update_position.c \
 		drawing/drawing.c drawing/drawing_player.c \
 		calculations/dda.c calculations/dda_utils.c calculations/dda_deltax_deltay_distx_disty.c calculations/dda_increment.c \

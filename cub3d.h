@@ -13,7 +13,7 @@
 //map_img_charateristics
 #define TILE_SIZE 50
 
-//color
+//colors
 #define RED 0xff0000
 #define GREEN 0x00ff00
 #define BLUE 0x0000ff
@@ -38,18 +38,15 @@
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
 #define DEGREE 2 * M_PI / 360;
-//start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate i mlx_win
+
+//start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
 {
 	void	*mlx_connection;
 	void	*mlx_win;
-//	void 	*img;
-//	char	*data;
-
 	int		w;
 	int		h;
-}
- t_win;
+} t_win;
 
 typedef struct s_map
 {
@@ -131,6 +128,9 @@ char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
 char	**get_map_from_file(char *file_content, int width, int height);
 
+//initializing
+
+void initialize_player(t_c3d *c3d);
 
 //calculation
 void	dda(t_c3d *c3d);
