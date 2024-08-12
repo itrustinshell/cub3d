@@ -143,6 +143,7 @@ void	calculate_dx(t_c3d *c3d, t_ray *ray);
 void	calculate_dy(t_c3d *c3d, t_ray *ray);
 void	get_cardinal_direction(double angle, t_ray *ray);
 void	increment(t_ray *ray, t_c3d *c3d, double alpha);
+int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);

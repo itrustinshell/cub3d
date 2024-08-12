@@ -15,7 +15,7 @@ void dda(t_c3d *c3d)
     reaching_first_side(c3d, &ray, c3d->player.alpha_direction);
     if (c3d->map_fm_file.grid[ray.first_impact_point.y / TILE_SIZE][ray.first_impact_point.x / TILE_SIZE] == '1')
     {
-      bresenham(c3d, c3d->player.x, c3d->player.y, ray.first_impact_point.x, ray.first_impact_point.y, YELLOW);
+      bresenham(c3d, c3d->player.x, c3d->player.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
    // if (c3d->map_fm_file.grid[ray.first_impact_point.y / TILE_SIZE][ray.first_impact_point.x / TILE_SIZE] != '1')
     }
     else
