@@ -18,28 +18,35 @@ void draw_tile(int x, int y, int color, t_c3d *c3d)
 	}
 }
 
-/*this function colors with balck the last line of pixxel of 
-evry cell...so the bottom and the rigth margins*/
+/**
+ * We first iterate through the borders and then we paint the inside of the tile.
+ * By doing so we avoid if statements.
+ */
 void draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d)
 {
-	int	i;
-	int	j;
+	int	row;
+	int	col;
+	int	border;
 
-	i = 0;
-	while (i < TILE_SIZE)
+	border = 0;
+	while(border < TILE_SIZE)
 	{
-		ft_color(x, y + i, c3d, BLACK);
-		ft_color(x + TILE_SIZE, y + i, c3d, BLACK);
-		j = 1;
-		while (j <= TILE_SIZE - 2)
+		ft_color(x, y + border, c3d, BLACK);
+		ft_color(x + TILE_SIZE, y + border, c3d, BLACK);
+		ft_color(x + border, y, c3d, BLACK);
+		ft_color(x + border, y + TILE_SIZE, c3d, BLACK);
+		border++;
+	}
+	row = 1;
+	while (row < TILE_SIZE - 1)
+	{
+		col = 1;
+		while (col < TILE_SIZE - 1)
 		{
-			if (i == 0 || i == TILE_SIZE)
-				ft_color(x + j, y + i, c3d, BLACK);
-			else 
-				ft_color(x + j, y + i, c3d, color);
-			j++;
+			ft_color(x + col, y + row, c3d, color);
+			col++;
 		}
-		i++;
+		row++;
 	}
 }
 
