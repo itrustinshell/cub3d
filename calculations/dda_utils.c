@@ -68,7 +68,72 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
     ray->sx = calculate_sx(c3d, ray, alpha); //rispettiva ipotenusa di dx
     ray->sy = calculate_sy(c3d, ray, alpha); //rispettiva ipotenusa di dy
 
-    /*
+    //#NOTA_1
+    t_point first_impact_point_with_sx; //calcolo sia il punto con sx che con sy
+    t_point first_impact_point_with_sy;
+
+    first_impact_point_with_sx.x = c3d->player.x + fabs(ray->sx) * cos(alpha); 
+    first_impact_point_with_sx.y = c3d->player.y + fabs(ray->sx) * sin(alpha);
+
+    first_impact_point_with_sy.x = c3d->player.x + fabs(ray->sy) * cos(alpha); 
+    first_impact_point_with_sy.y = c3d->player.y + fabs(ray->sy) * sin(alpha);
+
+    printf("primo punto calcolato con dx: %d, %d\n", first_impact_point_with_sx.x, first_impact_point_with_sx.y);
+    printf("primo punto calcolato con dy: %d, %d\n", first_impact_point_with_sy.x, first_impact_point_with_sy.y);
+
+
+	
+	if (!is_it_inside_map_perimeter(first_impact_point_with_sx, c3d)) //#NOTA_2 
+	{
+	
+		ray->first_impact_point =  first_impact_point_with_sy;
+		return;
+	}
+	
+    if (c3d->map_fm_file.grid[first_impact_point_with_sx.y / TILE_SIZE][first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto
+    {   
+        printf("Yes! first impact point with sx is a wall\n");
+        if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //allora vedi se anche quello con sy è di un muro
+        {
+            printf("Yes! first impact point with sy is a wall\n");
+            //per stare qui allora entrmabi sono due punti che incontrano muri quindi
+            if (fabs(ray->sx) <= fabs(ray->sy)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
+                ray->first_impact_point =  first_impact_point_with_sx;
+            else
+                ray->first_impact_point =  first_impact_point_with_sy; //altrimenti ritorni quell'altro
+        }
+        ray->first_impact_point =  first_impact_point_with_sx; //se sei qui significa che solo il punto con sx era quello di impatto e quindi ritornaleo
+    }
+    else
+	{
+		if (!is_it_inside_map_perimeter(first_impact_point_with_sy, c3d)) //# NOTA_2
+		{
+			ray->first_impact_point =  first_impact_point_with_sx;
+			return;
+		}
+		if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
+		{
+			printf("Yes! first impact point with sy is a wall\n");
+			//qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
+			ray->first_impact_point =  first_impact_point_with_sy;
+		}
+		else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
+		{
+			if (fabs(ray->sx) <= fabs(ray->sy)) //confronto tra ipotenuse
+			{
+				ray->first_impact_point = first_impact_point_with_sx;
+			}
+			else
+			{
+				ray->first_impact_point = first_impact_point_with_sy;
+			}
+		}
+	}
+    printf("punto di impatto: %d, %d\n",ray->first_impact_point.x, ray->first_impact_point.y);
+}
+
+
+    /* # NOTA_1
     I Verify what is the shorter distance (I use fabs to avoid negatives)
     I return the end-point of the shortest distance.
     */
@@ -88,67 +153,21 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
    punti di impatto su un muro.... appure ritorni solo il punto piu grande se è un punto di impatto su un muro.
    altrimenti ritorni solo il numero piu piccolo (ovvero quando nessuno dei due è un punto di impatto su un muro)
    */
-  //quindi ora:
-  //calcolo sia il punto con sx che con sy
 
-    t_point first_impact_point_with_sx;
-    t_point first_impact_point_with_sy;
-
-    first_impact_point_with_sx.x = c3d->player.x + fabs(ray->sx) * cos(alpha); 
-    first_impact_point_with_sx.y = c3d->player.y + fabs(ray->sx) * sin(alpha);
-
-    first_impact_point_with_sy.x = c3d->player.x + fabs(ray->sy) * cos(alpha); 
-    first_impact_point_with_sy.y = c3d->player.y + fabs(ray->sy) * sin(alpha);
-
-    printf("primo punto calcolato con dx: %d, %d\n", first_impact_point_with_sx.x, first_impact_point_with_sx.y);
-    printf("primo punto calcolato con dy: %d, %d\n", first_impact_point_with_sy.x, first_impact_point_with_sy.y);
-
-
-//verifico se sono punti di impatto.
-if (is_it_inside_map_perimeter(first_impact_point_with_sx, c3d))
-{
-    printf("ok o ok ok ok ok ok ok ok ok ok ok \n");
-}   
-else
-{
-    printf("AAAAAAAAAAAAAAAA EXIT\n");
-    return;
-}
-        printf("punto di impatto: %d, %d\n",first_impact_point_with_sx.x, first_impact_point_with_sx.y);
-        printf("cella di impatto: %d, %d\n",first_impact_point_with_sx.x / TILE_SIZE, first_impact_point_with_sx.y / TILE_SIZE);
-
-    if (c3d->map_fm_file.grid[first_impact_point_with_sx.y / TILE_SIZE][first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto
-    {   
-
-        printf("Yes! first impact point with sx is a wall\n");
-        if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //allora vedi se anche quello con sy è di un muro
-        {
-            printf("Yes! first impact point with sy is a wall\n");
-            //per stare qui allora entrmabi sono due punti che incontrano muri quindi
-            if (fabs(ray->sx) <= fabs(ray->sy)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
-                ray->first_impact_point =  first_impact_point_with_sx;
-            else
-                ray->first_impact_point =  first_impact_point_with_sy; //altrimenti ritorni quell'altro
-        }
-        ray->first_impact_point =  first_impact_point_with_sx; //se sei qui significa che solo il punto con sx era quello di impatto e quindi ritornaleo
-    }
-    else if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
-    {
-        printf("Yes! first impact point with sy is a wall\n");
-        //qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
-        ray->first_impact_point =  first_impact_point_with_sy;
-    }
-    else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
-    {
-        if (fabs(ray->sx) <= fabs(ray->sy)) //confronto tra ipotenuse
-        {
-            ray->first_impact_point = first_impact_point_with_sx;
-        }
-        else
-        {
-            ray->first_impact_point = first_impact_point_with_sy;
-
-        }
-    }
-    printf("punto di impatto: %d, %d\n",ray->first_impact_point.x, ray->first_impact_point.y);
-}
+  	/* #NOTA_2
+		inizio con il punto calcolato su sx. Farò lo stesso dopo con sy. 
+		In pratica voglio sapere se questo punto è già oltre i confini del mio permimetro.
+		per perimetro intendiamo proprio l'aria interna, quella che va oltre il punto di impatto interno.
+		Per intenderci intorno alla mappa verrà a crearsi un perimetro.
+		Ogni cella di questo perimetro è un quadrato.
+		prendnendo un punto che viaggia verso NE questo potrebbe incontrare quel quadrato su suo lato sinistro.
+		Ecco cosa intendo per perimetro. Quel lato sinistro è il limite.
+		Quindi quand'anche un punto cadesse all'interno di una cella del perimetro ma oltrepassasse tale limite interno,
+		ebbene sarebbe al di fuori del perimetro cosi come definito.
+		Ora proseguento: se una punto cade fuori questo perimetro significa che matematicamente quel punto ha il corrispetticvo 
+		sx (o sx) maggiore dell'altro puto calcolato lungo sy (o sx).
+		Quindi dovrò restituire matematicamente l'altro punto. E la funzione non prosegue...ecco perchè c'è un return.
+		Se poi il punto tornato è lungo (ma non oltre) il confine, oppure è un muro interno, verrà gestito in dda 
+		che non passa la plla a increment qualora ppunto appartenesse ad un muro, altrimenti se non fosse un muro,
+		passerebbe la palla a incrment che andrebbe a calcolare il punto di impatto per i successivi incrementi.
+		*/

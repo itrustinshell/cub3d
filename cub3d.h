@@ -22,6 +22,7 @@
 #define WHITE 0xffffff
 #define PURPLE 0x800080
 #define GRAY 0x808080
+#define PINK 0xffc0cb
 
 //keycode
 #define KEY_W 13
@@ -144,6 +145,19 @@ void	calculate_dy(t_c3d *c3d, t_ray *ray);
 void	get_cardinal_direction(double angle, t_ray *ray);
 void	increment(t_ray *ray, t_c3d *c3d, double alpha);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+
+//increment_measurement
+double	calculation_of_temporarySX(t_c3d *c3d, t_ray *ray, double alpha);
+double	calculation_of_temporarySY(t_c3d *c3d,  t_ray *ray, double alpha);
+void	calculation_of_end_point_to_check_along_SxTemp(t_c3d *c3d, t_ray *ray, double alpha);
+void 	calculation_of_end_point_to_check_along_SyTemp(t_c3d *c3d, t_ray *ray, double alpha);
+
+// increment_utils
+int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, t_point point);
+int is_it_a_wall_for_increment_x(t_c3d *c3d, t_ray *ray);
+int is_it_a_wall_for_increment_y(t_c3d *c3d, t_ray *ray);
+int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
