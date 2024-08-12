@@ -19,34 +19,30 @@ void draw_tile(int x, int y, int color, t_c3d *c3d)
 }
 
 /**
- * We first iterate through the borders and then we paint the inside of the tile.
- * By doing so we avoid if statements.
+ * This functions iterates over the TILE_SIZE and paints, for each row,
+ * the corresponding black borders, and the fills the inside of the row.
+ * By doing so we ensure O(n) speed and avoid if statements to check
+ * if the pixel is a border.
  */
 void draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d)
 {
-	int	row;
 	int	col;
-	int	border;
+	int	i;
 
-	border = 0;
-	while(border < TILE_SIZE)
-	{
-		ft_color(x, y + border, c3d, BLACK);
-		ft_color(x + TILE_SIZE, y + border, c3d, BLACK);
-		ft_color(x + border, y, c3d, BLACK);
-		ft_color(x + border, y + TILE_SIZE, c3d, BLACK);
-		border++;
-	}
-	row = 1;
-	while (row < TILE_SIZE - 1)
+	i = 0;
+	while(i < TILE_SIZE)
 	{
 		col = 1;
+		ft_color(x, y + i, c3d, BLACK);
+		ft_color(x + TILE_SIZE, y + i, c3d, BLACK);
+		ft_color(x + i, y, c3d, BLACK);
+		ft_color(x + i, y + TILE_SIZE, c3d, BLACK);
 		while (col < TILE_SIZE - 1)
 		{
-			ft_color(x + col, y + row, c3d, color);
+			ft_color(x + col, y + i, c3d, color);
 			col++;
 		}
-		row++;
+		i++;
 	}
 }
 
