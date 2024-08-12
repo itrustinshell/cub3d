@@ -21,8 +21,6 @@ void draw_tile(int x, int y, int color, t_c3d *c3d)
 /**
  * This functions iterates over the TILE_SIZE and paints, for each row,
  * the corresponding black borders, and the fills the inside of the row.
- * By doing so we ensure O(n) speed and avoid if statements to check
- * if the pixel is a border.
  */
 void draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d)
 {
