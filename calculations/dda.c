@@ -10,8 +10,8 @@ void dda(t_c3d *c3d)
 	printf("ecco l'anfgolo: %f\n", c3d->player.alpha_direction);
 	get_cardinal_direction(c3d->player.alpha_direction, &ray);
 	reaching_first_side(c3d, &ray, c3d->player.alpha_direction);
-	if (c3d->map_fm_file.grid[ray.first_impact_point.y / TILE_SIZE][ray.first_impact_point.x / TILE_SIZE] == '1')
-		bresenham(c3d, c3d->player.x, c3d->player.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
+	if (c3d->map_fm_file.grid[(int)ray.first_impact_point.y / TILE_SIZE][(int)ray.first_impact_point.x / TILE_SIZE] == '1')
+		bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
 	else
 		increment(&ray, c3d, c3d->player.alpha_direction);
 
@@ -21,7 +21,7 @@ void dda(t_c3d *c3d)
 //     reaching_first_side(c3d, &ray, ray.left_alpha );
 //     if (c3d->map_fm_file.grid[ray.first_impact_point.y / TILE_SIZE][ray.first_impact_point.x / TILE_SIZE] == '1')
 //     {
-//       bresenham(c3d, c3d->player.x, c3d->player.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
+//       bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
 //    // if (c3d->map_fm_file.grid[ray.first_impact_point.y / TILE_SIZE][ray.first_impact_point.x / TILE_SIZE] != '1')
 //     }
 //     else

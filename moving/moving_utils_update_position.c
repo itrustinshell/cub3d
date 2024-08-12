@@ -18,8 +18,8 @@ If there is a collision simpli don't do anything. so don't update coordinates of
 
 void update_player_tile_reference(t_c3d* c3d)
 {
-    c3d->player.tile_x = c3d->player.x / TILE_SIZE;
-    c3d->player.tile_y = c3d->player.y / TILE_SIZE;
+    c3d->player.tile.x = c3d->player.coordinates.x / TILE_SIZE;
+    c3d->player.tile.y = c3d->player.coordinates.y / TILE_SIZE;
 }
 
 int update_position(void *param) 
@@ -31,36 +31,36 @@ int update_position(void *param)
     c3d = (t_c3d *)param;   
     if (c3d->player.move_up)
     {   
-        if(!is_collision(c3d->player.x, c3d->player.y - FOOT_STEP, c3d))
+        if(!is_collision(c3d->player.coordinates.x, c3d->player.coordinates.y - FOOT_STEP, c3d))
         {
-            c3d->player.y -= FOOT_STEP;
+            c3d->player.coordinates.y -= FOOT_STEP;
             update_player_tile_reference(c3d);
             check = 1;
         }
     }
     if (c3d->player.move_down)
     {
-        if(!is_collision(c3d->player.x, c3d->player.y + FOOT_STEP, c3d))
+        if(!is_collision(c3d->player.coordinates.x, c3d->player.coordinates.y + FOOT_STEP, c3d))
         {
-            c3d->player.y += FOOT_STEP;
+            c3d->player.coordinates.y += FOOT_STEP;
             update_player_tile_reference(c3d);
             check = 1;
         }   
     }
     if (c3d->player.move_left)
     {
-        if(!is_collision(c3d->player.x - FOOT_STEP, c3d->player.y, c3d))
+        if(!is_collision(c3d->player.coordinates.x - FOOT_STEP, c3d->player.coordinates.y, c3d))
         {
-            c3d->player.x -= FOOT_STEP;
+            c3d->player.coordinates.x -= FOOT_STEP;
             update_player_tile_reference(c3d);
             check = 1;
         }   
     }
     if (c3d->player.move_right)
     {  
-        if(!is_collision(c3d->player.x + FOOT_STEP, c3d->player.y, c3d))
+        if(!is_collision(c3d->player.coordinates.x + FOOT_STEP, c3d->player.coordinates.y, c3d))
         {
-            c3d->player.x += FOOT_STEP;
+            c3d->player.coordinates.x += FOOT_STEP;
             update_player_tile_reference(c3d);
             check = 1;
         }   
@@ -73,9 +73,9 @@ int update_position(void *param)
         draw_map(c3d);
         mlx_put_image_to_window(c3d->win.mlx_connection, c3d->win.mlx_win, c3d->img.map_img, 0, 0);
 
-        draw_player(c3d, c3d->player.x, c3d->player.y, RADIUS);
+        draw_player(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, RADIUS);
         
-        draw_2d_player_direction(c3d, c3d->player.x, c3d->player.y, c3d->player.alpha_direction, BLACK);
+        draw_2d_player_direction(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, c3d->player.alpha_direction, BLACK);
 
         printf("sto stampando mappa e giocatore\n");
     }

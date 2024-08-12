@@ -32,18 +32,18 @@ int main(int argc, char **argv)
 	draw_map(&c3d);
 	mlx_put_image_to_window(c3d.win.mlx_connection, c3d.win.mlx_win, c3d.img.map_img, 0, 0);
 
-	c3d.player.x = 90;
-	c3d.player.y = 90;
+	c3d.player.coordinates.x = 90;
+	c3d.player.coordinates.y = 90;
 	update_player_tile_reference(&c3d);
 	
 
-	draw_player(&c3d, c3d.player.x, c3d.player.y, RADIUS);
+	draw_player(&c3d, c3d.player.coordinates.x, c3d.player.coordinates.y, RADIUS);
     
 
 
 	c3d.player.alpha_direction = 2 * M_PI;
 	dda(&c3d);
- 	draw_2d_player_direction(&c3d, c3d.player.x, c3d.player.y, c3d.player.alpha_direction, BLACK);
+ 	draw_2d_player_direction(&c3d, c3d.player.coordinates.x, c3d.player.coordinates.y, c3d.player.alpha_direction, BLACK);
 
 
 

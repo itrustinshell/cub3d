@@ -51,8 +51,8 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                 ray->DxTemp = abs(ray->dx) + TILE_SIZE;
                 printf("INCREMENT ray->DxTemp = %d\n", ray->DxTemp);
                 ray->SxTemp= calculation_of_temporarySX(c3d, ray, alpha);
-                ray->end_point_to_check.x = c3d->player.x + fabs(ray->SxTemp) * cos(alpha);
-                ray->end_point_to_check.y = c3d->player.y + fabs(ray->SxTemp) * sin(alpha);
+                ray->end_point_to_check.x = c3d->player.coordinates.x + fabs(ray->SxTemp) * cos(alpha);
+                ray->end_point_to_check.y = c3d->player.coordinates.y + fabs(ray->SxTemp) * sin(alpha);
                 printf("INCREMENT ray->end_point_to_check.x = %d, ray->end_point_to_check.y = %d\n", ray->end_point_to_check.x, ray->end_point_to_check.y);
                 printf("INCREMENT impact_tile: %d, %d\n", ray->end_point_to_check.x / TILE_SIZE, ray->end_point_to_check.y / TILE_SIZE);
                 //attenzione per far guardare al giusto quadrato ho sottratto -1 alle x quando è a NE. Non dovrebbe influire sul resto
@@ -64,15 +64,15 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                 if (c3d->map_fm_file.grid[ray->end_point_to_check.y / TILE_SIZE][(ray->end_point_to_check.x / TILE_SIZE)] != '1')
                 {
             //  ray->DxTemp =  ray->dx + TILE_SIZE;
-            // ray->sx  = calculate_sx(c3d, ray, alpha);
-            // ray->end_point.x = c3d->player.x + fabs(ray->sx) * cos(alpha);
-            // ray->end_point.y = c3d->player.y + fabs(ray->sx) * sin(alpha);
+            // ray->sx  = calculate_sx(c3d, ray, alpha, "sx")(c3d, ray, alpha);
+            // ray->end_point.x = c3d->player.coordinates.x + fabs(ray->sx) * cos(alpha);
+            // ray->end_point.y = c3d->player.coordinates.y + fabs(ray->sx) * sin(alpha);
                     
                     ray->dx = ray->DxTemp; //aggiorno il ray->dx che mi servirà aggiornato per l'iterazione successiva
                     ray->sx = ray->SxTemp; //aggiorno per stesso motivo rigo precefente
                     ray->end_point.x = ray->end_point_to_check.x;
                     ray->end_point.y = ray->end_point_to_check.y;
-                    bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                    bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                     printf("print along dist_x\n");
                 }
                 else
@@ -85,7 +85,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                     {
                         ray->end_point.x = ray->end_point_to_check.x;
                         ray->end_point.y = ray->end_point_to_check.y;
-                        bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                         printf("print alond d i s t _ X\n");
                         break;
                     }
@@ -95,8 +95,8 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                         {
                             ray->DxTemp = abs(ray->dx) + TILE_SIZE;
                             ray->SxTemp= calculation_of_temporarySX(c3d, ray, alpha);
-                            ray->end_point_to_check.x = c3d->player.x + fabs(ray->SxTemp) * cos(alpha);
-                            ray->end_point_to_check.y = c3d->player.y + fabs(ray->SxTemp) * sin(alpha);
+                            ray->end_point_to_check.x = c3d->player.coordinates.x + fabs(ray->SxTemp) * cos(alpha);
+                            ray->end_point_to_check.y = c3d->player.coordinates.y + fabs(ray->SxTemp) * sin(alpha);
                        
                             if (c3d->map_fm_file.grid[ray->end_point_to_check.y / TILE_SIZE][(ray->end_point_to_check.x / TILE_SIZE)] != '1')
                             {
@@ -104,7 +104,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                                 ray->sx = ray->SxTemp; //aggiorno per stesso motivo rigo precefente
                                 ray->end_point.x = ray->end_point_to_check.x;
                                 ray->end_point.y = ray->end_point_to_check.y;
-                                bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                                bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                             }
                             else
                             {
@@ -112,7 +112,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                                 ray->sx = ray->SxTemp; //aggiorno per stesso motivo rigo precefente
                                 ray->end_point.x = ray->end_point_to_check.x;
                                 ray->end_point.y = ray->end_point_to_check.y;
-                                bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                                bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                                 break;
                             }
                         }
@@ -129,8 +129,8 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                 ray->DyTemp = abs(ray->dy) + TILE_SIZE; ///allora da questo memoento inzia qualcosa di anomalo che cambia dy..non la fa aumentare di TILE_SIZE
                 printf("INCREMENT ray->DyTemp = %d\n", ray->DyTemp);
                 ray->SyTemp = calculation_of_temporarySY(c3d, ray, alpha);
-                ray->end_point_to_check.x = c3d->player.x + fabs(ray->SyTemp) * cos(alpha);
-                ray->end_point_to_check.y = c3d->player.y + fabs(ray->SyTemp) * sin(alpha);
+                ray->end_point_to_check.x = c3d->player.coordinates.x + fabs(ray->SyTemp) * cos(alpha);
+                ray->end_point_to_check.y = c3d->player.coordinates.y + fabs(ray->SyTemp) * sin(alpha);
                 printf("vediamo ste coord siamo in sez y\n");
                 printf("INCREMENT ray->end_point_to_check.x = %d, ray->end_point_to_check.y = %d\n", ray->end_point_to_check.x, ray->end_point_to_check.y);
                 printf("INCREMENT impact_tile: %d, %d\n", ray->end_point_to_check.x / TILE_SIZE, ray->end_point_to_check.y / TILE_SIZE);
@@ -140,7 +140,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                     ray->sy = ray->SyTemp; 
                     ray->end_point.x = ray->end_point_to_check.x;
                     ray->end_point.y = ray->end_point_to_check.y;
-                    bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, GREEN);
+                    bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, GREEN);
                     printf("print along dist_y\n");
                 }
                 else
@@ -152,7 +152,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                     {
                         ray->end_point.x = ray->end_point_to_check.x;
                         ray->end_point.y = ray->end_point_to_check.y;
-                        bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, GREEN);
+                        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, GREEN);
                         break;
                     }
                     else
@@ -161,8 +161,8 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                         {
                             ray->DyTemp = abs(ray->dy) + TILE_SIZE;
                             ray->SyTemp = calculation_of_temporarySX(c3d, ray, alpha);
-                            ray->end_point_to_check.x = c3d->player.x + fabs(ray->SyTemp) * cos(alpha);
-                            ray->end_point_to_check.y = c3d->player.y + fabs(ray->SyTemp) * sin(alpha);
+                            ray->end_point_to_check.x = c3d->player.coordinates.x + fabs(ray->SyTemp) * cos(alpha);
+                            ray->end_point_to_check.y = c3d->player.coordinates.y + fabs(ray->SyTemp) * sin(alpha);
 
                             if (c3d->map_fm_file.grid[ray->end_point_to_check.y / TILE_SIZE][(ray->end_point_to_check.x / TILE_SIZE)] != '1')
                             {
@@ -170,7 +170,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                                 ray->sy = ray->SyTemp; //aggiorno per stesso motivo rigo precefente
                                 ray->end_point.x = ray->end_point_to_check.x;
                                 ray->end_point.y = ray->end_point_to_check.y;
-                                bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                                bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                             }
                             else
                             {
@@ -178,7 +178,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
                                 ray->sy = ray->SyTemp; //aggiorno per stesso motivo rigo precefente
                                 ray->end_point.x = ray->end_point_to_check.x;
                                 ray->end_point.y = ray->end_point_to_check.y;
-                                bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, RED);
+                                bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, RED);
                                 break;
                             }
                         }
@@ -191,7 +191,7 @@ void increment(t_ray *ray, t_c3d *c3d, double alpha)
     }
     else
     {
-        bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, BLACK);
+        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, BLACK);
         printf ("print_you are not pointing NE\n");
     }
 }

@@ -37,49 +37,52 @@ t_point chose_side_point(t_c3d *c3d, t_ray *ray)
     side_point.y = 0;
     if (strcmp(ray->cardinal_direction, "NE") == 0 || strcmp(ray->cardinal_direction, "E") == 0)
     {
-        side_point.x = (c3d->player.tile_x + 1) * TILE_SIZE;
-        side_point.y = c3d->player.tile_y * TILE_SIZE;
+        side_point.x = ((int)c3d->player.tile.x + 1) * TILE_SIZE;
+        side_point.y = (int)c3d->player.tile.y * TILE_SIZE;
     }
     else if (strcmp(ray->cardinal_direction, "NW") == 0 || strcmp(ray->cardinal_direction, "W") == 0 || strcmp(ray->cardinal_direction, "N") == 0)
     {
-        side_point.x = c3d->player.tile_x * TILE_SIZE;
-        side_point.y = c3d->player.tile_y * TILE_SIZE;
+        side_point.x = (int)c3d->player.tile.x * TILE_SIZE;
+        side_point.y = (int)c3d->player.tile.y * TILE_SIZE;
     }
     else if (strcmp(ray->cardinal_direction, "SE") == 0)
     {
-        side_point.x = (c3d->player.tile_x + 1) * TILE_SIZE;
-        side_point.y = (c3d->player.tile_y + 1) * TILE_SIZE;
+        side_point.x = ((int)c3d->player.tile.x + 1) * TILE_SIZE;
+        side_point.y = ((int)c3d->player.tile.y + 1) * TILE_SIZE;
     }
     else if (strcmp(ray->cardinal_direction, "SW") == 0 || strcmp(ray->cardinal_direction, "S") == 0)
     {
-        side_point.x = c3d->player.tile_x * TILE_SIZE;
-        side_point.y = (c3d->player.tile_y + 1) * TILE_SIZE;
+        side_point.x = (int)c3d->player.tile.x * TILE_SIZE;
+        side_point.y = ((int)c3d->player.tile.y + 1) * TILE_SIZE;
     }
     return (side_point);
 }
 
+
+//void	calculate_sx(c3d, ray, alpha, "sx")(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
+
 void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 {
     ray->first_impact_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
-    calculate_dx(c3d, ray);
-    calculate_dy(c3d, ray);
-    printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", ray->first_impact_point.x / TILE_SIZE,  ray->first_impact_point.y /TILE_SIZE);
+    calculate_dx_dy(c3d, ray, "dx");
+    calculate_dx_dy(c3d, ray, "dY");
+    printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE);
     printf("ray.dx = %d, ray.dy = %d\n", abs(ray->dx), abs(ray->dy));
-    ray->sx = calculate_sx(c3d, ray, alpha); //rispettiva ipotenusa di dx
-    ray->sy = calculate_sy(c3d, ray, alpha); //rispettiva ipotenusa di dy
+    calculate_sx_sy(c3d, ray, alpha, "sx"); //rispettiva ipotenusa di dx
+    calculate_sx_sy(c3d, ray, alpha, "sy"); //rispettiva ipotenusa di dy
 
     //#NOTA_1
     t_point first_impact_point_with_sx; //calcolo sia il punto con sx che con sy
     t_point first_impact_point_with_sy;
 
-    first_impact_point_with_sx.x = c3d->player.x + fabs(ray->sx) * cos(alpha); 
-    first_impact_point_with_sx.y = c3d->player.y + fabs(ray->sx) * sin(alpha);
+    first_impact_point_with_sx.x = c3d->player.coordinates.x + fabs(ray->sx) * cos(alpha); 
+    first_impact_point_with_sx.y = c3d->player.coordinates.y + fabs(ray->sx) * sin(alpha);
 
-    first_impact_point_with_sy.x = c3d->player.x + fabs(ray->sy) * cos(alpha); 
-    first_impact_point_with_sy.y = c3d->player.y + fabs(ray->sy) * sin(alpha);
+    first_impact_point_with_sy.x = c3d->player.coordinates.x + fabs(ray->sy) * cos(alpha); 
+    first_impact_point_with_sy.y = c3d->player.coordinates.y + fabs(ray->sy) * sin(alpha);
 
-    printf("primo punto calcolato con dx: %d, %d\n", first_impact_point_with_sx.x, first_impact_point_with_sx.y);
-    printf("primo punto calcolato con dy: %d, %d\n", first_impact_point_with_sy.x, first_impact_point_with_sy.y);
+    printf("primo punto calcolato con dx: %d, %d\n", (int)first_impact_point_with_sx.x, (int)first_impact_point_with_sx.y);
+    printf("primo punto calcolato con dy: %d, %d\n", (int)first_impact_point_with_sy.x, (int)first_impact_point_with_sy.y);
 
 
 	
@@ -90,10 +93,10 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 		return;
 	}
 	
-    if (c3d->map_fm_file.grid[first_impact_point_with_sx.y / TILE_SIZE][first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto
+    if (c3d->map_fm_file.grid[(int)first_impact_point_with_sx.y / TILE_SIZE][(int)first_impact_point_with_sx.x / TILE_SIZE] == '1') //se il punto su sx è di un muto
     {   
         printf("Yes! first impact point with sx is a wall\n");
-        if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //allora vedi se anche quello con sy è di un muro
+        if (c3d->map_fm_file.grid[(int)first_impact_point_with_sy.y / TILE_SIZE][(int)first_impact_point_with_sy.x / TILE_SIZE] == '1') //allora vedi se anche quello con sy è di un muro
         {
             printf("Yes! first impact point with sy is a wall\n");
             //per stare qui allora entrmabi sono due punti che incontrano muri quindi
@@ -111,7 +114,7 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 			ray->first_impact_point =  first_impact_point_with_sx;
 			return;
 		}
-		if (c3d->map_fm_file.grid[first_impact_point_with_sy.y / TILE_SIZE][first_impact_point_with_sy.x / TILE_SIZE] == '1') //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
+		if (c3d->map_fm_file.grid[(int)first_impact_point_with_sy.y / TILE_SIZE][(int)first_impact_point_with_sy.x / TILE_SIZE] == '1') //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
 		{
 			printf("Yes! first impact point with sy is a wall\n");
 			//qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
@@ -129,7 +132,7 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 			}
 		}
 	}
-    printf("punto di impatto: %d, %d\n",ray->first_impact_point.x, ray->first_impact_point.y);
+    printf("punto di impatto: %d, %d\n",(int)ray->first_impact_point.x, (int)ray->first_impact_point.y);
 }
 
 

@@ -73,8 +73,8 @@ typedef struct s_img
 
 typedef struct	s_point
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 } t_point;
 
 typedef struct s_ray
@@ -101,10 +101,8 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	double		x;
-	double		y;
-	int			tile_x;
-	int			tile_y;
+	t_point		coordinates;
+	t_point		tile;
 	int			move_down;
 	int			move_up;
 	int			move_left;
@@ -138,10 +136,10 @@ void initialize_player(t_c3d *c3d);
 void	dda(t_c3d *c3d);
 void	reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-double	calculate_sx(t_c3d *c3d, t_ray *ray, double alpha);
-double	calculate_sy(t_c3d *c3d, t_ray *ray, double alpha);
-void	calculate_dx(t_c3d *c3d, t_ray *ray);
-void	calculate_dy(t_c3d *c3d, t_ray *ray);
+void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy);
+
+void 	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
+
 void	get_cardinal_direction(double angle, t_ray *ray);
 void	increment(t_ray *ray, t_c3d *c3d, double alpha);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);

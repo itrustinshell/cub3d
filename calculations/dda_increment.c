@@ -6,8 +6,8 @@ void print_info(t_ray *ray)
     printf("\n\n\n\n#### inizio controllo di increment ####\n");
     printf("dx iniziale = %d\n", ray->dx);
     printf("dy iniziale = %d\n", ray->dy);
-    printf("la prima cella è: (%d, %d)\n", ray->end_point.x / TILE_SIZE, ray->end_point.y / TILE_SIZE);
-    printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", ray->end_point.x, ray->end_point.y);
+    printf("la prima cella è: (%d, %d)\n", (int)ray->end_point.x / TILE_SIZE, (int)ray->end_point.y / TILE_SIZE);
+    printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
 }
 
 void	increment(t_ray *ray, t_c3d *c3d, double alpha) //# NOTA_2
@@ -75,7 +75,7 @@ void	increment(t_ray *ray, t_c3d *c3d, double alpha) //# NOTA_2
 	}
 	else
 	{
-		bresenham(c3d, c3d->player.x, c3d->player.y, ray->end_point.x, ray->end_point.y, BLACK);
+		bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, BLACK);
 		printf ("print_you are not pointing NE\n");
 	}
 }
