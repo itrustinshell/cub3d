@@ -13,6 +13,9 @@
 //map_img_charateristics
 #define TILE_SIZE 50
 
+//calculations
+#define EPSILON 1e-6 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
+
 //colors
 #define RED 0xff0000
 #define GREEN 0x00ff00
@@ -33,13 +36,13 @@
 #define ARROW_RIGHT 124
 
 //player charactieristics
-#define RAY_LENGTH (RADIUS * 2)
+#define RAY_LENGTH round((RADIUS * 2))
 #define FOOT_STEP 3
 #define RADIUS 6
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
-#define DEGREE 2 * M_PI / 360;
+#define DEGREE round(2 * round(M_PI / 360));
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
@@ -79,16 +82,16 @@ typedef struct	s_point
 
 typedef struct s_ray
 {
-	int		dx;
-	int 	dy;
+	double		dx;
+	double 	dy;
 
 	char 	*cardinal_direction;
 	double 	sx;
 	double 	sy;
 	double	SxTemp;
 	double	SyTemp;
-	int		DxTemp;
-	int		DyTemp;;
+	double		DxTemp;
+	double		DyTemp;;
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
 	t_point first_impact_point; //è il primo punto diimpatto in quella cella
 	t_point	end_point;
@@ -148,7 +151,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 
 t_point	calculation_of_end_point_to_check_along_SxTemp(t_c3d *c3d, t_ray *ray, double alpha);
 t_point calculation_of_end_point_to_check_along_SyTemp(t_c3d *c3d, t_ray *ray, double alpha);
-double    calculation_of_temporarySX_SY(int map_length, double DxTemp, double DyTemp, double alpha, char *chose_sx_or_sy);
+double    calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
 
 
 

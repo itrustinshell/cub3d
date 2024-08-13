@@ -10,29 +10,55 @@ disty = sy
 */
 
 
-void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
+// void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
+// {
+//     if (strcmp(chose_sx_or_sy, "sx") == 0)
+//     {
+//         if (alpha == (M_PI / 2) || alpha == (3 * M_PI / 2))
+//             ray->sx = ray->dy / sin(alpha);
+//         else
+//             ray->sx = ray->dx / cos(alpha);
+//         if (fabs(ray->sx) > (c3d->map_fm_file.w * TILE_SIZE))
+//             ray->sx = c3d->map_fm_file.w * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
+//         printf("ipotenusa tramite dx: %f\n", fabs(ray->sx));  //# NOTA_4
+//     }
+//     else
+//     {
+//         if (alpha == (M_PI) || alpha == (2 * M_PI) || alpha == (0))
+//             ray->sy = ray->dx / cos(alpha);
+//         else
+//             ray->sy = ray->dy / sin(alpha);
+//         if (fabs( ray->sy) > (c3d->map_fm_file.h * TILE_SIZE))
+//             ray->sy = c3d->map_fm_file.h * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
+//         printf("ipotenusa tramite dy: %f\n",  fabs(ray->sy)); //NOTA_5
+//     }
+// }
+
+void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
 {
+    double distance;
+    
     if (strcmp(chose_sx_or_sy, "sx") == 0)
     {
-        if (alpha == (M_PI / 2) || alpha == (3 * M_PI / 2))
-            ray->sx = ray->dy / sin(alpha);
+        if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
+            distance = ray->dy / sin(alpha);
         else
-            ray->sx = ray->dx / cos(alpha);
-        if (fabs(ray->sx) > (c3d->map_fm_file.w * TILE_SIZE))
-            ray->sx = c3d->map_fm_file.w * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-        printf("ipotenusa tramite dx: %f\n", fabs(ray->sx));  //# NOTA_4
+            distance = ray->dx / cos(alpha);
+        ray->sx = fmin(fabs(distance), c3d->map_fm_file.w * TILE_SIZE); //alla fine restituisvo con fmin confrontando distance con una grandezza scelta da me. Se questa è piu piccola alora me al restituisce perchè altrimenti l'altra sarebbe troppo grande.  fmin mi restituirà il valore piu piccolo.
+        printf("ipotenusa tramite dx: %f\n", fabs(ray->sx));
     }
     else
     {
-        if (alpha == (M_PI) || alpha == (2 * M_PI) || alpha == (0))
-            ray->sy = ray->dx / cos(alpha);
+        if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
+            distance = ray->dx / cos(alpha);
         else
-            ray->sy = ray->dy / sin(alpha);
-        if (fabs( ray->sy) > (c3d->map_fm_file.h * TILE_SIZE))
-            ray->sy = c3d->map_fm_file.h * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-        printf("ipotenusa tramite dy: %f\n",  fabs(ray->sy)); //NOTA_5
+            distance = ray->dy / sin(alpha);
+
+        ray->sy = fmin(fabs(distance), c3d->map_fm_file.h * TILE_SIZE);
+        printf("ipotenusa tramite dy: %f\n", fabs(ray->sy));
     }
 }
+
 
 void calculate_dx(t_c3d *c3d, t_ray *ray)
 {
