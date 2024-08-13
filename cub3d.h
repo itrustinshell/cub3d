@@ -141,8 +141,8 @@ void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
 void 	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 
 void	get_cardinal_direction(double angle, t_ray *ray);
-void	increment(t_ray *ray, t_c3d *c3d, double alpha);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 
 //increment_measurement
 
@@ -154,7 +154,7 @@ double    calculation_of_temporarySX_SY(int map_length, double DxTemp, double Dy
 
 
 // increment_utils
-int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, t_point point);
+int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
 //int is_it_a_wall_for_increment_x(t_c3d *c3d, t_ray *ray);
 //int is_it_a_wall_for_increment_y(t_c3d *c3d, t_ray *ray);
 int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d);

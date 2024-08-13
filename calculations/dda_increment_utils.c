@@ -6,15 +6,15 @@ da stampare  e ritprna 1 per fare il break.
 
 vedere poi se è megliofare una eventuale verisone che mette piu precisione magari con double
 sulla mappa*/
-int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, t_point point)
+int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify)
 {
-    if (c3d->map_fm_file.grid[(int)point.y / TILE_SIZE][(((int)point.x - 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point.y + 1) / TILE_SIZE][((int)point.x / TILE_SIZE)] == '1')
+    if (map_grid[(int)point_to_verify.y / TILE_SIZE][(((int)point_to_verify.x - 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point_to_verify.y + 1) / TILE_SIZE][((int)point_to_verify.x / TILE_SIZE)] == '1')
     {
         printf("ma attenzione che le celle affianco sono muri!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-        ray->end_point.x = point.x - 1;
-        ray->end_point.y = point.y + 1;
+        point_to_verify.x = point_to_verify.x - 1;
+        point_to_verify.y = point_to_verify.y + 1;
         printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
-        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray->end_point.x, ray->end_point.y, YELLOW);
+        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, point_to_verify.x, point_to_verify.y, YELLOW);
         return (1);
     }
     return (0);
@@ -35,7 +35,7 @@ int is_it_a_wall_for_increment_x(char **map_grid, t_point point_to_verify, t_c3d
     }
     else
     {
-        printf("Si! La cella (%f, %f) è un muro\n", ray->end_point_to_check.x / TILE_SIZE, ray->end_point_to_check.y / TILE_SIZE);
+        printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
         // ray->end_point.x = ray->end_point_to_check.x;
         // ray->end_point.y = ray->end_point_to_check.y;
         printf("le cooridnate di impatto sono: %f, %f\n", point_to_verify.x, point_to_verify.y);
