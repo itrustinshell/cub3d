@@ -46,7 +46,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				{
 					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) 
 						break;
-					if (is_it_a_wall(map_grid, end_point, c3d, ray, "sx"))
+					if (is_it_a_wall(map_grid, end_point, c3d))
 						break;
 				}
 				else
@@ -55,7 +55,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 					while (1) //quindi aumento di volta in volta lungo la y fino a quando non incontro un muro.
 					{
 						end_point = calculation_of_end_point_to_check_along_path_y(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
-						if (is_it_a_wall(map_grid, end_point, c3d, ray, "sy"))
+						if (is_it_a_wall(map_grid, end_point, c3d))
 							break;
 					}
 					break; //serve a far interrompere il while esterno
@@ -70,7 +70,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				{
 					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 						break;
-					if (is_it_a_wall(map_grid, end_point, c3d, ray, "sy"))
+					if (is_it_a_wall(map_grid, end_point, c3d))
 						break;
 				}
 				else
@@ -79,7 +79,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 					while (1) //quindi aumento di volta in volta lungo la x fino a quando non incontro un muro.
 					{
 						end_point = calculation_of_end_point_to_check_along_path_x(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
-						if (is_it_a_wall(map_grid, end_point, c3d, ray, "sx"))
+						if (is_it_a_wall(map_grid, end_point, c3d))
 							break;
 					}
 					break; //serve a far interrompere il while esterno
