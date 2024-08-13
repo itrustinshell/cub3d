@@ -64,7 +64,7 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
     calculate_dx_dy(c3d, ray, "dx");
     calculate_dx_dy(c3d, ray, "dY");
     printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE);
-    printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));
+    printf("ray.initialDx = %f, ray.initialDy = %f\n", fabs(ray->initialDx), fabs(ray->initialDy));
     calculate_sx_sy(c3d, ray, alpha, "sx"); //rispettiva ipotenusa di dx
     calculate_sx_sy(c3d, ray, alpha, "sy"); //rispettiva ipotenusa di dy
 

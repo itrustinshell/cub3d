@@ -34,9 +34,9 @@ t_point calculation_of_end_point_to_check_along_path_x(t_c3d *c3d, t_ray *ray, d
     point_to_return.x = 0;
     point_to_return.y = 0;
 
-    ray->DxTemp = fabs(ray->DxTemp) + TILE_SIZE; //allora aumentiamo di TILE_SIZE il dx. Andiamo a salvare questo valroe in un DXtemporaneo
-    printf("DxTemp = %f\n", ray->DxTemp);
-    ray->path_x =  calculation_of_temporarySX_SY(c3d->map_fm_file.w, ray->DxTemp, ray->DyTemp, alpha, "sx");     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+    ray->dx = fabs(ray->dx) + TILE_SIZE; //allora aumentiamo di TILE_SIZE il dx. Andiamo a salvare questo valroe in un DXtemporaneo
+    printf("dx = %f\n", ray->dx);
+    ray->path_x =  calculation_of_temporarySX_SY(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
     point_to_return.x = c3d->player.coordinates.x + round(fabs(ray->path_x) * cos(alpha)); //grazie al calcolo del sx temporaneo ecco che posso calcoalrre il nuovo punto
     point_to_return.y = c3d->player.coordinates.y + round(fabs(ray->path_x) * sin(alpha));
     printf("end_point_to_check: (%d, %d)\n", (int)point_to_return.x, (int)point_to_return.y);
@@ -51,9 +51,9 @@ t_point calculation_of_end_point_to_check_along_path_y(t_c3d *c3d, t_ray *ray, d
 
     point_to_return.x = 0;
     point_to_return.y = 0;
-    ray->DyTemp = fabs(ray->DyTemp) + TILE_SIZE; //aumento di TILE_SIZE
-    printf("DyTemp = %f\n", ray->DyTemp);
-    ray->path_y =  calculation_of_temporarySX_SY(c3d->map_fm_file.w, ray->DxTemp, ray->DyTemp, alpha, "sy"); 
+    ray->dy = fabs(ray->dy) + TILE_SIZE; //aumento di TILE_SIZE
+    printf("dy = %f\n", ray->dy);
+    ray->path_y =  calculation_of_temporarySX_SY(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy"); 
     point_to_return.x = c3d->player.coordinates.x + round(fabs(ray->path_y) * cos(alpha));
     point_to_return.y = c3d->player.coordinates.y + round(fabs(ray->path_y) * sin(alpha));
     printf("end_point_to_check:(%d, %d)\n", (int)point_to_return.x, (int)point_to_return.y);

@@ -4,8 +4,8 @@
 void print_info(t_ray *ray)
 {
     printf("\n\n\n\n#### inizio controllo di increment ####\n");
-    printf("dx iniziale = %f\n", ray->dx);
-    printf("dy iniziale = %f\n", ray->dy);
+    printf("dx iniziale = %f\n", ray->initialDx);
+    printf("dy iniziale = %f\n", ray->initialDy);
     printf("la prima cella è: (%d, %d)\n", (int)ray->end_point.x / TILE_SIZE, (int)ray->end_point.y / TILE_SIZE);
     printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
 }
@@ -25,8 +25,8 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 		//sto mettendo qui i valori iniziali cosi da iniziare ad eleminiare il doppione con temporary
 		ray->path_x = fabs(ray->sx);
 		ray->path_y = fabs(ray->sy);
-		ray->DxTemp = fabs(ray->dx);
-		ray->DyTemp = fabs(ray->dy);
+		ray->dx = fabs(ray->initialDx);
+		ray->dy = fabs(ray->initialDy);
 
 		printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
 		while (1)
@@ -35,9 +35,6 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 				break;
 			printf("sx = %f, sy = %f\n", fabs(ray->sx), fabs(ray->sy));
-			
-			
-
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
 			{   
 				printf("sez. x:\n");

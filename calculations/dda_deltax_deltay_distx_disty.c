@@ -9,6 +9,7 @@ distx = sx (is the hypotenus calculated for a particular dx)
 disty = sy
 */
 
+
 void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
 {
     double distance;
@@ -16,18 +17,18 @@ void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
     if (strcmp(chose_sx_or_sy, "sx") == 0)
     {
         if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
-            distance = ray->dy / sin(alpha);
+            distance = ray->initialDy / sin(alpha);
         else
-            distance = ray->dx / cos(alpha);
+            distance = ray->initialDx / cos(alpha);
         ray->sx = fmin(fabs(distance), c3d->map_fm_file.w * TILE_SIZE); //alla fine restituisvo con fmin confrontando distance con una grandezza scelta da me. Se questa è piu piccola alora me al restituisce perchè altrimenti l'altra sarebbe troppo grande.  fmin mi restituirà il valore piu piccolo.
         printf("ipotenusa tramite dx: %f\n", fabs(ray->sx));
     }
     else
     {
         if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
-            distance = ray->dx / cos(alpha);
+            distance = ray->initialDx / cos(alpha);
         else
-            distance = ray->dy / sin(alpha);
+            distance = ray->initialDy / sin(alpha);
 
         ray->sy = fmin(fabs(distance), c3d->map_fm_file.h * TILE_SIZE);
         printf("ipotenusa tramite dy: %f\n", fabs(ray->sy));
@@ -38,41 +39,41 @@ void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
 void calculate_dx(t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); 
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); 
     else if (strcmp(ray->cardinal_direction, "NE") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); 
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); 
     else if (strcmp(ray->cardinal_direction, "N") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); //VERIFICA SE VA BENE dovrebbe essere indifferente se riferisce a lato dx o sx
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x); //VERIFICA SE VA BENE dovrebbe essere indifferente se riferisce a lato dx o sx
     else if (strcmp(ray->cardinal_direction, "NW") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
     else if (strcmp(ray->cardinal_direction, "W") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
     else if (strcmp(ray->cardinal_direction, "SW") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
     else if (strcmp(ray->cardinal_direction, "S") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
     else if (strcmp(ray->cardinal_direction, "SE") == 0 )
-        ray->dx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
+        ray->initialDx = fabs(ray->first_impact_point.x - c3d->player.coordinates.x - 1);
 }
 
 void calculate_dy(t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1);
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1);
     if (strcmp(ray->cardinal_direction, "NE") == 0)
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); 
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); 
     else if (strcmp(ray->cardinal_direction, "N") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); 
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); 
     else if (strcmp(ray->cardinal_direction, "NW") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1);
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1);
     else if (strcmp(ray->cardinal_direction, "W") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); //dovrebbe essere indifferente se su o giu
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y + 1); //dovrebbe essere indifferente se su o giu
     else if (strcmp(ray->cardinal_direction, "SW") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y); 
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y); 
     else if (strcmp(ray->cardinal_direction, "S") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y);
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y);
     else if (strcmp(ray->cardinal_direction, "SE") == 0 )
-        ray->dy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y); 
+        ray->initialDy = fabs(c3d->player.coordinates.y - ray->first_impact_point.y); 
 }
 
 void calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy)
