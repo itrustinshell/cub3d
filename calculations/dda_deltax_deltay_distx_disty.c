@@ -9,31 +9,6 @@ distx = sx (is the hypotenus calculated for a particular dx)
 disty = sy
 */
 
-
-// void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
-// {
-//     if (strcmp(chose_sx_or_sy, "sx") == 0)
-//     {
-//         if (alpha == (M_PI / 2) || alpha == (3 * M_PI / 2))
-//             ray->sx = ray->dy / sin(alpha);
-//         else
-//             ray->sx = ray->dx / cos(alpha);
-//         if (fabs(ray->sx) > (c3d->map_fm_file.w * TILE_SIZE))
-//             ray->sx = c3d->map_fm_file.w * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-//         printf("ipotenusa tramite dx: %f\n", fabs(ray->sx));  //# NOTA_4
-//     }
-//     else
-//     {
-//         if (alpha == (M_PI) || alpha == (2 * M_PI) || alpha == (0))
-//             ray->sy = ray->dx / cos(alpha);
-//         else
-//             ray->sy = ray->dy / sin(alpha);
-//         if (fabs( ray->sy) > (c3d->map_fm_file.h * TILE_SIZE))
-//             ray->sy = c3d->map_fm_file.h * TILE_SIZE; //qui ho ridotto molto perchè erano lunghezze enormi man mano che ci si avvicinava a pi/2 ma vedi ora come gestire
-//         printf("ipotenusa tramite dy: %f\n",  fabs(ray->sy)); //NOTA_5
-//     }
-// }
-
 void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
 {
     double distance;

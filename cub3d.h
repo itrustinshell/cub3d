@@ -88,8 +88,8 @@ typedef struct s_ray
 	char 	*cardinal_direction;
 	double 	sx;
 	double 	sy;
-	double	SxTemp;
-	double	SyTemp;
+	double	path_x;
+	double	path_y;
 	double		DxTemp;
 	double		DyTemp;;
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
@@ -149,8 +149,8 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 
 //increment_measurement
 
-t_point	calculation_of_end_point_to_check_along_SxTemp(t_c3d *c3d, t_ray *ray, double alpha);
-t_point calculation_of_end_point_to_check_along_SyTemp(t_c3d *c3d, t_ray *ray, double alpha);
+t_point	calculation_of_end_point_to_check_along_path_x(t_c3d *c3d, t_ray *ray, double alpha);
+t_point calculation_of_end_point_to_check_along_path_y(t_c3d *c3d, t_ray *ray, double alpha);
 double    calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
 
 
