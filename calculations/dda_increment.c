@@ -23,7 +23,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 		while (1)
 		{
 			
-			if (is_it_passing_between_two_walls(c3d, ray, c3d->map_fm_file.grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
+			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 				break;
 			printf("sx = %f, sy = %f\n", fabs(ray->sx), fabs(ray->sy));
 			if (fabs(ray->sx) < fabs(ray->sy)) //se sx reale è più piccolo di sy reale
@@ -32,9 +32,9 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				end_point = calculation_of_end_point_to_check_along_SxTemp(c3d, ray, alpha);
 				if (is_it_inside_map_perimeter(end_point, c3d)) //#NOTA 1
 				{
-					if (is_it_passing_between_two_walls(c3d, ray, c3d->map_fm_file.grid, end_point)) 
+					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) 
 						break;
-					if (is_it_a_wall_for_increment_x(map_grid, end_point, c3d, ray))
+					if (is_it_a_wall(map_grid, end_point, c3d, ray, "sx"))
 						break;
 				}
 				else
@@ -43,7 +43,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 					while (1) //quindi aumento di volta in volta lungo la y fino a quando non incontro un muro.
 					{
 						end_point = calculation_of_end_point_to_check_along_SyTemp(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
-						if (is_it_a_wall_for_increment_y(map_grid, end_point, c3d, ray))
+						if (is_it_a_wall(map_grid, end_point, c3d, ray, "sy"))
 							break;
 					}
 					break; //serve a far interrompere il while esterno
@@ -56,9 +56,9 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 
 				if (is_it_inside_map_perimeter(end_point, c3d))
 				{
-					if (is_it_passing_between_two_walls(c3d, ray, c3d->map_fm_file.grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
+					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 						break;
-					if (is_it_a_wall_for_increment_y(map_grid, end_point, c3d, ray))
+					if (is_it_a_wall(map_grid, end_point, c3d, ray, "sy"))
 						break;
 				}
 				else
@@ -67,7 +67,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 					while (1) //quindi aumento di volta in volta lungo la x fino a quando non incontro un muro.
 					{
 						end_point = calculation_of_end_point_to_check_along_SxTemp(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
-						if (is_it_a_wall_for_increment_x(map_grid, end_point, c3d, ray))
+						if (is_it_a_wall(map_grid, end_point, c3d, ray, "sx"))
 							break;
 					}
 					break; //serve a far interrompere il while esterno

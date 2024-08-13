@@ -158,8 +158,8 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
 //int is_it_a_wall_for_increment_x(t_c3d *c3d, t_ray *ray);
 //int is_it_a_wall_for_increment_y(t_c3d *c3d, t_ray *ray);
 int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-int is_it_a_wall_for_increment_x(char **map_grid, t_point point_to_verify, t_c3d *c3d, t_ray *ray);
-int is_it_a_wall_for_increment_y(char **map_grid, t_point point_to_verify, t_c3d *c3d, t_ray *ray);
+
+int is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d, t_ray *ray, char *chose_section_x_or_y);
 
 
 
