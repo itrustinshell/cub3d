@@ -4,8 +4,8 @@ void initialize_player(t_c3d *c3d)
 {
 	c3d->player.alpha_direction = 0;
 	c3d->player.move_down = 0;
-	c3d->player.coordinates.x = 0;
-	c3d->player.coordinates.y = 0;
+	c3d->player.position.x = 0;
+	c3d->player.position.y = 0;
 	c3d->player.tile.x = 0;
 	c3d->player.tile.y = 0;
 	c3d->player.move_down = 0;

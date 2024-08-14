@@ -18,7 +18,7 @@ int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray)
 			return (THROUGH_TWO_WALLS);
 		if (is_it_a_wall(map_grid, end_point, c3d))
 		{
-			bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
+			bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, PINK);
 			return (WALL_INTERCEPTED);
 		}
 		return (INSIDE_PERIMETER);
@@ -34,17 +34,19 @@ void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d 
 	{
 		if (chose_path == PATH_X)
 		{
+			ray->dx = fabs(ray->dx) + TILE_SIZE; 
 			ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-			end_point = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); //ovvim
+			end_point = calculate_end_point(c3d->player.position, ray->path_x, alpha); //ovvim
 		}
 		else
 		{
+			ray->dy = fabs(ray->dy) + TILE_SIZE;
 			ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
-			end_point = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+			end_point = calculate_end_point(c3d->player.position, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 		}
 		if (is_it_a_wall(c3d->map_fm_file.grid, end_point, c3d))
 		{
-			bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
+			bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, PINK);
 			break;
 		}
 	}
@@ -54,7 +56,6 @@ void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d 
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOTA_2
 {
 	t_point end_point;
-
 
 	end_point.x = ray->first_impact_point.x; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
 	end_point.y = ray->first_impact_point.y;
@@ -69,8 +70,9 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				break;  printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
 			{   printf("sez. x:\n");
-				ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-				end_point = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha);
+				ray->dx = fabs(ray->dx) + TILE_SIZE; /*allora aumentiamo di TILE_SIZE il dx. Andiamo a salvare questo valroe in un DXtemporaneo*/printf("dx = %f\n", ray->dx);
+				ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);    //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+				end_point = calculate_end_point(c3d->player.position, ray->path_x, alpha);
 				wall_check = check_wall(end_point,  c3d, map_grid, ray);
 				if (wall_check != OUTSIDE_PERIMETER)
 				{
@@ -85,8 +87,9 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			}
 			else
 			{printf("Sez. Y\n");
+				ray->dy = fabs(ray->dy) + TILE_SIZE;
 				ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y);
-				end_point = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+				end_point = calculate_end_point(c3d->player.position, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 				wall_check = check_wall(end_point,  c3d, map_grid, ray);
 				if (wall_check != OUTSIDE_PERIMETER)
 				{
@@ -103,7 +106,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 	}
 	else
 	{
-		bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, BLACK);
+		bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, BLACK);
 		printf ("print_you are not pointing NE\n");
 	}
 	return (end_point);

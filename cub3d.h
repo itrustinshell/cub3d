@@ -118,7 +118,7 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	t_point		coordinates;
+	t_point		position;
 	t_point		tile;
 	int			move_down;
 	int			move_up;
@@ -161,8 +161,7 @@ int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 
 //increment_measurement
-t_point calculation_of_end_point_along_path_x(t_c3d *c3d, t_ray *ray, double path, double alpha);
-t_point calculation_of_end_point_along_path_y(t_c3d *c3d, t_ray *ray, double path, double alpha);
+t_point calculate_end_point(t_point player_position, double path, double alpha);
 double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
 
 // increment_utils
