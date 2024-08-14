@@ -16,6 +16,18 @@
 //calculations
 #define EPSILON 1e-6 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
 
+//wall_check
+#define THROUGH_TWO_WALLS 1
+#define WALL_INTERCEPTED 1
+#define INSIDE_PERIMETER 2
+#define OUTSIDE_PERIMETER 0
+#define WALL_IS_NOT_INTERCEPTED 1
+
+
+//chose_path
+#define PATH_X 1
+#define PATH_Y 2
+
 //colors
 #define RED 0xff0000
 #define GREEN 0x00ff00
@@ -128,6 +140,8 @@ typedef struct s_c3d
 	t_player	player;
 } t_c3d;
 
+
+
 //parsing
 char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
@@ -140,7 +154,7 @@ void	initialize_player(t_c3d *c3d);
 void	dda(t_c3d *c3d);
 t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
+double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
 void calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 void	get_cardinal_direction(double angle, t_ray *ray);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
@@ -149,7 +163,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 //increment_measurement
 t_point calculation_of_end_point_along_path_x(t_c3d *c3d, t_ray *ray, double path, double alpha);
 t_point calculation_of_end_point_along_path_y(t_c3d *c3d, t_ray *ray, double path, double alpha);
-double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
+double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
 
 // increment_utils
 int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);

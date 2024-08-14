@@ -9,29 +9,27 @@ distx = sx (is the hypotenus calculated for a particular dx)
 disty = sy
 */
 
-double calculate_path(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy)
+double calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path)
 {
-    double sx_or_sy_to_return;
+    double path;
 
-    sx_or_sy_to_return = 0;
-    if (strcmp(chose_sx_or_sy, "sx") == 0)
+    path = 0;
+    if (chose_path == PATH_X)
     {
         if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
-            sx_or_sy_to_return = deltaY / sin(alpha);
+            path = deltaY / sin(alpha);
         else
-            sx_or_sy_to_return = deltaX / cos(alpha);
-        printf("ipotenusa tramite dx: %f\n", fabs(sx_or_sy_to_return));
+            path = deltaX / cos(alpha);printf("ipotenusa tramite dx: %f\n", fabs(path));
     }
     else
     {
         if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
-            sx_or_sy_to_return = deltaX / cos(alpha);
+            path = deltaX / cos(alpha);
         else
-            sx_or_sy_to_return = deltaY / sin(alpha);
-        printf("ipotenusa tramite dy: %f\n", fabs(sx_or_sy_to_return));
+            path = deltaY / sin(alpha);printf("ipotenusa tramite dy: %f\n", fabs(path));
     }
-    sx_or_sy_to_return = fmin(fabs(sx_or_sy_to_return), map_length * TILE_SIZE);
-    return (fabs(sx_or_sy_to_return));
+    path = fmin(fabs(path), map_length * TILE_SIZE);
+    return (fabs(path));
 }
 
 void calculate_initial_dx(t_point initial_side_point, t_c3d *c3d, t_ray *ray)

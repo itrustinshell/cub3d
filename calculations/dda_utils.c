@@ -84,9 +84,9 @@ t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ra
 	ray->first_side_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
 	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dx"); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
 	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));  //#NOTA_1
-	ray->path_x = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");
+	ray->path_x = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);
 	first_impact_point_along_pathX = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); /*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_along_pathX.x, (int)first_impact_point_along_pathX.y);
-	ray->path_y = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy"); 
+	ray->path_y = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
 	first_impact_point_along_pathY = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_along_pathY.x, (int)first_impact_point_along_pathY.y);
 	if (!is_it_inside_map_perimeter(first_impact_point_along_pathX, c3d)) //#NOTA_2 
 		return (first_impact_point_along_pathY);

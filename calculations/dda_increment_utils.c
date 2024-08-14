@@ -24,7 +24,7 @@ int is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d)
 {
     t_c3d *ciao;
     ciao = c3d;
-    
+
     if (map_grid[(int)point_to_verify.y / TILE_SIZE][(int)point_to_verify.x / TILE_SIZE] == '1')
     {
         printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
@@ -38,9 +38,8 @@ int is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d)
     return (1);
 }
 
-int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d)
+int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d) //AAA QUESTO è il perimwtro che sondiera proprio la parte interna senza muri
 {
-    //AAA QUESTO è il perimwtro che sondiera proprio la parte interna senza muri
 	if (point.x >= TILE_SIZE - 1 && point.x < (c3d->map_fm_file.w * TILE_SIZE - TILE_SIZE) + 1  && point.y >= TILE_SIZE - 1 && point.y < (c3d->map_fm_file.h * TILE_SIZE) - TILE_SIZE + 1)
 		return (1);
 	else
