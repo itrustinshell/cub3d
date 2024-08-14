@@ -138,10 +138,10 @@ void	initialize_player(t_c3d *c3d);
 
 //calculation
 void	dda(t_c3d *c3d);
-void	reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha);
+t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-double	calculate_sx_sy(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
-void	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
+double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
+void calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 void	get_cardinal_direction(double angle, t_ray *ray);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);

@@ -58,71 +58,56 @@ t_point chose_side_point(t_c3d *c3d, t_ray *ray)
 	return (side_point);
 }
 
-/*attention: 
-this function checks if even the other point belongs to a wall.
-To be executed it means that the first point for sure belongs to a wall
-*/
-void	check_if_are_both_walls(t_c3d *c3d, t_ray *ray, t_point first_point, t_point second_point) 
+/*this function checks if even the other point belongs to a wall.
+To be executed it means that the first point for sure belongs to a wall.
+It set th first_impact_point*/
+t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, t_point point_to_verify, char **map_grid, t_ray *ray, t_c3d *c3d) 
 {
-		if (is_it_a_wall(c3d->map_fm_file.grid, second_point, c3d)) //allora vedi se anche quello con sy è di un muro
+		if (is_it_a_wall(map_grid, point_to_verify, c3d)) //allora vedi se anche quello con sy è di un muro
 		{
 			//per stare qui allora entrmabi sono due punti che incontrano muri quindi
 			if (fabs(ray->path_x) <= fabs(ray->path_y)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
-				ray->first_impact_point = first_point;
+				return (point_of_a_wall);
 			else
-				ray->first_impact_point = second_point; //altrimenti ritorni quell'altro
+				return (point_to_verify); //altrimenti ritorni quell'altro
 		}
 		else
-			ray->first_impact_point = first_point; //se sei qui significa che solo il punto con sx era quello di impatto e quindi ritornaleo
+			return (point_of_a_wall); //se sei qui significa che solo il punto con sx era quello di impatto e quindi ritornaleo
+		return (point_of_a_wall);
 }   
 
-
-
-void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
+t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray) //la verisone commentata è nel file versioni
 {   
-	t_point first_impact_point_with_sx; //calcolo sia il punto con sx che con sy
-	t_point first_impact_point_with_sy;
+	t_point first_impact_point_along_pathX; //calcolo sia il punto con sx che con sy
+	t_point first_impact_point_along_pathY;
 
-	ray->first_impact_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
-   
-	calculate_dx_dy(c3d, ray, "dx"); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
-	calculate_dx_dy(c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));  //#NOTA_1
-   
-	ray->path_x = calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");
-	first_impact_point_with_sx = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); /*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_with_sx.x, (int)first_impact_point_with_sx.y);
-   
-	ray->path_y = calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy"); 
-	first_impact_point_with_sy = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_with_sy.x, (int)first_impact_point_with_sy.y);
-
-	if (!is_it_inside_map_perimeter(first_impact_point_with_sx, c3d)) //#NOTA_2 
-	{
-		ray->first_impact_point = first_impact_point_with_sy;
-		return;
-	}
-	if (is_it_a_wall(c3d->map_fm_file.grid, first_impact_point_with_sx, c3d))
-		check_if_are_both_walls(c3d, ray, first_impact_point_with_sx, first_impact_point_with_sy);
+	ray->first_side_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
+	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dx"); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
+	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));  //#NOTA_1
+	ray->path_x = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");
+	first_impact_point_along_pathX = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); /*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_along_pathX.x, (int)first_impact_point_along_pathX.y);
+	ray->path_y = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy"); 
+	first_impact_point_along_pathY = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_along_pathY.x, (int)first_impact_point_along_pathY.y);
+	if (!is_it_inside_map_perimeter(first_impact_point_along_pathX, c3d)) //#NOTA_2 
+		return (first_impact_point_along_pathY);
+	else if (is_it_a_wall(c3d->map_fm_file.grid, first_impact_point_along_pathX, c3d))
+		return (check_if_are_both_walls_and_set_firstSidePoint(first_impact_point_along_pathX, first_impact_point_along_pathY, map_grid, ray, c3d));
 	else
 	{
-		if (!is_it_inside_map_perimeter(first_impact_point_with_sy, c3d)) //# NOTA_2
-		{
-			ray->first_impact_point = first_impact_point_with_sx;
-			return;
-		}
-		if (is_it_a_wall(c3d->map_fm_file.grid, first_impact_point_with_sy, c3d)) //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
-		{
-			printf("Yes! first impact point with sy is a wall\n");
-			//qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
-			ray->first_impact_point =  first_impact_point_with_sy;
-		}
+		if (!is_it_inside_map_perimeter(first_impact_point_along_pathY, c3d)) //# NOTA_2
+			return (first_impact_point_along_pathX);
+		if (is_it_a_wall(c3d->map_fm_file.grid, first_impact_point_along_pathY, c3d)) //il punto su sx non era di un muro, quindi ha skippato qulla parte...allora vediamo se us sy il punto è di un muro
+			return(first_impact_point_along_pathY);			//qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
 		else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
 		{
 			if (fabs(ray->path_x) <= fabs(ray->path_y)) //confronto tra ipotenuse
-				ray->first_impact_point = first_impact_point_with_sx;
+				return (first_impact_point_along_pathX);
 			else
-				ray->first_impact_point = first_impact_point_with_sy;
+				return (first_impact_point_along_pathY);
 		}
-	}
-	printf("punto di impatto: %d, %d\n",(int)ray->first_impact_point.x, (int)ray->first_impact_point.y);
+	} printf("punto di impatto: %d, %d\n",(int)ray->first_impact_point.x, (int)ray->first_impact_point.y);
+	return (first_impact_point_along_pathY);
+
 }
 
 

@@ -9,7 +9,7 @@ void dda(t_c3d *c3d)
 	ray.right_alpha = c3d->player.alpha_direction + 8 * DEGREE;
 	printf("ecco l'anfgolo: %f\n", c3d->player.alpha_direction);
 	get_cardinal_direction(c3d->player.alpha_direction, &ray);
-	reaching_first_side(c3d, &ray, c3d->player.alpha_direction);
+	ray.first_impact_point = reaching_first_side(c3d->map_fm_file.grid,c3d->player.alpha_direction, c3d, &ray);
 	if (c3d->map_fm_file.grid[(int)ray.first_impact_point.y / TILE_SIZE][(int)ray.first_impact_point.x / TILE_SIZE] == '1')
 		bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, ray.first_impact_point.x, ray.first_impact_point.y, PURPLE);
 	else
