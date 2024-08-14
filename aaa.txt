@@ -14,3 +14,9 @@ vedi bene il Makefile....
 
 ///
 ho un problema quando guarda ad est...vedi se anche quando quadra altrove
+
+
+
+
+
+

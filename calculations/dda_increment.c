@@ -14,6 +14,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 {
 	t_point end_point;
 
+
 	end_point.x = ray->first_impact_point.x; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
 	end_point.y = ray->first_impact_point.y;
 	print_info(ray);
@@ -29,22 +30,30 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
 			{   
 				printf("sez. x:\n");
-				end_point = calculation_of_end_point_to_check_along_path_x(c3d, ray, alpha);
+				ray->path_x =  calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+				end_point = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha);
 				if (is_it_inside_map_perimeter(end_point, c3d)) //#NOTA 1
 				{
 					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) 
 						break;
 					if (is_it_a_wall(map_grid, end_point, c3d))
+					{
+						bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
 						break;
+					}
 				}
 				else
 				{
 					printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
 					while (1) //quindi aumento di volta in volta lungo la y fino a quando non incontro un muro.
 					{
-						end_point = calculation_of_end_point_to_check_along_path_y(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+						ray->path_y =  calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy"); 
+						end_point = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 						if (is_it_a_wall(map_grid, end_point, c3d))
+						{
+							bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
 							break;
+						}
 					}
 					break; //serve a far interrompere il while esterno
 				}
@@ -52,23 +61,31 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			else
 			{
 				printf("Sez. Y\n");
-				end_point = calculation_of_end_point_to_check_along_path_y(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+				ray->path_y =  calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sy");
+				end_point = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 
 				if (is_it_inside_map_perimeter(end_point, c3d))
 				{
 					if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 						break;
 					if (is_it_a_wall(map_grid, end_point, c3d))
+					{
+						bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
 						break;
+					}
 				}
 				else
 				{
 					printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
 					while (1) //quindi aumento di volta in volta lungo la x fino a quando non incontro un muro.
 					{
-						end_point = calculation_of_end_point_to_check_along_path_x(c3d, ray, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+						ray->path_x =  calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, "sx");     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+						end_point = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 						if (is_it_a_wall(map_grid, end_point, c3d))
+						{
+							bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, end_point.x, end_point.y, PINK);
 							break;
+						}
 					}
 					break; //serve a far interrompere il while esterno
 				}

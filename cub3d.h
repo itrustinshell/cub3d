@@ -134,39 +134,27 @@ void	get_map_dimensions(char * file_content, int *width, int *height);
 char	**get_map_from_file(char *file_content, int width, int height);
 
 //initializing
-
-void initialize_player(t_c3d *c3d);
+void	initialize_player(t_c3d *c3d);
 
 //calculation
 void	dda(t_c3d *c3d);
 void	reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-double calculate_sx_sy(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
-
-void 	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
-
+double	calculate_sx_sy(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
+void	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 void	get_cardinal_direction(double angle, t_ray *ray);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 
 //increment_measurement
-
-t_point	calculation_of_end_point_to_check_along_path_x(t_c3d *c3d, t_ray *ray, double alpha);
-t_point calculation_of_end_point_to_check_along_path_y(t_c3d *c3d, t_ray *ray, double alpha);
-double    calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
-
-
-
+t_point calculation_of_end_point_along_path_x(t_c3d *c3d, t_ray *ray, double path, double alpha);
+t_point calculation_of_end_point_along_path_y(t_c3d *c3d, t_ray *ray, double path, double alpha);
+double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
 
 // increment_utils
-int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
-//int is_it_a_wall_for_increment_x(t_c3d *c3d, t_ray *ray);
-//int is_it_a_wall_for_increment_y(t_c3d *c3d, t_ray *ray);
-int	is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-
-int is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d);
-
-
+int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
+int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+int 	is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
@@ -181,14 +169,14 @@ void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 
 
 //moving;
-int my_key_hook(int keycode, void *param);
-int my_key_release(int keycode, void *param);
-int key_press(int keycode, void *param);
-int key_release(int keycode, void *param);
-int update_position(void *param);
-int update_alpha_rotation(void *param);
-int update_player_movement(void *param);
-int is_collision(int player_next_x, int player_next_y, t_c3d *c3d);
+int		my_key_hook(int keycode, void *param);
+int		my_key_release(int keycode, void *param);
+int		key_press(int keycode, void *param);
+int		key_release(int keycode, void *param);
+int		update_position(void *param);
+int		update_alpha_rotation(void *param);
+int		update_player_movement(void *param);
+int 	is_collision(int player_next_x, int player_next_y, t_c3d *c3d);
 void	update_player_tile_reference(t_c3d *c3d);
 //moving_utils
 void    key_press_player_alpha_rotation(int keycode, t_c3d *c3d);

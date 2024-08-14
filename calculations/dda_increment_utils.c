@@ -22,10 +22,12 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
 
 int is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d)
 {
+    t_c3d *ciao;
+    ciao = c3d;
+    
     if (map_grid[(int)point_to_verify.y / TILE_SIZE][(int)point_to_verify.x / TILE_SIZE] == '1')
     {
         printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
-        bresenham(c3d, c3d->player.coordinates.x, c3d->player.coordinates.y, point_to_verify.x, point_to_verify.y, RED);
         return (1);
     }
     else
