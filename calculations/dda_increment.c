@@ -18,20 +18,11 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 	end_point.y = ray->first_impact_point.y;
 	print_info(ray);
 
-
-
 	if (strcmp(ray->cardinal_direction, "NE") == 0) //per ora ho toloto E per questinoi di testing
 	{
-		//sto mettendo qui i valori iniziali cosi da iniziare ad eleminiare il doppione con temporary
-		// ray->path_x = fabs(ray->sx);
-		// ray->path_y = fabs(ray->sy);
-		//ray->dx = fabs(ray->initialDx);
-		//ray->dy = fabs(ray->initialDy);
-
 		printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
 		while (1)
 		{
-			
 			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 				break;
 			printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));

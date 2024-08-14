@@ -10,30 +10,35 @@ disty = sy
 */
 
 
-void calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy)
+double calculate_sx_sy(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy)
 {
-    double distance;
-    
+    double sx_or_sy_to_return;
+
+    sx_or_sy_to_return = 0;
     if (strcmp(chose_sx_or_sy, "sx") == 0)
     {
         if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
-            distance = ray->dy / sin(alpha);
+            sx_or_sy_to_return = deltaY / sin(alpha);
         else
-            distance = ray->dx / cos(alpha);
-        ray->path_x = fmin(fabs(distance), c3d->map_fm_file.w * TILE_SIZE); //alla fine restituisvo con fmin confrontando distance con una grandezza scelta da me. Se questa è piu piccola alora me al restituisce perchè altrimenti l'altra sarebbe troppo grande.  fmin mi restituirà il valore piu piccolo.
-        printf("ipotenusa tramite dx: %f\n", fabs(ray->path_x));
+            sx_or_sy_to_return = deltaX / cos(alpha);
+        printf("ipotenusa tramite dx: %f\n", fabs(sx_or_sy_to_return));
     }
     else
     {
         if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
-            distance = ray->dx / cos(alpha);
+            sx_or_sy_to_return = deltaX / cos(alpha);
         else
-            distance = ray->dy / sin(alpha);
-
-        ray->path_y = fmin(fabs(distance), c3d->map_fm_file.h * TILE_SIZE);
-        printf("ipotenusa tramite dy: %f\n", fabs(ray->path_y));
+            sx_or_sy_to_return = deltaY / sin(alpha);
+        printf("ipotenusa tramite dy: %f\n", fabs(sx_or_sy_to_return));
     }
+    sx_or_sy_to_return = fmin(fabs(sx_or_sy_to_return), map_length * TILE_SIZE);
+    return (sx_or_sy_to_return);
 }
+
+
+
+
+
 
 
 // void calculate_dx(t_c3d *c3d, t_ray *ray)

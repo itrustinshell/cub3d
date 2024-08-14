@@ -141,7 +141,7 @@ void initialize_player(t_c3d *c3d);
 void	dda(t_c3d *c3d);
 void	reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-void	calculate_sx_sy(t_c3d *c3d, t_ray *ray, double alpha, char *chose_sx_or_sy);
+double calculate_sx_sy(int map_length, double deltaX, double deltaY, double alpha, char *chose_sx_or_sy);
 
 void 	calculate_dx_dy(t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 
