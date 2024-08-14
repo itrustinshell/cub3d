@@ -73,8 +73,8 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
     t_point first_impact_point_with_sx; //calcolo sia il punto con sx che con sy
     t_point first_impact_point_with_sy;
 
-    first_impact_point_with_sx.x = c3d->player.coordinates.x + round(fabs(ray->sx) * cos(alpha)); 
-    first_impact_point_with_sx.y = c3d->player.coordinates.y + round(fabs(ray->sx) * sin(alpha));
+    first_impact_point_with_sx.x = c3d->player.coordinates.x + round(fabs(ray->path_x) * cos(alpha)); 
+    first_impact_point_with_sx.y = c3d->player.coordinates.y + round(fabs(ray->path_x) * sin(alpha));
 
     first_impact_point_with_sy.x = c3d->player.coordinates.x + round(fabs(ray->path_y) * cos(alpha)); 
     first_impact_point_with_sy.y = c3d->player.coordinates.y + round(fabs(ray->path_y) * sin(alpha));
