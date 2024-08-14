@@ -10,6 +10,19 @@ void print_info(t_ray *ray)
     printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
 }
 
+
+t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha)
+{
+	t_point point_to_return;
+
+	point_to_return.x = 0;
+	point_to_return.y = 0;
+	point_to_return.x = player_position.x + round(fabs(path) * cos(alpha)); //grazie al calcolo del sx temporaneo ecco che posso calcoalrre il nuovo punto
+	point_to_return.y = player_position.y + round(fabs(path) * sin(alpha)); printf("end_point_to_check: (%d, %d)\n", (int)point_to_return.x, (int)point_to_return.y);printf("cella di impatto: %d, %d\n", (int)point_to_return.x / TILE_SIZE, (int)point_to_return.y / TILE_SIZE);
+	return (point_to_return);
+}
+
+
 int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray)
 {
 	if (is_it_inside_map_perimeter(end_point, c3d)) //#NOTA 1
@@ -28,6 +41,9 @@ int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray)
 	return (OUTSIDE_PERIMETER);
 }
 
+
+
+
 void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path)
 {
 	while (WALL_IS_NOT_INTERCEPTED) //quindi aumento di volta in volta lungo la y fino a quando non incontro un muro.
@@ -36,13 +52,13 @@ void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d 
 		{
 			ray->dx = fabs(ray->dx) + TILE_SIZE; 
 			ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-			end_point = calculate_end_point(c3d->player.position, ray->path_x, alpha); //ovvim
+			end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_x, alpha) ;//ovvim
 		}
 		else
 		{
 			ray->dy = fabs(ray->dy) + TILE_SIZE;
 			ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
-			end_point = calculate_end_point(c3d->player.position, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+			end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_y, alpha);//ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 		}
 		if (is_it_a_wall(c3d->map_fm_file.grid, end_point, c3d))
 		{
@@ -52,6 +68,26 @@ void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d 
 	}
 	return;
 }
+
+t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y)
+{
+	t_point end_point;
+	if (chose_section_x_or_y == SECTION_X)
+	{
+		ray->dx = fabs(ray->dx) + TILE_SIZE; 
+		ray->path_x =  calculate_path(map_length, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+		end_point = trigonometric_pointCalculation(player_position, ray->path_x, alpha); //ovvim
+	}
+	else
+	{
+		ray->dy = fabs(ray->dy) + TILE_SIZE;
+		ray->path_y =  calculate_path(map_length, ray->dx, ray->dy, alpha, PATH_Y); 
+		end_point = trigonometric_pointCalculation(player_position, ray->path_y, alpha);
+	}
+	return (end_point);
+}
+
+
 
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOTA_2
 {
@@ -70,9 +106,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				break;  printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
 			{   printf("sez. x:\n");
-				ray->dx = fabs(ray->dx) + TILE_SIZE; /*allora aumentiamo di TILE_SIZE il dx. Andiamo a salvare questo valroe in un DXtemporaneo*/printf("dx = %f\n", ray->dx);
-				ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);    //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-				end_point = calculate_end_point(c3d->player.position, ray->path_x, alpha);
+				end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w,  alpha, ray, SECTION_X);
 				wall_check = check_wall(end_point,  c3d, map_grid, ray);
 				if (wall_check != OUTSIDE_PERIMETER)
 				{
@@ -89,7 +123,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			{printf("Sez. Y\n");
 				ray->dy = fabs(ray->dy) + TILE_SIZE;
 				ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y);
-				end_point = calculate_end_point(c3d->player.position, ray->path_y, alpha); //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+				end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_y, alpha);; //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
 				wall_check = check_wall(end_point,  c3d, map_grid, ray);
 				if (wall_check != OUTSIDE_PERIMETER)
 				{

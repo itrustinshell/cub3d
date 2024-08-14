@@ -23,10 +23,13 @@
 #define OUTSIDE_PERIMETER 0
 #define WALL_IS_NOT_INTERCEPTED 1
 
-
 //chose_path
 #define PATH_X 1
 #define PATH_Y 2
+
+//chose section
+#define SECTION_X 1
+#define SECTION_Y 2
 
 //colors
 #define RED 0xff0000
@@ -86,6 +89,18 @@ typedef struct s_img
 }	t_img;
 
 
+typedef struct s_delta
+{
+	double	dx;
+	double	dy;
+} t_delta;
+
+typedef struct s_path
+{
+	double	x;
+	double	y;
+} t_path;
+
 typedef struct	s_point
 {
 	double	x;
@@ -94,26 +109,22 @@ typedef struct	s_point
 
 typedef struct s_ray
 {
-
 	char 	*cardinal_direction;
 	double	initialDx;
 	double 	initialDy;
-	double 	sx;
-	double 	sy;
+
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
 	t_point first_impact_point; //è il primo punto diimpatto in quella cella
-
 	double	path_x;
 	double	path_y;
+	t_delta delta;
+	t_path path;
 	double	dx;
 	double	dy;
-
 	t_point	end_point;
 	t_point	end_point_to_check;
 	double 	left_alpha;
 	double 	right_alpha;
-	
-
 } t_ray;
 
 typedef struct s_player
@@ -155,13 +166,17 @@ void	dda(t_c3d *c3d);
 t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
 double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
-void calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
+void 	calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
 void	get_cardinal_direction(double angle, t_ray *ray);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
+t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
+int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
+int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
+int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
 
 //increment_measurement
-t_point calculate_end_point(t_point player_position, double path, double alpha);
+t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
 double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
 
 // increment_utils
