@@ -61,10 +61,11 @@ t_point chose_side_point(t_c3d *c3d, t_ray *ray)
 void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 {
     ray->first_impact_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
+    //ray->dx =  calculate_dx_dy(c3d, ray, "dx");
     calculate_dx_dy(c3d, ray, "dx");
     calculate_dx_dy(c3d, ray, "dY");
     printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE);
-    printf("ray.initialDx = %f, ray.initialDy = %f\n", fabs(ray->initialDx), fabs(ray->initialDy));
+    printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));
     calculate_sx_sy(c3d, ray, alpha, "sx"); //rispettiva ipotenusa di dx
     calculate_sx_sy(c3d, ray, alpha, "sy"); //rispettiva ipotenusa di dy
 
@@ -75,8 +76,8 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
     first_impact_point_with_sx.x = c3d->player.coordinates.x + round(fabs(ray->sx) * cos(alpha)); 
     first_impact_point_with_sx.y = c3d->player.coordinates.y + round(fabs(ray->sx) * sin(alpha));
 
-    first_impact_point_with_sy.x = c3d->player.coordinates.x + round(fabs(ray->sy) * cos(alpha)); 
-    first_impact_point_with_sy.y = c3d->player.coordinates.y + round(fabs(ray->sy) * sin(alpha));
+    first_impact_point_with_sy.x = c3d->player.coordinates.x + round(fabs(ray->path_y) * cos(alpha)); 
+    first_impact_point_with_sy.y = c3d->player.coordinates.y + round(fabs(ray->path_y) * sin(alpha));
 
     printf("primo punto calcolato con dx: %d, %d\n", (int)first_impact_point_with_sx.x, (int)first_impact_point_with_sx.y);
     printf("primo punto calcolato con dy: %d, %d\n", (int)first_impact_point_with_sy.x, (int)first_impact_point_with_sy.y);
@@ -94,7 +95,7 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
         {
             printf("Yes! first impact point with sy is a wall\n");
             //per stare qui allora entrmabi sono due punti che incontrano muri quindi
-            if (fabs(ray->sx) <= fabs(ray->sy)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
+            if (fabs(ray->path_x) <= fabs(ray->path_y)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
                 ray->first_impact_point =  first_impact_point_with_sx;
             else
                 ray->first_impact_point =  first_impact_point_with_sy; //altrimenti ritorni quell'altro
@@ -116,7 +117,7 @@ void reaching_first_side(t_c3d *c3d, t_ray *ray, double alpha)
 		}
 		else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
 		{
-			if (fabs(ray->sx) <= fabs(ray->sy)) //confronto tra ipotenuse
+			if (fabs(ray->path_x) <= fabs(ray->path_y)) //confronto tra ipotenuse
 			{
 				ray->first_impact_point = first_impact_point_with_sx;
 			}

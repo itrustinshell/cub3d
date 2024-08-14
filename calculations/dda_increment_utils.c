@@ -10,7 +10,7 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
 {
     if (map_grid[(int)point_to_verify.y / TILE_SIZE][(((int)point_to_verify.x - 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point_to_verify.y + 1) / TILE_SIZE][((int)point_to_verify.x / TILE_SIZE)] == '1')
     {
-        printf("ma attenzione che le celle affianco sono muri!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+        printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
         point_to_verify.x = point_to_verify.x - 1;
         point_to_verify.y = point_to_verify.y + 1;
         printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
