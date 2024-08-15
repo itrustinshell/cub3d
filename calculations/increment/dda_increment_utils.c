@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../../cub3d.h"
 #include <string.h>
 
 /*gli passo un punto per frlo verificare. Se il muro ha attraversato due muri, setta il corrispettivo end_point

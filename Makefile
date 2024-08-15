@@ -8,7 +8,8 @@ SRC = 	c3d.c \
 		moving/moving.c moving/moving_utils_press_release_position.c moving/moving_utils_press_release_rotation.c moving/moving_utils_collision.c moving/moving_utils_update_rotation.c moving/moving_utils_update_position.c \
 		drawing/drawing.c drawing/drawing_player.c \
 		calculations/dda.c calculations/dda_utils.c calculations/dda_deltax_deltay_distx_disty.c \
-		calculations/dda_increment.c calculations/dda_increment_measurement.c calculations/dda_increment_utils.c calculations/routine.c \
+		calculations/routine.c \
+		calculations/increment/dda_increment.c calculations/increment/dda_increment_utils.c \
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c
 
 #SRC = main.c moving.c read_the_map.c get_map_dimensions.c get_map_from_file.c drawing.c

@@ -189,9 +189,6 @@ int routine(t_c3d* c3d, t_ray *ray, char **map_grid, double alpha, int chose_sec
 //calculation dda
 void	dda(t_c3d *c3d);
 
-
-
-
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
 void	draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d);

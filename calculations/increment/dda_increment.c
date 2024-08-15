@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../../cub3d.h"
 #include <string.h>
 
 void print_info(t_ray *ray)
