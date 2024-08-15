@@ -23,6 +23,11 @@
 #define OUTSIDE_PERIMETER 0
 #define WALL_IS_NOT_INTERCEPTED 1
 
+
+//choese_delta
+#define DELTA_X 1
+#define DELTA_Y 2
+
 //chose_path
 #define PATH_X 1
 #define PATH_Y 2
@@ -154,30 +159,38 @@ char	**get_map_from_file(char *file_content, int width, int height);
 //initializing
 void	initialize_player(t_c3d *c3d);
 
-//calculation
-void	dda(t_c3d *c3d);
-t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
+//calculation initial
+void calculate_initial_delta(t_point first_side_point, t_c3d *c3d, t_ray *ray, int chose_delta);
 t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
-double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
-void 	calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy);
+t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
 void	get_cardinal_direction(double angle, t_ray *ray);
+
+
+//calculation general
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
-t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
-int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
-int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
-int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
-void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
-int routine(t_c3d* c3d, t_ray *ray, char **map_grid, double alpha, int chose_section);
-
-//increment_measurement
-t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
-double	calculation_of_temporarySX_SY(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
-
-// increment_utils
 int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 int 	is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d);
+int		check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
+double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
+t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
+t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
+
+
+//calculation increment
+t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
+void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
+
+int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
+int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
+int routine(t_c3d* c3d, t_ray *ray, char **map_grid, double alpha, int chose_section);
+
+
+//calculation dda
+void	dda(t_c3d *c3d);
+
+
+
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);

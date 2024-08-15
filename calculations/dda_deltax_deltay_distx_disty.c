@@ -72,9 +72,9 @@ void calculate_initial_dy(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
         ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y); 
 }
 
-void calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy)
+void calculate_initial_delta(t_point first_side_point, t_c3d *c3d, t_ray *ray, int chose_delta)
 {
-    if (strcmp(chose_dx_or_dy, "dx") == 0)
+    if (chose_delta == DELTA_X)
         calculate_initial_dx(first_side_point, c3d, ray);
     else
         calculate_initial_dy(first_side_point, c3d, ray);
