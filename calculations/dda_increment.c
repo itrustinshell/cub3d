@@ -83,6 +83,7 @@ t_point get_end_point(t_point player_position, int map_length, double alpha, t_r
 
 int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
 {
+	printf("Routine SECTION_X\n");
 	t_point end_point;
 	int wall_check;
 
@@ -103,8 +104,31 @@ int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
 	}
 	return (1);
 }
-//int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
 
+int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
+{
+	printf("Routine SECTION_Y\n");
+	t_point end_point;
+	int wall_check;
+
+	end_point.x = 0;
+	end_point.y = 0;
+	wall_check = 0;
+
+	end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w, alpha,  ray, SECTION_Y);
+	wall_check = check_wall(end_point,  c3d, map_grid, ray);
+	if (wall_check != OUTSIDE_PERIMETER)
+	{
+		if (wall_check == THROUGH_TWO_WALLS || wall_check == WALL_INTERCEPTED)
+			return (0);
+	}
+	else
+	{	printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
+		increment_chosenPath_unitl_you_find_a_wall(ray, alpha, c3d, end_point, PATH_X);
+		return (0); //serve a far interrompere il while esterno
+	}
+	return (1);
+}
 
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOTA_2
 {
@@ -116,31 +140,18 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 
 	if (strcmp(ray->cardinal_direction, "NE") == 0) //per ora ho toloto E per questinoi di testing
 	{
-		int wall_check; printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
+		printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
 		while (1)
 		{
 			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
 				break;  printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
-			{   printf("sez. x:\n");
+			{  
 				if (routine_sectionX(c3d, ray, map_grid,  alpha) == 0)
 					break;
 			}
-			else
-			{printf("Sez. Y\n");
-				end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w, alpha,  ray, SECTION_Y);
-				wall_check = check_wall(end_point,  c3d, map_grid, ray);
-				if (wall_check != OUTSIDE_PERIMETER)
-				{
-					if (wall_check == THROUGH_TWO_WALLS || wall_check == WALL_INTERCEPTED)
-						break;
-				}
-				else
-				{	printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
-					increment_chosenPath_unitl_you_find_a_wall(ray, alpha, c3d, end_point, PATH_X);
-					break; //serve a far interrompere il while esterno
-				}
-			}
+			else if (routine_sectionY(c3d, ray, map_grid,  alpha) == 0)
+				break;
 		}
 	}
 	else 
