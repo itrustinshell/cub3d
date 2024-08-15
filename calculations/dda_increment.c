@@ -10,7 +10,6 @@ void print_info(t_ray *ray)
     printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
 }
 
-
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha)
 {
 	t_point point_to_return;
@@ -42,23 +41,17 @@ int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray)
 }
 
 
-
-
 void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path)
 {
 	while (WALL_IS_NOT_INTERCEPTED) //quindi aumento di volta in volta lungo la y fino a quando non incontro un muro.
 	{
 		if (chose_path == PATH_X)
 		{
-			ray->dx = fabs(ray->dx) + TILE_SIZE; 
-			ray->path_x =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-			end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_x, alpha) ;//ovvim
+			end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w, alpha,  ray, SECTION_X);
 		}
 		else
 		{
-			ray->dy = fabs(ray->dy) + TILE_SIZE;
-			ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
-			end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_y, alpha);//ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+			end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w, alpha,  ray, SECTION_Y);
 		}
 		if (is_it_a_wall(c3d->map_fm_file.grid, end_point, c3d))
 		{
@@ -121,9 +114,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			}
 			else
 			{printf("Sez. Y\n");
-				ray->dy = fabs(ray->dy) + TILE_SIZE;
-				ray->path_y =  calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y);
-				end_point = trigonometric_pointCalculation(c3d->player.position, ray->path_y, alpha);; //ovvimente questa funzione aumenta sempre di un TILE_sIZE il dyTemporary
+				end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w, alpha,  ray, SECTION_Y);
 				wall_check = check_wall(end_point,  c3d, map_grid, ray);
 				if (wall_check != OUTSIDE_PERIMETER)
 				{
@@ -138,7 +129,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 			}
 		}
 	}
-	else
+	else 
 	{
 		bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, BLACK);
 		printf ("print_you are not pointing NE\n");
