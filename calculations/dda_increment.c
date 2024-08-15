@@ -95,10 +95,10 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				break;  printf("sx = %f, sy = %f\n", fabs(ray->path.x), fabs(ray->path.y));
 			if (fabs(ray->path.x) < fabs(ray->path.y)) //se sx reale è più piccolo di sy reale
 			{  
-				if (routine_sectionX(c3d, ray, map_grid,  alpha) == 0)
+				if (routine(c3d, ray, map_grid, alpha, SECTION_X) == 0)
 					break;
 			}
-			else if (routine_sectionY(c3d, ray, map_grid,  alpha) == 0)
+			else if (routine(c3d, ray, map_grid, alpha, SECTION_Y) == 0)
 				break;
 		}
 	}

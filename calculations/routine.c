@@ -19,7 +19,7 @@ int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
 	else
 	{printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
 		increment_chosenPath_unitl_you_find_a_wall(ray,  alpha, c3d, end_point, PATH_Y);
-		return (0); //serve a far interrompere il while esterno
+		return (0);
 	}
 	return (1);
 }
@@ -44,7 +44,16 @@ int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
 	else
 	{	printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
 		increment_chosenPath_unitl_you_find_a_wall(ray, alpha, c3d, end_point, PATH_X);
-		return (0); //serve a far interrompere il while esterno
+		return (0);
 	}
 	return (1);
+}
+
+int routine(t_c3d* c3d, t_ray *ray, char **map_grid, double alpha, int chose_section)
+{
+    if (chose_section == SECTION_X)
+        return (routine_sectionX(c3d, ray, map_grid, alpha));
+    else
+        return (routine_sectionY(c3d, ray, map_grid, alpha));
+    return (0);
 }
