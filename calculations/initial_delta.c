@@ -9,30 +9,7 @@ distx = sx (is the hypotenus calculated for a particular dx)
 disty = sy
 */
 
-double calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path)
-{
-    double path;
-
-    path = 0;
-    if (chose_path == PATH_X)
-    {
-        if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
-            path = deltaY / sin(alpha);
-        else
-            path = deltaX / cos(alpha);printf("ipotenusa tramite dx: %f\n", fabs(path));
-    }
-    else
-    {
-        if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
-            path = deltaX / cos(alpha);
-        else
-            path = deltaY / sin(alpha);printf("ipotenusa tramite dy: %f\n", fabs(path));
-    }
-    path = fmin(fabs(path), map_length * TILE_SIZE);
-    return (fabs(path));
-}
-
-void calculate_initial_dx(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
+void calculate_initial_deltaX(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
         ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x); 
@@ -52,7 +29,7 @@ void calculate_initial_dx(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
         ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
 }
 
-void calculate_initial_dy(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
+void calculate_initial_deltaY(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
         ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1);
@@ -75,9 +52,9 @@ void calculate_initial_dy(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
 void calculate_initial_delta(t_point first_side_point, t_c3d *c3d, t_ray *ray, int chose_delta)
 {
     if (chose_delta == DELTA_X)
-        calculate_initial_dx(first_side_point, c3d, ray);
+        calculate_initial_deltaX(first_side_point, c3d, ray);
     else
-        calculate_initial_dy(first_side_point, c3d, ray);
+        calculate_initial_deltaY(first_side_point, c3d, ray);
 }
 
 /* //# NOTA_4
