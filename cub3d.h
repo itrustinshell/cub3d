@@ -175,6 +175,7 @@ int		check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
 double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
 t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
+t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, t_point point_to_verify, char **map_grid, t_ray *ray, t_c3d *c3d);
 
 
 //calculation increment
