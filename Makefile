@@ -7,9 +7,9 @@ SRC = 	c3d.c \
 		initializing/initializing.c \
 		moving/moving.c moving/moving_utils_press_release_position.c moving/moving_utils_press_release_rotation.c moving/moving_utils_collision.c moving/moving_utils_update_rotation.c moving/moving_utils_update_position.c \
 		drawing/drawing.c drawing/drawing_player.c \
-		dda/dda.c dda/dda_utils.c dda/initial_delta.c \
+		dda/dda.c \
 		dda/increment/increment.c dda/increment/utils.c dda/increment/routine.c \
-		dda/utils/path.c dda/utils/checks.c\
+		dda/utils/path.c dda/utils/checks.c dda/utils/initial_delta.c dda/utils/initial_operations.c\
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c
 
 #SRC = main.c moving.c read_the_map.c get_map_dimensions.c get_map_from_file.c drawing.c
