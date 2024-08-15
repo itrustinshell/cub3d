@@ -4,8 +4,6 @@
 void print_info(t_ray *ray)
 {
     printf("\n\n\n\n#### inizio controllo di increment ####\n");
-    printf("dx iniziale = %f\n", ray->initialDx);
-    printf("dy iniziale = %f\n", ray->initialDy);
     printf("la prima cella è: (%d, %d)\n", (int)ray->end_point.x / TILE_SIZE, (int)ray->end_point.y / TILE_SIZE);
     printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
 }

@@ -110,15 +110,10 @@ typedef struct	s_point
 typedef struct s_ray
 {
 	char 	*cardinal_direction;
-	double	initialDx;
-	double 	initialDy;
-
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
 	t_point first_impact_point; //è il primo punto diimpatto in quella cella
 	t_delta delta;
-	t_path path;
-	// double	dx;
-	// double	dy;
+	t_path 	path;
 	t_point	end_point;
 	t_point	end_point_to_check;
 	double 	left_alpha;
