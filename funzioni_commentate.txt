@@ -6,13 +6,13 @@ void reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray) 
 	ray->first_impact_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
    
 	calculate_dx_dy(c3d, ray, "dx"); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
-	calculate_dx_dy(c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));  //#NOTA_1
+	calculate_dx_dy(c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->delta.x), fabs(ray->delta.y));  //#NOTA_1
    
-	ray->path_x = calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);
-	first_impact_point_with_sx = calculation_of_end_point_along_path_x(c3d, ray, ray->path_x, alpha); /*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_with_sx.x, (int)first_impact_point_with_sx.y);
+	ray->path.x = calculate_sx_sy(c3d->map_fm_file.w, ray->delta.x, ray->delta.y, alpha, PATH_X);
+	first_impact_point_with_sx = calculation_of_end_point_along_path_x(c3d, ray,ray->path.x, alpha); /*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_with_sx.x, (int)first_impact_point_with_sx.y);
    
-	ray->path_y = calculate_sx_sy(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
-	first_impact_point_with_sy = calculation_of_end_point_along_path_y(c3d, ray, ray->path_y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_with_sy.x, (int)first_impact_point_with_sy.y);
+	ray->path.y = calculate_sx_sy(c3d->map_fm_file.w, ray->delta.x, ray->delta.y, alpha, PATH_Y); 
+	first_impact_point_with_sy = calculation_of_end_point_along_path_y(c3d, ray,ray->path.y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_with_sy.x, (int)first_impact_point_with_sy.y);
 
 	if (!is_it_inside_map_perimeter(first_impact_point_with_sx, c3d)) //#NOTA_2 
 	{
@@ -36,7 +36,7 @@ void reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray) 
 		}
 		else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
 		{
-			if (fabs(ray->path_x) <= fabs(ray->path_y)) //confronto tra ipotenuse
+			if (fabs(ray->path.x) <= fabs(ray->path.y)) //confronto tra ipotenuse
 				ray->first_impact_point = first_impact_point_with_sx;
 			else
 				ray->first_impact_point = first_impact_point_with_sy;

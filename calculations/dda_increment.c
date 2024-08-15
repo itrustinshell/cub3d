@@ -67,15 +67,15 @@ t_point get_end_point(t_point player_position, int map_length, double alpha, t_r
 	t_point end_point;
 	if (chose_section_x_or_y == SECTION_X)
 	{
-		ray->dx = fabs(ray->dx) + TILE_SIZE; 
-		ray->path_x =  calculate_path(map_length, ray->dx, ray->dy, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
-		end_point = trigonometric_pointCalculation(player_position, ray->path_x, alpha); //ovvim
+		ray->delta.x = fabs(ray->delta.x) + TILE_SIZE; 
+		ray->path.x =  calculate_path(map_length, ray->delta.x, ray->delta.y, alpha, PATH_X);     //grazie al dx_temporaneo calcolato possiamo calcolarci il nuovi path_xoraneo           
+		end_point = trigonometric_pointCalculation(player_position,ray->path.x, alpha); //ovvim
 	}
 	else
 	{
-		ray->dy = fabs(ray->dy) + TILE_SIZE;
-		ray->path_y =  calculate_path(map_length, ray->dx, ray->dy, alpha, PATH_Y); 
-		end_point = trigonometric_pointCalculation(player_position, ray->path_y, alpha);
+		ray->delta.y = fabs(ray->delta.y) + TILE_SIZE;
+		ray->path.y =  calculate_path(map_length, ray->delta.x, ray->delta.y, alpha, PATH_Y); 
+		end_point = trigonometric_pointCalculation(player_position,ray->path.y, alpha);
 	}
 	return (end_point);
 }
@@ -139,13 +139,12 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 	print_info(ray);
 
 	if (strcmp(ray->cardinal_direction, "NE") == 0) //per ora ho toloto E per questinoi di testing
-	{
-		printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
+	{printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
 		while (1)
 		{
 			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
-				break;  printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));
-			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
+				break;  printf("sx = %f, sy = %f\n", fabs(ray->path.x), fabs(ray->path.y));
+			if (fabs(ray->path.x) < fabs(ray->path.y)) //se sx reale è più piccolo di sy reale
 			{  
 				if (routine_sectionX(c3d, ray, map_grid,  alpha) == 0)
 					break;

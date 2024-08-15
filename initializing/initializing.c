@@ -18,8 +18,6 @@ void initialize_player(t_c3d *c3d)
 	c3d->player.ray.cardinal_direction = NULL;
 	c3d->player.ray.initialDy = 0;
 	c3d->player.ray.initialDy = 0;
-	c3d->player.ray.path_x = 0;
-	c3d->player.ray.path_y = 0;
 	c3d->player.ray.first_impact_point.x = 0;
 	c3d->player.ray.first_impact_point.y = 0;
 	c3d->player.ray.end_point.x = 0;

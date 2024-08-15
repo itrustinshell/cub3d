@@ -66,7 +66,7 @@ t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, 
 		if (is_it_a_wall(map_grid, point_to_verify, c3d)) //allora vedi se anche quello con sy è di un muro
 		{
 			//per stare qui allora entrmabi sono due punti che incontrano muri quindi
-			if (fabs(ray->path_x) <= fabs(ray->path_y)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
+			if (fabs(ray->path.x) <= fabs(ray->path.y)) //qui gestisci anche un uguale occhio // se sx + piu piccolo allora ritorni il punto su sx
 				return (point_of_a_wall);
 			else
 				return (point_to_verify); //altrimenti ritorni quell'altro
@@ -83,12 +83,12 @@ t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ra
 
 	ray->first_side_point = chose_side_point(c3d, ray); //individua uno dei vertici interni della cella
 	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dx"); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
-	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->dx), fabs(ray->dy));  //#NOTA_1
-	ray->path_x = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_X);
-	first_impact_point_along_pathX =  trigonometric_pointCalculation(c3d->player.position, ray->path_x, alpha);/*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_along_pathX.x, (int)first_impact_point_along_pathX.y);
-	ray->path_y = calculate_path(c3d->map_fm_file.w, ray->dx, ray->dy, alpha, PATH_Y); 
+	calculate_initial_dx_dy(ray->first_side_point, c3d, ray, "dY");  printf("\nla prima cella verso cui il raggio si sta dirigendo è: %d, %d\n", (int)ray->first_impact_point.x / TILE_SIZE,  (int)ray->first_impact_point.y /TILE_SIZE); printf("ray.dx = %f, ray.dy = %f\n", fabs(ray->delta.x), fabs(ray->delta.y));  //#NOTA_1
+	ray->path.x = calculate_path(c3d->map_fm_file.w, ray->delta.x, ray->delta.y, alpha, PATH_X);
+	first_impact_point_along_pathX =  trigonometric_pointCalculation(c3d->player.position,ray->path.x, alpha);/*calcolo il punto lungo sx */ printf("primo punto calcolato con path_x: %d, %d\n", (int)first_impact_point_along_pathX.x, (int)first_impact_point_along_pathX.y);
+	ray->path.y = calculate_path(c3d->map_fm_file.w, ray->delta.x, ray->delta.y, alpha, PATH_Y); 
 
-	first_impact_point_along_pathY = trigonometric_pointCalculation(c3d->player.position, ray->path_y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_along_pathY.x, (int)first_impact_point_along_pathY.y);
+	first_impact_point_along_pathY = trigonometric_pointCalculation(c3d->player.position,ray->path.y, alpha); printf("primo punto calcolato con path_y: %d, %d\n", (int)first_impact_point_along_pathY.x, (int)first_impact_point_along_pathY.y);
 	if (!is_it_inside_map_perimeter(first_impact_point_along_pathX, c3d)) //#NOTA_2 
 		return (first_impact_point_along_pathY);
 	else if (is_it_a_wall(c3d->map_fm_file.grid, first_impact_point_along_pathX, c3d))
@@ -101,7 +101,7 @@ t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ra
 			return(first_impact_point_along_pathY);			//qui significa che il punto con sx non appartiene ad un muro, ma quello con sy si! quindi ritorna il punto ottenuto con sx
 		else //per esssere a questo punto significa che nessuno dei precedenti punti appartiene ad un muro quindi riestituisci sempricemente il punto appartemente all'ipotenusa piu corta
 		{
-			if (fabs(ray->path_x) <= fabs(ray->path_y)) //confronto tra ipotenuse
+			if (fabs(ray->path.x) <= fabs(ray->path.y)) //confronto tra ipotenuse
 				return (first_impact_point_along_pathX);
 			else
 				return (first_impact_point_along_pathY);

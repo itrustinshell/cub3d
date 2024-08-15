@@ -35,41 +35,41 @@ double calculate_path(int map_length, double deltaX, double deltaY, double alpha
 void calculate_initial_dx(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x); 
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x); 
     else if (strcmp(ray->cardinal_direction, "NE") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x); 
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x); 
     else if (strcmp(ray->cardinal_direction, "N") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x); //VERIFICA SE VA BENE dovrebbe essere indifferente se riferisce a lato dx o sx
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x); //VERIFICA SE VA BENE dovrebbe essere indifferente se riferisce a lato dx o sx
     else if (strcmp(ray->cardinal_direction, "NW") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x - 1);
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
     else if (strcmp(ray->cardinal_direction, "W") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x - 1);
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
     else if (strcmp(ray->cardinal_direction, "SW") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x - 1);
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
     else if (strcmp(ray->cardinal_direction, "S") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x - 1);
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
     else if (strcmp(ray->cardinal_direction, "SE") == 0 )
-        ray->dx = fabs(initial_side_point.x - c3d->player.position.x - 1);
+        ray->delta.x = fabs(initial_side_point.x - c3d->player.position.x - 1);
 }
 
 void calculate_initial_dy(t_point initial_side_point, t_c3d *c3d, t_ray *ray)
 {
     if (strcmp(ray->cardinal_direction, "E") == 0)
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y + 1);
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1);
     if (strcmp(ray->cardinal_direction, "NE") == 0)
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y + 1); 
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1); 
     else if (strcmp(ray->cardinal_direction, "N") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y + 1); 
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1); 
     else if (strcmp(ray->cardinal_direction, "NW") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y + 1);
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1);
     else if (strcmp(ray->cardinal_direction, "W") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y + 1); //dovrebbe essere indifferente se su o giu
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y + 1); //dovrebbe essere indifferente se su o giu
     else if (strcmp(ray->cardinal_direction, "SW") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y); 
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y); 
     else if (strcmp(ray->cardinal_direction, "S") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y);
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y);
     else if (strcmp(ray->cardinal_direction, "SE") == 0 )
-        ray->dy = fabs(c3d->player.position.y - initial_side_point.y); 
+        ray->delta.y = fabs(c3d->player.position.y - initial_side_point.y); 
 }
 
 void calculate_initial_dx_dy(t_point first_side_point, t_c3d *c3d, t_ray *ray, char *chose_dx_or_dy)

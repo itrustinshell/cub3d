@@ -91,8 +91,8 @@ typedef struct s_img
 
 typedef struct s_delta
 {
-	double	dx;
-	double	dy;
+	double	x;
+	double	y;
 } t_delta;
 
 typedef struct s_path
@@ -115,12 +115,10 @@ typedef struct s_ray
 
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
 	t_point first_impact_point; //è il primo punto diimpatto in quella cella
-	double	path_x;
-	double	path_y;
 	t_delta delta;
 	t_path path;
-	double	dx;
-	double	dy;
+	// double	dx;
+	// double	dy;
 	t_point	end_point;
 	t_point	end_point_to_check;
 	double 	left_alpha;
