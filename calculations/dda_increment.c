@@ -81,6 +81,30 @@ t_point get_end_point(t_point player_position, int map_length, double alpha, t_r
 }
 
 
+int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha)
+{
+	t_point end_point;
+	int wall_check;
+
+	end_point.x = 0;
+	end_point.y = 0;
+	wall_check = 0;
+	end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w,  alpha, ray, SECTION_X);
+	wall_check = check_wall(end_point,  c3d, map_grid, ray);
+	if (wall_check != OUTSIDE_PERIMETER)
+	{
+		if (wall_check == THROUGH_TWO_WALLS || wall_check == WALL_INTERCEPTED)
+			return (0);
+	}
+	else
+	{printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
+		increment_chosenPath_unitl_you_find_a_wall(ray,  alpha, c3d, end_point, PATH_Y);
+		return (0); //serve a far interrompere il while esterno
+	}
+	return (1);
+}
+//int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
+
 
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOTA_2
 {
@@ -99,18 +123,8 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOT
 				break;  printf("sx = %f, sy = %f\n", fabs(ray->path_x), fabs(ray->path_y));
 			if (fabs(ray->path_x) < fabs(ray->path_y)) //se sx reale è più piccolo di sy reale
 			{   printf("sez. x:\n");
-				end_point = get_end_point(c3d->player.position, c3d->map_fm_file.w,  alpha, ray, SECTION_X);
-				wall_check = check_wall(end_point,  c3d, map_grid, ray);
-				if (wall_check != OUTSIDE_PERIMETER)
-				{
-					if (wall_check == THROUGH_TWO_WALLS || wall_check == WALL_INTERCEPTED)
-						break;
-				}
-				else
-				{printf("Attenzione il raggio è andato oltre i confini della mappa!\n"); //ormai è fuori...devo trovare il punto di impatto sul muro quindi devo 
-					increment_chosenPath_unitl_you_find_a_wall(ray,  alpha, c3d, end_point, PATH_Y);
-					break; //serve a far interrompere il while esterno
-				}
+				if (routine_sectionX(c3d, ray, map_grid,  alpha) == 0)
+					break;
 			}
 			else
 			{printf("Sez. Y\n");
