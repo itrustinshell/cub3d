@@ -167,6 +167,7 @@ t_point get_end_point(t_point player_position, int map_length, double alpha, t_r
 int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
 int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
 int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
+void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
 
 //increment_measurement
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
