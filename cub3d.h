@@ -179,6 +179,9 @@ t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, 
 
 
 //calculation increment
+int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
+void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
+t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
 

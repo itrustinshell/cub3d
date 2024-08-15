@@ -9,8 +9,8 @@ SRC = 	c3d.c \
 		drawing/drawing.c drawing/drawing_player.c \
 		dda/dda.c \
 		dda/initial_operations/initial_delta.c dda/initial_operations/direction_sidePoint_reachingFirstSide.c \
-		dda/increment/increment.c dda/increment/routine.c \
-		dda/utils/path.c dda/utils/checks.c \
+		dda/increment/increment.c dda/increment/routine.c dda/increment/increment_calculations.c \
+		dda/general_calculations_and_checks/path.c dda/general_calculations_and_checks/pointCalculation.c dda/general_calculations_and_checks/checks.c \
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c
 
 #SRC = main.c moving.c read_the_map.c get_map_dimensions.c get_map_from_file.c drawing.c
