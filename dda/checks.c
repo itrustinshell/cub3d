@@ -4,12 +4,12 @@ int is_it_a_wall(t_point point_to_verify, char **map_grid)
 {
     if (map_grid[(int)point_to_verify.y / TILE_SIZE][(int)point_to_verify.x / TILE_SIZE] == '1')
     {
-        printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
+       printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
         return (1);
     }
     else
     { 
-        printf("NO! La cella (%f, %f) NON è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
+       printf("NO! La cella (%f, %f) NON è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
         return (0);
     }
     return (1);
@@ -29,7 +29,7 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
             point_to_verify.x = point_to_verify.x - 1;
             point_to_verify.y = point_to_verify.y + 1;
             printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
-            bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+          //  bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, RED);
             return (1);
         }
     }
@@ -37,11 +37,11 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
     {
         if (map_grid[((int)point_to_verify.y) / TILE_SIZE][(((int)point_to_verify.x - 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point_to_verify.y -1) / TILE_SIZE][((int)point_to_verify.x / TILE_SIZE)] == '1')
         {
-            printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+           // printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
             point_to_verify.x = point_to_verify.x - 1;
             point_to_verify.y = point_to_verify.y + 1;
-            printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
-            bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+           // printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
+         //   bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (1);
         }
     }
@@ -49,11 +49,11 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
     {
         if (map_grid[((int)point_to_verify.y) / TILE_SIZE][(((int)point_to_verify.x + 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point_to_verify.y -1) / TILE_SIZE][((int)point_to_verify.x / TILE_SIZE)] == '1')
         {
-            printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+         //   printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
             point_to_verify.x = point_to_verify.x - 1;
             point_to_verify.y = point_to_verify.y + 1;
-            printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
-            bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+          //  printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
+         //   bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (1);
         }
     }
@@ -61,11 +61,11 @@ int is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_p
     {
         if (map_grid[((int)point_to_verify.y) / TILE_SIZE][(((int)point_to_verify.x + 1) / TILE_SIZE)] == '1' && c3d->map_fm_file.grid[((int)point_to_verify.y +1) / TILE_SIZE][((int)point_to_verify.x / TILE_SIZE)] == '1')
         {
-            printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+         //   printf("Attenzione sei passato tra due muri !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
             point_to_verify.x = point_to_verify.x - 1;
             point_to_verify.y = point_to_verify.y + 1;
-            printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
-            bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+       //     printf("le cooridnate di impatto sono: %d, %d\n", (int)ray->end_point.x, (int)ray->end_point.y);
+        //    bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (1);
         }
     }

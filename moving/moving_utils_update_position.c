@@ -83,6 +83,7 @@ int update_position(void *param)
         draw_player(c3d, c3d->player.position.x, c3d->player.position.y, RADIUS);
         
         draw_2d_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.alpha_direction, BLACK);
+        draw_field_of_view(c3d);
 
         printf("sto stampando mappa e giocatore\n");
     }

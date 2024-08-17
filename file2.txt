@@ -1,0 +1,1529 @@
+start a new stamp
+1111111111
+1000000001
+1001000001
+1000000001
+1000101001
+1000010001
+1000101001
+1000000001
+1000000001
+1111111111
+finish stamp
+raggio n.: 0
+ma che caz di angolo è: 6.143559
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.098276 path.y: 294.597158
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.491379 path.y: 287.411861
+si sono entrato in x
+second_point calculated: 150, 82
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.640000) NON è un muro
+attuale primo punto: 150.000000, 82.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 33.000000
+path.x:50.491379 path.y: 237.114786
+si sono entrato in x
+second_point calculated: 200, 75
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.500000) NON è un muro
+attuale primo punto: 200.000000, 75.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 26.000000
+path.x:50.491379 path.y: 186.817710
+si sono entrato in x
+second_point calculated: 250, 68
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.360000) NON è un muro
+attuale primo punto: 250.000000, 68.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 19.000000
+path.x:50.491379 path.y: 136.520634
+si sono entrato in x
+second_point calculated: 300, 61
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.220000) NON è un muro
+attuale primo punto: 300.000000, 61.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 12.000000
+path.x:50.491379 path.y: 86.223558
+si sono entrato in x
+second_point calculated: 350, 54
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.080000) NON è un muro
+attuale primo punto: 350.000000, 54.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 5.000000
+path.x:50.491379 path.y: 35.926483
+second_point calculated: 386, 49
+cella del second_point: 7, 0
+Si! La cella (7.720000, 0.980000) è un muro
+raggio n.: 1
+ma che caz di angolo è: 6.161012
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.075098 path.y: 336.425871
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.375491 path.y: 328.220362
+si sono entrato in x
+second_point calculated: 150, 83
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.660000) NON è un muro
+attuale primo punto: 150.000000, 83.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 34.000000
+path.x:50.375491 path.y: 278.987308
+si sono entrato in x
+second_point calculated: 200, 77
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.540000) NON è un muro
+attuale primo punto: 200.000000, 77.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 28.000000
+path.x:50.375491 path.y: 229.754253
+si sono entrato in x
+second_point calculated: 250, 71
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.420000) NON è un muro
+attuale primo punto: 250.000000, 71.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 22.000000
+path.x:50.375491 path.y: 180.521199
+si sono entrato in x
+second_point calculated: 300, 65
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.300000) NON è un muro
+attuale primo punto: 300.000000, 65.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 16.000000
+path.x:50.375491 path.y: 131.288145
+si sono entrato in x
+second_point calculated: 350, 59
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.180000) NON è un muro
+attuale primo punto: 350.000000, 59.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 10.000000
+path.x:50.375491 path.y: 82.055090
+si sono entrato in x
+second_point calculated: 400, 53
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.060000) NON è un muro
+attuale primo punto: 400.000000, 53.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 4.000000
+path.x:50.375491 path.y: 32.822036
+second_point calculated: 433, 49
+cella del second_point: 8, 0
+Si! La cella (8.660000, 0.980000) è un muro
+raggio n.: 2
+ma che caz di angolo è: 6.178466
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.055083 path.y: 392.237662
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.275414 path.y: 382.670889
+si sono entrato in x
+second_point calculated: 150, 84
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.680000) NON è un muro
+attuale primo punto: 150.000000, 84.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 35.000000
+path.x:50.275414 path.y: 334.837028
+si sono entrato in x
+second_point calculated: 200, 79
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.580000) NON è un muro
+attuale primo punto: 200.000000, 79.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 30.000000
+path.x:50.275414 path.y: 287.003167
+si sono entrato in x
+second_point calculated: 250, 74
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.480000) NON è un muro
+attuale primo punto: 250.000000, 74.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 25.000000
+path.x:50.275414 path.y: 239.169306
+si sono entrato in x
+second_point calculated: 300, 69
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.380000) NON è un muro
+attuale primo punto: 300.000000, 69.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 20.000000
+path.x:50.275414 path.y: 191.335445
+si sono entrato in x
+second_point calculated: 350, 64
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.280000) NON è un muro
+attuale primo punto: 350.000000, 64.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 15.000000
+path.x:50.275414 path.y: 143.501584
+si sono entrato in x
+second_point calculated: 400, 59
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.180000) NON è un muro
+attuale primo punto: 400.000000, 59.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 10.000000
+path.x:50.275414 path.y: 95.667722
+si sono entrato in x
+second_point calculated: 450, 54
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.080000) è un muro
+raggio n.: 3
+ma che caz di angolo è: 6.195919
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.038198 path.y: 470.422243
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.190992 path.y: 458.948530
+si sono entrato in x
+second_point calculated: 150, 85
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.700000) NON è un muro
+attuale primo punto: 150.000000, 85.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 36.000000
+path.x:50.190992 path.y: 413.053677
+si sono entrato in x
+second_point calculated: 200, 81
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.620000) NON è un muro
+attuale primo punto: 200.000000, 81.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 32.000000
+path.x:50.190992 path.y: 367.158824
+si sono entrato in x
+second_point calculated: 250, 77
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.540000) NON è un muro
+attuale primo punto: 250.000000, 77.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 28.000000
+path.x:50.190992 path.y: 321.263971
+si sono entrato in x
+second_point calculated: 300, 73
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.460000) NON è un muro
+attuale primo punto: 300.000000, 73.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 24.000000
+path.x:50.190992 path.y: 275.369118
+si sono entrato in x
+second_point calculated: 350, 69
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.380000) NON è un muro
+attuale primo punto: 350.000000, 69.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 20.000000
+path.x:50.190992 path.y: 229.474265
+si sono entrato in x
+second_point calculated: 400, 65
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.300000) NON è un muro
+attuale primo punto: 400.000000, 65.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 16.000000
+path.x:50.190992 path.y: 183.579412
+si sono entrato in x
+second_point calculated: 450, 61
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.220000) è un muro
+raggio n.: 4
+ma che caz di angolo è: 6.213372
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.024419 path.y: 587.759068
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.122095 path.y: 573.423481
+si sono entrato in x
+second_point calculated: 150, 86
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.720000) NON è un muro
+attuale primo punto: 150.000000, 86.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 37.000000
+path.x:50.122095 path.y: 530.416720
+si sono entrato in x
+second_point calculated: 200, 83
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.660000) NON è un muro
+attuale primo punto: 200.000000, 83.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 34.000000
+path.x:50.122095 path.y: 487.409959
+si sono entrato in x
+second_point calculated: 250, 80
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.600000) NON è un muro
+attuale primo punto: 250.000000, 80.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 31.000000
+path.x:50.122095 path.y: 444.403198
+si sono entrato in x
+second_point calculated: 300, 77
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.540000) NON è un muro
+attuale primo punto: 300.000000, 77.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 28.000000
+path.x:50.122095 path.y: 401.396437
+si sono entrato in x
+second_point calculated: 350, 74
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.480000) NON è un muro
+attuale primo punto: 350.000000, 74.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 25.000000
+path.x:50.122095 path.y: 358.389676
+si sono entrato in x
+second_point calculated: 400, 71
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.420000) NON è un muro
+attuale primo punto: 400.000000, 71.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 22.000000
+path.x:50.122095 path.y: 315.382915
+si sono entrato in x
+second_point calculated: 450, 68
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.360000) è un muro
+raggio n.: 5
+ma che caz di angolo è: 6.230825
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.013723 path.y: 783.400227
+si sono entrato in x
+second_point calculated: 100, 89
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.780000) NON è un muro
+attuale primo punto: 100.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.068617 path.y: 764.292904
+si sono entrato in x
+second_point calculated: 150, 86
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.720000) NON è un muro
+attuale primo punto: 150.000000, 86.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 37.000000
+path.x:50.068617 path.y: 706.970937
+si sono entrato in x
+second_point calculated: 200, 83
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.660000) NON è un muro
+attuale primo punto: 200.000000, 83.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 34.000000
+path.x:50.068617 path.y: 649.648969
+si sono entrato in x
+second_point calculated: 250, 80
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.600000) NON è un muro
+attuale primo punto: 250.000000, 80.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 31.000000
+path.x:50.068617 path.y: 592.327001
+si sono entrato in x
+second_point calculated: 300, 77
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.540000) NON è un muro
+attuale primo punto: 300.000000, 77.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 28.000000
+path.x:50.068617 path.y: 535.005033
+si sono entrato in x
+second_point calculated: 350, 74
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.480000) NON è un muro
+attuale primo punto: 350.000000, 74.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 25.000000
+path.x:50.068617 path.y: 477.683065
+si sono entrato in x
+second_point calculated: 400, 71
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.420000) NON è un muro
+attuale primo punto: 400.000000, 71.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 22.000000
+path.x:50.068617 path.y: 420.361097
+si sono entrato in x
+second_point calculated: 450, 68
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.360000) è un muro
+raggio n.: 6
+ma che caz di angolo è: 6.248279
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.006095 path.y: 1174.802042
+si sono entrato in x
+second_point calculated: 100, 90
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.800000) NON è un muro
+attuale primo punto: 100.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 41.000000
+path.x:50.030477 path.y: 1174.802042
+si sono entrato in x
+second_point calculated: 150, 88
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.760000) NON è un muro
+attuale primo punto: 150.000000, 88.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 39.000000
+path.x:50.030477 path.y: 1117.494626
+si sono entrato in x
+second_point calculated: 200, 86
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.720000) NON è un muro
+attuale primo punto: 200.000000, 86.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 37.000000
+path.x:50.030477 path.y: 1060.187209
+si sono entrato in x
+second_point calculated: 250, 84
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.680000) NON è un muro
+attuale primo punto: 250.000000, 84.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 35.000000
+path.x:50.030477 path.y: 1002.879792
+si sono entrato in x
+second_point calculated: 300, 82
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.640000) NON è un muro
+attuale primo punto: 300.000000, 82.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 33.000000
+path.x:50.030477 path.y: 945.572375
+si sono entrato in x
+second_point calculated: 350, 80
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.600000) NON è un muro
+attuale primo punto: 350.000000, 80.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 31.000000
+path.x:50.030477 path.y: 888.264959
+si sono entrato in x
+second_point calculated: 400, 78
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.560000) NON è un muro
+attuale primo punto: 400.000000, 78.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 29.000000
+path.x:50.030477 path.y: 830.957542
+si sono entrato in x
+second_point calculated: 450, 76
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.520000) è un muro
+raggio n.: 7
+ma che caz di angolo è: 6.265732
+You are looking at 1330
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 41.000000
+path.x:10.001523 path.y: 2349.246228
+si sono entrato in x
+second_point calculated: 100, 90
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.800000) NON è un muro
+attuale primo punto: 100.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 41.000000
+path.x:50.007616 path.y: 2349.246228
+si sono entrato in x
+second_point calculated: 150, 89
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.780000) NON è un muro
+attuale primo punto: 150.000000, 89.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.007616 path.y: 2291.947540
+si sono entrato in x
+second_point calculated: 200, 88
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.760000) NON è un muro
+attuale primo punto: 200.000000, 88.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 39.000000
+path.x:50.007616 path.y: 2234.648851
+si sono entrato in x
+second_point calculated: 250, 87
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.740000) NON è un muro
+attuale primo punto: 250.000000, 87.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 38.000000
+path.x:50.007616 path.y: 2177.350163
+si sono entrato in x
+second_point calculated: 300, 86
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.720000) NON è un muro
+attuale primo punto: 300.000000, 86.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 37.000000
+path.x:50.007616 path.y: 2120.051474
+si sono entrato in x
+second_point calculated: 350, 85
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.700000) NON è un muro
+attuale primo punto: 350.000000, 85.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 36.000000
+path.x:50.007616 path.y: 2062.752786
+si sono entrato in x
+second_point calculated: 400, 84
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.680000) NON è un muro
+attuale primo punto: 400.000000, 84.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1330
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 35.000000
+path.x:50.007616 path.y: 2005.454097
+si sono entrato in x
+second_point calculated: 450, 83
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.660000) è un muro
+raggio n.: 8
+eh si queto angolo è proprio zero
+ma che caz di angolo è: 6.283185
+You are looking at 1500
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 100.000000, 50.000000
+side_point per calcolo delta: 100.000000, 50.000000
+delta.x: 10.000000, delta.y: 40.000000
+path.x:10.000000 path.y: 10.000000
+second_point calculated: 100, 90
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.800000) NON è un muro
+attuale primo punto: 100.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 150.000000, 50.000000
+side_point per calcolo delta: 150.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 150, 90
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.800000) NON è un muro
+attuale primo punto: 150.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 200.000000, 50.000000
+side_point per calcolo delta: 200.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 200, 90
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.800000) NON è un muro
+attuale primo punto: 200.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 250.000000, 50.000000
+side_point per calcolo delta: 250.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 250, 90
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.800000) NON è un muro
+attuale primo punto: 250.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 300.000000, 50.000000
+side_point per calcolo delta: 300.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 300, 90
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.800000) NON è un muro
+attuale primo punto: 300.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 350.000000, 50.000000
+side_point per calcolo delta: 350.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 350, 90
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.800000) NON è un muro
+attuale primo punto: 350.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 400.000000, 50.000000
+side_point per calcolo delta: 400.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 400, 90
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.800000) NON è un muro
+attuale primo punto: 400.000000, 90.000000
+hei sono fuori
+hei sono dentro...funiona!
+cardinal_direction:1500
+side_point: 450.000000, 50.000000
+side_point per calcolo delta: 450.000000, 50.000000
+delta.x: 50.000000, delta.y: 40.000000
+path.x:50.000000 path.y: 50.000000
+second_point calculated: 450, 90
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.800000) è un muro
+raggio n.: 9
+ma che caz di angolo è: 0.017453
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.001523 path.y: 572.986885
+si sono entrato in x
+second_point calculated: 100, 90
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.800000) NON è un muro
+attuale primo punto: 100.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 10.000000
+path.x:50.007616 path.y: 572.986885
+si sono entrato in x
+second_point calculated: 150, 91
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.820000) NON è un muro
+attuale primo punto: 150.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.007616 path.y: 515.688196
+si sono entrato in x
+second_point calculated: 200, 92
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.840000) NON è un muro
+attuale primo punto: 200.000000, 92.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 100.000000
+side_point per calcolo delta: 250.000000, 100.000000
+delta.x: 50.000000, delta.y: 8.000000
+path.x:50.007616 path.y: 458.389508
+si sono entrato in x
+second_point calculated: 250, 93
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.860000) NON è un muro
+attuale primo punto: 250.000000, 93.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 300.000000, 100.000000
+side_point per calcolo delta: 300.000000, 100.000000
+delta.x: 50.000000, delta.y: 7.000000
+path.x:50.007616 path.y: 401.090819
+si sono entrato in x
+second_point calculated: 300, 94
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.880000) NON è un muro
+attuale primo punto: 300.000000, 94.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 350.000000, 100.000000
+side_point per calcolo delta: 350.000000, 100.000000
+delta.x: 50.000000, delta.y: 6.000000
+path.x:50.007616 path.y: 343.792131
+si sono entrato in x
+second_point calculated: 350, 95
+cella del second_point: 7, 1
+NO! La cella (7.000000, 1.900000) NON è un muro
+attuale primo punto: 350.000000, 95.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 400.000000, 100.000000
+side_point per calcolo delta: 400.000000, 100.000000
+delta.x: 50.000000, delta.y: 5.000000
+path.x:50.007616 path.y: 286.493442
+si sono entrato in x
+second_point calculated: 400, 96
+cella del second_point: 8, 1
+NO! La cella (8.000000, 1.920000) NON è un muro
+attuale primo punto: 400.000000, 96.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 450.000000, 100.000000
+side_point per calcolo delta: 450.000000, 100.000000
+delta.x: 50.000000, delta.y: 4.000000
+path.x:50.007616 path.y: 229.194754
+si sono entrato in x
+second_point calculated: 450, 97
+cella del second_point: 9, 1
+Si! La cella (9.000000, 1.940000) è un muro
+raggio n.: 10
+ma che caz di angolo è: 0.034907
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.006095 path.y: 286.537083
+si sono entrato in x
+second_point calculated: 100, 90
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.800000) NON è un muro
+attuale primo punto: 100.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 10.000000
+path.x:50.030477 path.y: 286.537083
+si sono entrato in x
+second_point calculated: 150, 92
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.840000) NON è un muro
+attuale primo punto: 150.000000, 92.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 8.000000
+path.x:50.030477 path.y: 229.229667
+si sono entrato in x
+second_point calculated: 200, 94
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.880000) NON è un muro
+attuale primo punto: 200.000000, 94.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 100.000000
+side_point per calcolo delta: 250.000000, 100.000000
+delta.x: 50.000000, delta.y: 6.000000
+path.x:50.030477 path.y: 171.922250
+si sono entrato in x
+second_point calculated: 250, 96
+cella del second_point: 5, 1
+NO! La cella (5.000000, 1.920000) NON è un muro
+attuale primo punto: 250.000000, 96.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 300.000000, 100.000000
+side_point per calcolo delta: 300.000000, 100.000000
+delta.x: 50.000000, delta.y: 4.000000
+path.x:50.030477 path.y: 114.614833
+si sono entrato in x
+second_point calculated: 300, 98
+cella del second_point: 6, 1
+NO! La cella (6.000000, 1.960000) NON è un muro
+attuale primo punto: 300.000000, 98.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 350.000000, 100.000000
+side_point per calcolo delta: 350.000000, 100.000000
+delta.x: 50.000000, delta.y: 2.000000
+path.x:50.030477 path.y: 57.307417
+si sono entrato in x
+second_point calculated: 350, 100
+cella del second_point: 7, 2
+NO! La cella (7.000000, 2.000000) NON è un muro
+attuale primo punto: 350.000000, 100.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 400.000000, 150.000000
+side_point per calcolo delta: 400.000000, 150.000000
+delta.x: 50.000000, delta.y: 50.000000
+path.x:50.030477 path.y: 1432.685417
+si sono entrato in x
+second_point calculated: 400, 102
+cella del second_point: 8, 2
+NO! La cella (8.000000, 2.040000) NON è un muro
+attuale primo punto: 400.000000, 102.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 450.000000, 150.000000
+side_point per calcolo delta: 450.000000, 150.000000
+delta.x: 50.000000, delta.y: 48.000000
+path.x:50.030477 path.y: 1375.378001
+si sono entrato in x
+second_point calculated: 450, 104
+cella del second_point: 9, 2
+Si! La cella (9.000000, 2.080000) è un muro
+raggio n.: 11
+ma che caz di angolo è: 0.052360
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.013723 path.y: 191.073226
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.068617 path.y: 171.965903
+si sono entrato in x
+second_point calculated: 150, 94
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.880000) NON è un muro
+attuale primo punto: 150.000000, 94.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 6.000000
+path.x:50.068617 path.y: 114.643936
+si sono entrato in x
+second_point calculated: 200, 97
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.940000) NON è un muro
+attuale primo punto: 200.000000, 97.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 100.000000
+side_point per calcolo delta: 250.000000, 100.000000
+delta.x: 50.000000, delta.y: 3.000000
+path.x:50.068617 path.y: 57.321968
+si sono entrato in x
+second_point calculated: 250, 100
+cella del second_point: 5, 2
+NO! La cella (5.000000, 2.000000) NON è un muro
+attuale primo punto: 250.000000, 100.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 300.000000, 150.000000
+side_point per calcolo delta: 300.000000, 150.000000
+delta.x: 50.000000, delta.y: 50.000000
+path.x:50.068617 path.y: 955.366130
+si sono entrato in x
+second_point calculated: 300, 103
+cella del second_point: 6, 2
+NO! La cella (6.000000, 2.060000) NON è un muro
+attuale primo punto: 300.000000, 103.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 350.000000, 150.000000
+side_point per calcolo delta: 350.000000, 150.000000
+delta.x: 50.000000, delta.y: 47.000000
+path.x:50.068617 path.y: 898.044163
+si sono entrato in x
+second_point calculated: 350, 106
+cella del second_point: 7, 2
+NO! La cella (7.000000, 2.120000) NON è un muro
+attuale primo punto: 350.000000, 106.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 400.000000, 150.000000
+side_point per calcolo delta: 400.000000, 150.000000
+delta.x: 50.000000, delta.y: 44.000000
+path.x:50.068617 path.y: 840.722195
+si sono entrato in x
+second_point calculated: 400, 109
+cella del second_point: 8, 2
+NO! La cella (8.000000, 2.180000) NON è un muro
+attuale primo punto: 400.000000, 109.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 450.000000, 150.000000
+side_point per calcolo delta: 450.000000, 150.000000
+delta.x: 50.000000, delta.y: 41.000000
+path.x:50.068617 path.y: 783.400227
+si sono entrato in x
+second_point calculated: 450, 112
+cella del second_point: 9, 2
+Si! La cella (9.000000, 2.240000) è un muro
+raggio n.: 12
+ma che caz di angolo è: 0.069813
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.024419 path.y: 143.355870
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.122095 path.y: 129.020283
+si sono entrato in x
+second_point calculated: 150, 94
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.880000) NON è un muro
+attuale primo punto: 150.000000, 94.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 6.000000
+path.x:50.122095 path.y: 86.013522
+si sono entrato in x
+second_point calculated: 200, 97
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.940000) NON è un muro
+attuale primo punto: 200.000000, 97.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 100.000000
+side_point per calcolo delta: 250.000000, 100.000000
+delta.x: 50.000000, delta.y: 3.000000
+path.x:50.122095 path.y: 43.006761
+second_point calculated: 243, 100
+cella del second_point: 4, 2
+NO! La cella (4.860000, 2.000000) NON è un muro
+attuale primo punto: 243.000000, 100.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 150.000000
+side_point per calcolo delta: 250.000000, 150.000000
+delta.x: 7.000000, delta.y: 50.000000
+path.x:7.017093 path.y: 716.779351
+si sono entrato in x
+second_point calculated: 250, 100
+cella del second_point: 5, 2
+NO! La cella (5.000000, 2.000000) NON è un muro
+attuale primo punto: 250.000000, 100.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 300.000000, 150.000000
+side_point per calcolo delta: 300.000000, 150.000000
+delta.x: 50.000000, delta.y: 50.000000
+path.x:50.122095 path.y: 716.779351
+si sono entrato in x
+second_point calculated: 300, 103
+cella del second_point: 6, 2
+NO! La cella (6.000000, 2.060000) NON è un muro
+attuale primo punto: 300.000000, 103.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 350.000000, 150.000000
+side_point per calcolo delta: 350.000000, 150.000000
+delta.x: 50.000000, delta.y: 47.000000
+path.x:50.122095 path.y: 673.772590
+si sono entrato in x
+second_point calculated: 350, 106
+cella del second_point: 7, 2
+NO! La cella (7.000000, 2.120000) NON è un muro
+attuale primo punto: 350.000000, 106.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 400.000000, 150.000000
+side_point per calcolo delta: 400.000000, 150.000000
+delta.x: 50.000000, delta.y: 44.000000
+path.x:50.122095 path.y: 630.765829
+si sono entrato in x
+second_point calculated: 400, 109
+cella del second_point: 8, 2
+NO! La cella (8.000000, 2.180000) NON è un muro
+attuale primo punto: 400.000000, 109.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 450.000000, 150.000000
+side_point per calcolo delta: 450.000000, 150.000000
+delta.x: 50.000000, delta.y: 41.000000
+path.x:50.122095 path.y: 587.759068
+si sono entrato in x
+second_point calculated: 450, 112
+cella del second_point: 9, 2
+Si! La cella (9.000000, 2.240000) è un muro
+raggio n.: 13
+ma che caz di angolo è: 0.087266
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.038198 path.y: 114.737132
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.190992 path.y: 103.263419
+si sono entrato in x
+second_point calculated: 150, 95
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.900000) NON è un muro
+attuale primo punto: 150.000000, 95.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 5.000000
+path.x:50.190992 path.y: 57.368566
+si sono entrato in x
+second_point calculated: 200, 99
+cella del second_point: 4, 1
+NO! La cella (4.000000, 1.980000) NON è un muro
+attuale primo punto: 200.000000, 99.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 100.000000
+side_point per calcolo delta: 250.000000, 100.000000
+delta.x: 50.000000, delta.y: 1.000000
+path.x:50.190992 path.y: 11.473713
+second_point calculated: 211, 100
+cella del second_point: 4, 2
+NO! La cella (4.220000, 2.000000) NON è un muro
+attuale primo punto: 211.000000, 100.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 250.000000, 150.000000
+side_point per calcolo delta: 250.000000, 150.000000
+delta.x: 39.000000, delta.y: 50.000000
+path.x:39.148974 path.y: 573.685662
+si sono entrato in x
+second_point calculated: 250, 103
+cella del second_point: 5, 2
+NO! La cella (5.000000, 2.060000) NON è un muro
+attuale primo punto: 250.000000, 103.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 300.000000, 150.000000
+side_point per calcolo delta: 300.000000, 150.000000
+delta.x: 50.000000, delta.y: 47.000000
+path.x:50.190992 path.y: 539.264523
+si sono entrato in x
+second_point calculated: 300, 107
+cella del second_point: 6, 2
+NO! La cella (6.000000, 2.140000) NON è un muro
+attuale primo punto: 300.000000, 107.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 350.000000, 150.000000
+side_point per calcolo delta: 350.000000, 150.000000
+delta.x: 50.000000, delta.y: 43.000000
+path.x:50.190992 path.y: 493.369670
+si sono entrato in x
+second_point calculated: 350, 111
+cella del second_point: 7, 2
+NO! La cella (7.000000, 2.220000) NON è un muro
+attuale primo punto: 350.000000, 111.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 400.000000, 150.000000
+side_point per calcolo delta: 400.000000, 150.000000
+delta.x: 50.000000, delta.y: 39.000000
+path.x:50.190992 path.y: 447.474817
+si sono entrato in x
+second_point calculated: 400, 115
+cella del second_point: 8, 2
+NO! La cella (8.000000, 2.300000) NON è un muro
+attuale primo punto: 400.000000, 115.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 450.000000, 150.000000
+side_point per calcolo delta: 450.000000, 150.000000
+delta.x: 50.000000, delta.y: 35.000000
+path.x:50.190992 path.y: 401.579964
+si sono entrato in x
+second_point calculated: 450, 119
+cella del second_point: 9, 2
+Si! La cella (9.000000, 2.380000) è un muro
+raggio n.: 14
+ma che caz di angolo è: 0.104720
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.055083 path.y: 95.667722
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.275414 path.y: 86.100950
+si sono entrato in x
+second_point calculated: 150, 96
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.920000) NON è un muro
+attuale primo punto: 150.000000, 96.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 4.000000
+path.x:50.275414 path.y: 38.267089
+second_point calculated: 188, 100
+cella del second_point: 3, 2
+Si! La cella (3.760000, 2.000000) è un muro
+raggio n.: 15
+ma che caz di angolo è: 0.122173
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.075098 path.y: 82.055090
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.375491 path.y: 73.849581
+si sono entrato in x
+second_point calculated: 150, 97
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.940000) NON è un muro
+attuale primo punto: 150.000000, 97.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 3.000000
+path.x:50.375491 path.y: 24.616527
+second_point calculated: 174, 100
+cella del second_point: 3, 2
+Si! La cella (3.480000, 2.000000) è un muro
+raggio n.: 16
+ma che caz di angolo è: 0.139626
+You are looking at 1630
+
+
+
+inizia un nuovo raggio
+attuale primo punto: 90.000000, 90.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 100.000000, 100.000000
+side_point per calcolo delta: 100.000000, 100.000000
+delta.x: 10.000000, delta.y: 10.000000
+path.x:10.098276 path.y: 71.852965
+si sono entrato in x
+second_point calculated: 100, 91
+cella del second_point: 2, 1
+NO! La cella (2.000000, 1.820000) NON è un muro
+attuale primo punto: 100.000000, 91.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 150.000000, 100.000000
+side_point per calcolo delta: 150.000000, 100.000000
+delta.x: 50.000000, delta.y: 9.000000
+path.x:50.491379 path.y: 64.667669
+si sono entrato in x
+second_point calculated: 150, 98
+cella del second_point: 3, 1
+NO! La cella (3.000000, 1.960000) NON è un muro
+attuale primo punto: 150.000000, 98.000000
+hei sono fuori
+cardinal_direction:1630
+side_point: 200.000000, 100.000000
+side_point per calcolo delta: 200.000000, 100.000000
+delta.x: 50.000000, delta.y: 2.000000
+path.x:50.491379 path.y: 14.370593
+second_point calculated: 164, 100
+cella del second_point: 3, 2

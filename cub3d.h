@@ -16,7 +16,7 @@
 #define TILE_SIZE 50
 
 //calculations
-#define EPSILON 1e-6 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
+#define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
 
 //wall_check
 #define THROUGH_TWO_WALLS 1
@@ -68,13 +68,13 @@
 #define ARROW_RIGHT 124
 
 //player charactieristics
-#define RAY_LENGTH round((RADIUS * 2))
+#define RAY_LENGTH round(RADIUS * 2)
 #define FOOT_STEP 3
 #define RADIUS 6
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
-#define DEGREE (2 * M_PI / 360)
+#define DEGREE round(2 * M_PI / 360)
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
@@ -169,6 +169,7 @@ char	**get_map_from_file(char *file_content, int width, int height);
 
 //initializing
 void	initialize_player(t_c3d *c3d);
+void initialize_ray(t_ray *ray);
 
 //dda
 t_point dda(t_point start_point, double alpha, t_c3d *c3d);
