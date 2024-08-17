@@ -170,28 +170,18 @@ char	**get_map_from_file(char *file_content, int width, int height);
 //initializing
 void	initialize_player(t_c3d *c3d);
 
-//calculation initial
+//dda
+t_point dda(t_point start_point, double alpha, t_c3d *c3d);
 t_point chose_side_point(t_point first_point, int cardinal_direction);
-t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
 int	get_cardinal_direction(double angle);
-
-
-//calculation general
-int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
-int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-int is_it_a_wall(t_point point_to_verify, char **map_grid);
+t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);
 t_path calculate_path(t_delta delta, double alpha);
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
-t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, t_point point_to_verify, char **map_grid, t_ray *ray, t_c3d *c3d);
 
-//calculation increment
-t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
-
-t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);
-
-//calculation dda
-t_point dda(t_point start_point, double alpha, t_c3d *c3d);
+//dda checks
+int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
+int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
