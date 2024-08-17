@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 
 	c3d.player.position.x = 90;
 	c3d.player.position.y = 90;
-	update_player_tile_reference(&c3d);
+	c3d.player.tile = tile_reference(c3d.player.position);
 	
 
 	draw_player(&c3d, c3d.player.position.x, c3d.player.position.y, RADIUS);

@@ -21,7 +21,7 @@
 #define WALL_INTERCEPTED 1
 #define INSIDE_PERIMETER 2
 #define OUTSIDE_PERIMETER 0
-#define WALL_IS_NOT_INTERCEPTED 1
+#define WALL_IS_NOT_INTERCEPTED 0
 
 
 //choese_delta
@@ -46,6 +46,16 @@
 #define PURPLE 0x800080
 #define GRAY 0x808080
 #define PINK 0xffc0cb
+
+//cardinal directions
+#define NE 1330
+#define E 1500
+#define SE 1630
+#define S 1800
+#define SW 1930
+#define W 2100
+#define NW 2230
+#define N 2400
 
 //keycode
 #define KEY_W 13
@@ -114,13 +124,13 @@ typedef struct	s_point
 
 typedef struct s_ray
 {
-	char 	*cardinal_direction;
+	int 	cardinal_direction;
 	t_point	first_side_point; // è uno dei 4 vertici interni della cella
 	t_point first_impact_point; //è il primo punto diimpatto in quella cella
 	t_delta delta;
 	t_path 	path;
+	t_point first_point;
 	t_point	end_point;
-	t_point	end_point_to_check;
 	double 	left_alpha;
 	double 	right_alpha;
 } t_ray;
@@ -160,35 +170,24 @@ char	**get_map_from_file(char *file_content, int width, int height);
 void	initialize_player(t_c3d *c3d);
 
 //calculation initial
-void calculate_initial_delta(t_point first_side_point, t_c3d *c3d, t_ray *ray, int chose_delta);
-t_point	chose_side_point(t_c3d *c3d, t_ray *ray);
+t_point chose_side_point(t_point first_point, int cardinal_direction);
 t_point reaching_first_side(char **map_grid, double alpha, t_c3d *c3d, t_ray *ray);
-void	get_cardinal_direction(double angle, t_ray *ray);
+int	get_cardinal_direction(double angle);
 
 
 //calculation general
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
 int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-int 	is_it_a_wall(char **map_grid, t_point point_to_verify, t_c3d *c3d);
-int		check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
-double	calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path);
+int is_it_a_wall(t_point point_to_verify, char **map_grid);
+t_path calculate_path(t_delta delta, double alpha);
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
-t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
 t_point	check_if_are_both_walls_and_set_firstSidePoint(t_point point_of_a_wall, t_point point_to_verify, char **map_grid, t_ray *ray, t_c3d *c3d);
 
-
 //calculation increment
-int check_wall(t_point end_point, t_c3d *c3d, char **map_grid, t_ray *ray);
-void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
-t_point get_end_point(t_point player_position, int map_length, double alpha, t_ray *ray, int chose_section_x_or_y);
 t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
-void	increment_chosenPath_unitl_you_find_a_wall(t_ray *ray, double alpha, t_c3d *c3d, t_point end_point, int chose_path);
 
-int	routine_sectionX(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
-int	routine_sectionY(t_c3d *c3d, t_ray *ray, char **map_grid, double alpha);
-int routine(t_c3d* c3d, t_ray *ray, char **map_grid, double alpha, int chose_section);
-
+t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);
 
 //calculation dda
 void	dda(t_c3d *c3d);
@@ -214,7 +213,7 @@ int		update_position(void *param);
 int		update_alpha_rotation(void *param);
 int		update_player_movement(void *param);
 int 	is_collision(int player_next_x, int player_next_y, t_c3d *c3d);
-void	update_player_tile_reference(t_c3d *c3d);
+t_point tile_reference(t_point point);
 //moving_utils
 void    key_press_player_alpha_rotation(int keycode, t_c3d *c3d);
 void    key_release_player_alpha_rotation(int keycode, t_c3d *c3d);

@@ -1,43 +1,46 @@
 #include "../../cub3d.h"
 #include <string.h>
 
-void print_info(t_ray *ray)
+void print_info(t_ray *ray, t_point first_point, t_point end_point)
 {
+	t_ray ciao;
+	ciao = *ray;
+
+	t_point ciaociao;
+	ciaociao = end_point;
     printf("\n\n\n\n#### inizio controllo di increment ####\n");
-    printf("la prima cella è: (%d, %d)\n", (int)ray->end_point.x / TILE_SIZE, (int)ray->end_point.y / TILE_SIZE);
-    printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)ray->end_point.x, (int)ray->end_point.y);
+    printf("la prima cella è: (%d, %d)\n", (int)first_point.x / TILE_SIZE, (int)first_point.y / TILE_SIZE);
+    printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)first_point.x, (int)first_point.y);
 }
 
-t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) //# NOTA_2
+t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha) 
 {
-	t_point end_point;
-
-	end_point.x = ray->first_impact_point.x; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
-	end_point.y = ray->first_impact_point.y;
-	print_info(ray);
-
-	if (strcmp(ray->cardinal_direction, "NE") == 0) //per ora ho toloto E per questinoi di testing
-	{printf("INIZIAAAA IL CONTROLLOOOO SU NE\n");
-		while (1)
-		{
-			if (is_it_passing_between_two_walls(c3d, ray, map_grid, end_point)) //il primo punto che arriva da reaching_the_side è un muro?
-				break;  printf("sx = %f, sy = %f\n", fabs(ray->path.x), fabs(ray->path.y));
-			if (fabs(ray->path.x) < fabs(ray->path.y)) //se sx reale è più piccolo di sy reale
-			{  
-				if (routine(c3d, ray, map_grid, alpha, SECTION_X) == 0)
-					break;
-			}
-			else if (routine(c3d, ray, map_grid, alpha, SECTION_Y) == 0)
-				break;
-		}
-	}
-	else 
+	ray->first_point.x = ray->first_impact_point.x; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
+	ray->first_point.y = ray->first_impact_point.y;
+	print_info(ray, ray->first_point, ray->end_point);
+	while (is_it_inside_map_perimeter(ray->first_point, c3d))
 	{
-		bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, BLACK);
-		printf ("print_you are not pointing NE\n");
+		ray->first_side_point = chose_side_point(ray->first_point, ray->cardinal_direction); //individua uno dei vertici interni della cella
+		ray->delta = calculate_delta(ray->first_point, ray->first_side_point, ray->cardinal_direction); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
+		ray->path = calculate_path(ray->delta, alpha);
+		if (fabs(ray->path.x) < fabs(ray->path.y))
+		{
+			printf("si sono entrato in x\n");
+			ray->end_point = trigonometric_pointCalculation(ray->first_point, ray->path.x, alpha);
+		}
+		else
+			ray->end_point = trigonometric_pointCalculation(ray->first_point, ray->path.y, alpha);
+		if (is_it_a_wall(ray->end_point, map_grid))
+		{
+			bresenham(c3d, c3d->player.position.x, c3d->player.position.y, ray->end_point.x, ray->end_point.y, BLACK);
+			break;
+		}
+		else
+			ray->first_point = ray->end_point;
 	}
-	return (end_point);
+	return (ray->end_point);  //da oscurare se attivi la parte sotto
 }
+
 
 /* #NOTA_1 
 ECCO trovato il segmentation fault. 

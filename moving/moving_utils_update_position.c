@@ -16,10 +16,17 @@ If there is a collision simpli don't do anything. so don't update coordinates of
 
 */
 
-void update_player_tile_reference(t_c3d* c3d)
+t_point tile_reference(t_point point)
 {
-    c3d->player.tile.x = c3d->player.position.x / TILE_SIZE;
-    c3d->player.tile.y = c3d->player.position.y / TILE_SIZE;
+    t_point tile_reference;
+
+    tile_reference.x = 0;
+    tile_reference.y = 0;
+
+    tile_reference.x = point.x / TILE_SIZE;
+    tile_reference.y = point.y / TILE_SIZE;
+
+    return (tile_reference);
 }
 
 int update_position(void *param) 
@@ -34,7 +41,7 @@ int update_position(void *param)
         if(!is_collision(c3d->player.position.x, c3d->player.position.y - FOOT_STEP, c3d))
         {
             c3d->player.position.y -= FOOT_STEP;
-            update_player_tile_reference(c3d);
+	        c3d->player.tile = tile_reference(c3d->player.position);
             check = 1;
         }
     }
@@ -43,7 +50,7 @@ int update_position(void *param)
         if(!is_collision(c3d->player.position.x, c3d->player.position.y + FOOT_STEP, c3d))
         {
             c3d->player.position.y += FOOT_STEP;
-            update_player_tile_reference(c3d);
+	        c3d->player.tile = tile_reference(c3d->player.position);
             check = 1;
         }   
     }
@@ -52,7 +59,7 @@ int update_position(void *param)
         if(!is_collision(c3d->player.position.x - FOOT_STEP, c3d->player.position.y, c3d))
         {
             c3d->player.position.x -= FOOT_STEP;
-            update_player_tile_reference(c3d);
+	        c3d->player.tile = tile_reference(c3d->player.position);
             check = 1;
         }   
     }
@@ -61,7 +68,7 @@ int update_position(void *param)
         if(!is_collision(c3d->player.position.x + FOOT_STEP, c3d->player.position.y, c3d))
         {
             c3d->player.position.x += FOOT_STEP;
-            update_player_tile_reference(c3d);
+	        c3d->player.tile = tile_reference(c3d->player.position);
             check = 1;
         }   
     }

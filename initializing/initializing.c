@@ -15,9 +15,11 @@ void initialize_player(t_c3d *c3d)
 	c3d->player.alpha_direction = 0;
 	c3d->player.rotate_alpha_right = 0;
 	c3d->player.rotate_alpha_left = 0;
-	c3d->player.ray.cardinal_direction = NULL;
+	c3d->player.ray.cardinal_direction = 0;
 	c3d->player.ray.first_impact_point.x = 0;
 	c3d->player.ray.first_impact_point.y = 0;
+	c3d->player.ray.first_point.x = 0;
+	c3d->player.ray.first_point.y = 0;
 	c3d->player.ray.end_point.x = 0;
 	c3d->player.ray.end_point.y = 0;
 }

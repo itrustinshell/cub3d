@@ -1,24 +1,20 @@
 #include "../cub3d.h"
 
-double calculate_path(int map_length, double deltaX, double deltaY, double alpha, int chose_path)
+t_path calculate_path(t_delta delta, double alpha) //TODO: Verifica se hai bisogno di fabs
 {
-    double path;
+    t_path path;
 
-    path = 0;
-    if (chose_path == PATH_X)
-    {
-        if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
-            path = deltaY / sin(alpha);
-        else
-            path = deltaX / cos(alpha);printf("ipotenusa tramite dx: %f\n", fabs(path));
-    }
+    path.x = 0;
+    path.y = 0;
+
+    if (fabs(alpha - M_PI / 2) < EPSILON || fabs(alpha - 3 * M_PI / 2) < EPSILON) //mettiamo il valore assoluto e vediamo se è minore di EPSILON_ Se lo è significa che è prossimo allo zero
+        path.x = fabs(delta.y / sin(alpha));
     else
-    {
-        if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
-            path = deltaX / cos(alpha);
-        else
-            path = deltaY / sin(alpha);printf("ipotenusa tramite dy: %f\n", fabs(path));
-    }
-    path = fmin(fabs(path), map_length * TILE_SIZE);
-    return (fabs(path));
+        path.x = fabs(delta.x / cos(alpha));printf("ipotenusa tramite dx: %f\n", fabs(path.x));
+ 
+    if (fabs(alpha - M_PI) < EPSILON || fabs(alpha - 2 * M_PI) < EPSILON || fabs(alpha) < EPSILON)
+        path.y = fabs(delta.x / cos(alpha));
+    else
+        path.y = fabs(delta.y / sin(alpha));printf("ipotenusa tramite dy: %f\n", fabs(path.y));
+    return (path);
 }
