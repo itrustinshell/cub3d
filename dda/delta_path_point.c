@@ -14,22 +14,11 @@ double calculate_deltaX(t_point first_point, t_point second_point, int cardinal_
     double deltaX;
     
     deltaX = 0;
-    if (cardinal_direction == E)
-        deltaX = fabs(second_point.x - first_point.x); 
-    else if (cardinal_direction == NE) 
-        deltaX = fabs(second_point.x - first_point.x); 
-    else if (cardinal_direction == N)
-        deltaX = fabs(second_point.x - first_point.x); //V
-    else if (cardinal_direction == NW)
-        deltaX = fabs(second_point.x - first_point.x - 1);
-    else if (cardinal_direction == W )
-        deltaX = fabs(second_point.x - first_point.x - 1);
-    else if (cardinal_direction == SW)
-        deltaX = fabs(second_point.x - first_point.x - 1);
-    else if (cardinal_direction == S)
-        deltaX = fabs(second_point.x - first_point.x - 1);
-    else if (cardinal_direction == SE)
-        deltaX = fabs(second_point.x - first_point.x);
+    if (cardinal_direction == E || cardinal_direction == NE || cardinal_direction == SE)
+        deltaX = second_point.x - first_point.x; 
+    else 
+        deltaX = fabs(second_point.x - first_point.x - 1); //TODO: think about N and S
+    printf("delta.x = %f\n", deltaX);
 
     return (deltaX);
 }
@@ -38,22 +27,11 @@ double calculate_deltaY(t_point first_point, t_point second_point, int cardinal_
 {
     double deltaY;
     deltaY = 0;
-    if (cardinal_direction == E)
-        deltaY = fabs(first_point.y - second_point.y + 1);
-    else if (cardinal_direction == NE )
+    if (cardinal_direction == N || cardinal_direction == NE || cardinal_direction == NW)
         deltaY = fabs(first_point.y - second_point.y + 1); 
-    else if (cardinal_direction == N)
-        deltaY = fabs(first_point.y - second_point.y + 1); 
-    else if (cardinal_direction == NW)
-        deltaY = fabs(first_point.y - second_point.y + 1);
-    else if (cardinal_direction == W )
-        deltaY = fabs(first_point.y - second_point.y + 1); //dovrebbe essere indifferente se su o giu
-    else if (cardinal_direction == SW)
-        deltaY = fabs(first_point.y - second_point.y); 
-    else if (cardinal_direction == S)
-        deltaY = fabs(first_point.y - second_point.y);
-    else if (cardinal_direction == SE)
-        deltaY = fabs(first_point.y - second_point.y);
+    else
+        deltaY = fabs(first_point.y - second_point.y); //TODO: think about E and W
+    printf("delta.y = %f\n", deltaY);
 
     return (deltaY);
 }

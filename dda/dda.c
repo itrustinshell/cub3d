@@ -1,19 +1,6 @@
 #include "../cub3d.h"
 #include <string.h>
 
-
-void print_info(t_ray *ray, t_point first_point, t_point end_point)
-{
-	t_ray ciao;
-	ciao = *ray;
-
-	t_point ciaociao;
-	ciaociao = end_point;
-    printf("\n\n\n\n#### inizio controllo di increment ####\n");
-    printf("la prima cella è: (%d, %d)\n", (int)first_point.x / TILE_SIZE, (int)first_point.y / TILE_SIZE);
-    printf("la prima cella è stata incontrate nel punto: (%d, %d)\n", (int)first_point.x, (int)first_point.y);
-}
-
 t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 {
 	t_ray   ray;
@@ -24,8 +11,7 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 
 	ray.cardinal_direction = get_cardinal_direction(c3d->player.alpha_direction);
 	ray.first_point = start_point; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
-	
-	print_info(&ray, ray.first_point, ray.end_point);
+	printf("\n\n\ninizia un nuovo raggio\n");
 	while (is_it_inside_map_perimeter(ray.first_point, c3d))
 	{
 		ray.first_side_point = chose_side_point(ray.first_point, ray.cardinal_direction); //individua uno dei vertici interni della cella
@@ -35,9 +21,19 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 		{
 			printf("si sono entrato in x\n");
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
+			if(is_it_passing_between_two_walls(c3d, &ray, c3d->map_fm_file.grid,  ray.end_point))
+			{
+			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, BLACK);
+			break;
+			}
 		}
 		else
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.y, alpha);
+			if(is_it_passing_between_two_walls(c3d, &ray, c3d->map_fm_file.grid, ray.end_point))
+			{
+			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, BLACK);
+			break;
+			}
 		if (is_it_a_wall(ray.end_point, c3d->map_fm_file.grid))
 		{
 			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, BLACK);

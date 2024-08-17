@@ -41,7 +41,7 @@ t_point chose_side_point(t_point first_point, int cardinal_direction)
 
 	tile_ref = tile_reference(first_point);
 
-	if (cardinal_direction == NE  || cardinal_direction == E)
+	if (cardinal_direction == NE || cardinal_direction == E)
 	{
 		side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
 		side_point.y = (int)tile_ref.y * TILE_SIZE;
@@ -61,5 +61,6 @@ t_point chose_side_point(t_point first_point, int cardinal_direction)
 		side_point.x = (int)tile_ref.x * TILE_SIZE;
 		side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
 	}
+	printf("side_point: %f, %f\n",side_point.x, side_point.y);
 	return (side_point);
 }
