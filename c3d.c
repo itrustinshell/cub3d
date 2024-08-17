@@ -9,6 +9,8 @@ int main(int argc, char **argv)
 	t_c3d	c3d;
 	char	*path;
 	
+    
+
 	if (argc < 4)
 	{
 		printf("Please provide a path to a map!\nUsage:\n./cube <map_path> <width> <height>\n");
@@ -42,7 +44,9 @@ int main(int argc, char **argv)
 
 
 	c3d.player.alpha_direction = 2 * M_PI;
-	dda(c3d.player.position, c3d.player.alpha_direction, &c3d);
+	//dda(c3d.player.position, c3d.player.alpha_direction, &c3d);
+	draw_field_of_view(&c3d);
+
  	draw_2d_player_direction(&c3d, c3d.player.position.x, c3d.player.position.y, c3d.player.alpha_direction, BLACK);
 
 

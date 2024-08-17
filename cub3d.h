@@ -9,6 +9,8 @@
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
+#define FOV_ANGLE 60.0 // Field of View angle in degrees
+#define NUM_RAYS 100   // Number of rays to cast
 
 //map_img_charateristics
 #define TILE_SIZE 50
@@ -72,7 +74,7 @@
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
-#define DEGREE round(2 * round(M_PI / 360));
+#define DEGREE 2 * M_PI / 360
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
@@ -202,6 +204,8 @@ void    draw_player(t_c3d *c3d, int center_x, int center_y, int radius);
 void	ft_color(int x, int y, t_c3d *c3d, int color);
 void	draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
+void draw_field_of_view( t_c3d *c3d);
+void draw_fov(t_c3d *c3d, t_point viewer_position, double viewer_angle, double fov_angle, int num_rays) ;
 
 
 //moving;

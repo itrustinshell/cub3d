@@ -65,7 +65,9 @@ int update_alpha_rotation(void *param)
         mlx_put_image_to_window(c3d->win.mlx_connection, c3d->win.mlx_win, c3d->img.map_img, 0, 0);
         draw_player(c3d, c3d->player.position.x, c3d->player.position.y, RADIUS);
         draw_2d_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.alpha_direction, BLACK);
-        dda(c3d->player.position, c3d->player.alpha_direction, c3d);
+        //dda(c3d->player.position, c3d->player.alpha_direction, c3d);
+        draw_field_of_view(c3d);
+
         static int loop_test;
         printf("%d: alpha: %f\n", loop_test, c3d->player.alpha_direction);
         loop_test++;
