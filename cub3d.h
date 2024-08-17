@@ -190,7 +190,7 @@ t_point	increment(t_ray *ray, t_c3d *c3d, char **map_grid, double alpha);
 t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);
 
 //calculation dda
-void	dda(t_c3d *c3d);
+t_point dda(t_point start_point, double alpha, t_c3d *c3d);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
