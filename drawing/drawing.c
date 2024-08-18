@@ -71,10 +71,6 @@ void	draw_map(t_c3d *c3d)
 	}
 }
 
-
-
-
-
 void	ft_color(int x, int y, t_c3d *c3d, int color)
 {
 	int	i;

@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <ctype.h> //this is for isspace
 #include "minilibx/mlx.h"
-#include<math.h>
+#include <math.h>
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
@@ -14,6 +14,7 @@
 
 //map_img_charateristics
 #define TILE_SIZE 50
+
 
 //calculations
 #define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
@@ -68,13 +69,18 @@
 #define ARROW_RIGHT 124
 
 //player charactieristics
-#define RAY_LENGTH round(RADIUS * 2)
-#define FOOT_STEP 3
+#define RAY_LENGTH RADIUS * 8
+#define FOOT_STEP 4
 #define RADIUS 6
+
+
+//camera
+#define CAMERA_DISTANCE RADIUS * 10
+#define FOV (M_PI / 2)
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
-#define DEGREE round(2 * M_PI / 360)
+#define DEGREE 2 * M_PI / 150
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
@@ -123,6 +129,17 @@ typedef struct	s_point
 	double	y;
 } t_point;
 
+typedef struct s_camera
+{
+	t_point position;
+	double fov;
+	t_point fov_rigth_point;
+	t_point fov_left_point;
+
+
+	
+} t_camera;
+
 typedef struct s_ray
 {
 	int 	cardinal_direction;
@@ -148,6 +165,7 @@ typedef struct s_player
 	double		rotate_alpha_right;
 	double		rotate_alpha_left;
 	t_ray		ray;
+	t_camera	camera;
 } t_player;
 
 
@@ -160,8 +178,7 @@ typedef struct s_c3d
 	t_player	player;
 } t_c3d;
 
-
-
+t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
 //parsing
 char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
@@ -189,8 +206,8 @@ void	draw_tile(int x, int y, int color, t_c3d *c3d);
 void	draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d);
 void	draw_map(t_c3d *c3d);
 void	clear_current_drawing(void *mlx, void *mlx_win, int win_w, int win_h);
-void 	draw_filled_circle(t_c3d *c3d, int center_x, int center_y, int radius);
-void    draw_player(t_c3d *c3d, int center_x, int center_y, int radius);
+void 	draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color);
+void    draw_player(t_c3d *c3d, t_point player_position, int radius, int color);
 void	ft_color(int x, int y, t_c3d *c3d, int color);
 void	draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);

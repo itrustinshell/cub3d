@@ -80,10 +80,11 @@ int update_position(void *param)
         draw_map(c3d);
         mlx_put_image_to_window(c3d->win.mlx_connection, c3d->win.mlx_win, c3d->img.map_img, 0, 0);
 
-        draw_player(c3d, c3d->player.position.x, c3d->player.position.y, RADIUS);
+        draw_player(c3d, c3d->player.position, RADIUS, RED);
         
         draw_2d_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.alpha_direction, BLACK);
         draw_field_of_view(c3d);
+	    camera_plane(c3d->player.position, c3d->player.alpha_direction,  c3d);
 
         printf("sto stampando mappa e giocatore\n");
     }

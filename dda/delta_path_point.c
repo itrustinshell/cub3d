@@ -60,7 +60,7 @@ t_path calculate_path(t_delta delta, double alpha) //TODO: Verifica se hai bisog
         path.y = fabs(delta.x / cos(alpha));
     else
         path.y = fabs(delta.y / sin(alpha));
-        printf("path.x:%f path.y: %f\n", fabs(path.x),fabs(path.y));
+    printf("path.x:%f path.y: %f\n", fabs(path.x),fabs(path.y));
     return (path);
 }
 

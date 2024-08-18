@@ -7,9 +7,9 @@ SRC = 	c3d.c \
 		initializing/initializing.c \
 		moving/moving.c moving/moving_utils_press_release_position.c moving/moving_utils_press_release_rotation.c moving/moving_utils_collision.c moving/moving_utils_update_rotation.c moving/moving_utils_update_position.c \
 		drawing/drawing.c drawing/drawing_player.c \
-		dda/dda.c dda/delta_path_point.c dda/cardilnalDirection_sidePoint.c dda/checks.c \
+		dda/dda.c dda/camera.c dda/delta_path_point.c dda/cardilnalDirection_sidePoint.c dda/checks.c \
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c
-
+		
 #SRC = main.c moving.c read_the_map.c get_map_dimensions.c get_map_from_file.c drawing.c
 OBJ = $(SRC:.c=.o)
 

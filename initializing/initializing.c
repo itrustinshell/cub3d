@@ -22,6 +22,14 @@ void initialize_player(t_c3d *c3d)
 	c3d->player.ray.first_point.y = 0;
 	c3d->player.ray.end_point.x = 0;
 	c3d->player.ray.end_point.y = 0;
+	c3d->player.camera.fov = 0;
+	c3d->player.camera.fov_left_point.x = 0;
+	c3d->player.camera.fov_left_point.y = 0;
+	c3d->player.camera.fov_rigth_point.x = 0;
+	c3d->player.camera.fov_rigth_point.y = 0;
+	c3d->player.camera.position.x= 0;	
+	c3d->player.camera.position.y= 0;
+
 }
 
 
@@ -42,4 +50,5 @@ void initialize_ray(t_ray *ray)
 	ray->end_point.y = 0;
 	ray->left_alpha = 0;
 	ray->right_alpha = 0;
+
 }

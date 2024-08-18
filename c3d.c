@@ -3,6 +3,7 @@
 #define MAP_PATH 1
 #define WIDTH 2
 #define HEIGHT 3
+#define FACTOR 80
 
 int main(int argc, char **argv)
 {
@@ -11,23 +12,25 @@ int main(int argc, char **argv)
 	
     
 
-	if (argc < 4)
+	if (argc < 2)
 	{
-		printf("Please provide a path to a map!\nUsage:\n./cube <map_path> <width> <height>\n");
-		printf("Example:\n./cube map.cub 500 500");
+		printf("Please provide a path to a map!\nUsage:\n./cube <map_path>\n");
 		exit(EXIT_FAILURE);
 	}
 	initialize_player(&c3d);
 	path = argv[MAP_PATH];
-	c3d.win.w = atoi(argv[WIDTH]);	//TODO: Substitute with ft_atoi from libft
-	c3d.win.h = atoi(argv[HEIGHT]);	//TODO: Substitute with ft_atoi from libft
+	// c3d.win.w = atoi(argv[WIDTH]);	//TODO: Substitute with ft_atoi from libft
+	// c3d.win.h = atoi(argv[HEIGHT]);	//TODO: Substitute with ft_atoi from libft
 	
+	c3d.win.w = 16 * FACTOR;	//TODO: Substitute with ft_atoi from libft
+	c3d.win.h = 9 * FACTOR;
+
 	c3d.map_fm_file.data_from_file = read_the_map(path);
 	get_map_dimensions(c3d.map_fm_file.data_from_file, &c3d.map_fm_file.w, &c3d.map_fm_file.h);
 	c3d.map_fm_file.grid = get_map_from_file(c3d.map_fm_file.data_from_file, c3d.map_fm_file.w, c3d.map_fm_file.h);
-    	c3d.win.mlx_connection = mlx_init();
+    c3d.win.mlx_connection = mlx_init();
 
-    	c3d.win.mlx_win = mlx_new_window(c3d.win.mlx_connection, c3d.win.w, c3d.win.h, "cub3d");
+    c3d.win.mlx_win = mlx_new_window(c3d.win.mlx_connection, c3d.win.w, c3d.win.h, "cub3d");
 	
 	c3d.img.map_img = mlx_new_image(c3d.win.mlx_connection, c3d.map_fm_file.w * TILE_SIZE, c3d.map_fm_file.h * TILE_SIZE);
 	c3d.img.data_img = mlx_get_data_addr(c3d.img.map_img, &c3d.img.bits_per_pixel, &c3d.img.size_line, &c3d.img.endian);
@@ -38,12 +41,16 @@ int main(int argc, char **argv)
 	c3d.player.position.y = 90;
 	c3d.player.tile = tile_reference(c3d.player.position);
 	
+	c3d.player.alpha_direction = 2 * M_PI;
+	draw_player(&c3d, c3d.player.position, RADIUS, RED);
+	camera_plane(c3d.player.position,  c3d.player.alpha_direction,  &c3d);
 
-	draw_player(&c3d, c3d.player.position.x, c3d.player.position.y, RADIUS);
+	//TODO: quando avrai finito tute le propeitò nlla struct della camera e le avrai determinate 
+	// fai una funzione draw camera che si occupa di disegnare tutti insimee qui.
     
 
 
-	c3d.player.alpha_direction = 2 * M_PI;
+	
 	//dda(c3d.player.position, c3d.player.alpha_direction, &c3d);
 	draw_field_of_view(&c3d);
 
