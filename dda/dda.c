@@ -21,7 +21,7 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 		{
 			printf("si sono entrato in x\n");
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
-			if(is_it_passing_between_two_walls(c3d, &ray, c3d->map_fm_file.grid,  ray.end_point))
+			if(is_it_passing_between_two_walls(&ray, c3d->map_fm_file.grid,  ray.end_point))
 			{
 				bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 				break;
@@ -29,7 +29,7 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 		}
 		else
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.y, alpha);
-		if(is_it_passing_between_two_walls(c3d, &ray, c3d->map_fm_file.grid, ray.end_point))
+		if(is_it_passing_between_two_walls(&ray, c3d->map_fm_file.grid, ray.end_point))
 		{
 			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 			break;

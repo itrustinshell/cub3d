@@ -5,12 +5,12 @@ t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c
 {
     t_camera    camera;
 
-    camera.fov_rigth_point.x = player_position.x + (CAMERA_DISTANCE * cos(player_direction + FOV / 2));
-    camera.fov_rigth_point.y  = player_position.y + (CAMERA_DISTANCE * sin(player_direction + FOV / 2));
+    camera.fov_rigth_point.x = player_position.x + (CAMERA_DISTANCE * cos(player_direction + FOV_ANGLE / 2));
+    camera.fov_rigth_point.y  = player_position.y + (CAMERA_DISTANCE * sin(player_direction + FOV_ANGLE / 2));
  	draw_filled_circle(c3d, camera.fov_rigth_point, RADIUS / 2, BLACK);
     
-    camera.fov_left_point.x = player_position.x + (CAMERA_DISTANCE * cos(player_direction - FOV / 2));
-    camera.fov_left_point.y = player_position.y + (CAMERA_DISTANCE * sin(player_direction - FOV / 2));
+    camera.fov_left_point.x = player_position.x + (CAMERA_DISTANCE * cos(player_direction - FOV_ANGLE / 2));
+    camera.fov_left_point.y = player_position.y + (CAMERA_DISTANCE * sin(player_direction - FOV_ANGLE / 2));
 
 
     draw_filled_circle(c3d, camera.fov_left_point, RADIUS / 2, BLACK);

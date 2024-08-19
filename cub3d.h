@@ -4,40 +4,19 @@
 #include <string.h>
 #include <fcntl.h>
 #include <ctype.h> //this is for isspace
-#include "minilibx/mlx.h"
 #include <math.h>
+#include "minilibx/mlx.h"
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
-#define FOV_ANGLE 60.0 // Field of View angle in degrees
-#define NUM_RAYS 100   // Number of rays to cast
 
-//map_img_charateristics
-#define TILE_SIZE 50
-
-
-//calculations
-#define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
-
-//wall_check
-#define THROUGH_TWO_WALLS 1
-#define WALL_INTERCEPTED 1
-#define INSIDE_PERIMETER 2
-#define OUTSIDE_PERIMETER 0
-#define WALL_IS_NOT_INTERCEPTED 0
-
-
-//choese_delta
-#define DELTA_X 1
-#define DELTA_Y 2
-
-//chose_path
-#define PATH_X 1
-#define PATH_Y 2
-
-//chose section
-#define SECTION_X 1
-#define SECTION_Y 2
+//keycode
+#define KEY_W 13
+#define KEY_S 1
+#define KEY_A 0
+#define KEY_D 2
+#define ARROW_LEFT 123
+#define ARROW_RIGHT 124
 
 //colors
 #define RED 0xff0000
@@ -60,26 +39,48 @@
 #define NW 2230
 #define N 2400
 
-//keycode
-#define KEY_W 13
-#define KEY_S 1
-#define KEY_A 0
-#define KEY_D 2
-#define ARROW_LEFT 123
-#define ARROW_RIGHT 124
+
+
+//map_img_charateristics
+#define TILE_SIZE 50
+
+//calculations
+#define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
+
+//wall_check
+#define IS_A_WALL '1'
+#define IT_IS_A_WALL 1
+#define IT_IS_NOT_A_WALL 0
+#define THROUGH_TWO_WALLS 1
+#define NOT_THROUGH_TWO_WALLS 0
+
+#define WALL_INTERCEPTED 1
+#define INSIDE_PERIMETER 2
+#define OUTSIDE_PERIMETER 0
+#define WALL_IS_NOT_INTERCEPTED 0
+
+//delta, path, section
+#define DELTA_X 1
+#define DELTA_Y 2
+#define PATH_X 1
+#define PATH_Y 2
+#define SECTION_X 1
+#define SECTION_Y 2
 
 //player charactieristics
 #define RAY_LENGTH RADIUS * 8
 #define FOOT_STEP 4
 #define RADIUS 6
 
-
 //camera
 #define CAMERA_DISTANCE RADIUS * 10
-#define FOV (M_PI / 2)
+#define FOV_ANGLE (M_PI / 2)
+//#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
+
+//angles utils
 #define DEGREE 2 * M_PI / 150
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
@@ -198,7 +199,7 @@ t_point trigonometric_pointCalculation(t_point player_position, double path, dou
 
 //dda checks
 int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
-int 	is_it_passing_between_two_walls(t_c3d *c3d, t_ray *ray, char **map_grid, t_point point_to_verify);
+int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_to_verify);
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 
 //drawing
