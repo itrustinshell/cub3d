@@ -39,13 +39,19 @@
 #define NW 2230
 #define N 2400
 
-
-
-//map_img_charateristics
-#define TILE_SIZE 50
+//delta, path, section
+#define DELTA_X 1
+#define DELTA_Y 2
+#define PATH_X 1
+#define PATH_Y 2
+#define SECTION_X 1
+#define SECTION_Y 2
 
 //calculations
 #define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
+
+//angles utils
+#define DEGREE 2 * M_PI / 150
 
 //wall_check
 #define IS_A_WALL '1'
@@ -56,17 +62,11 @@
 #define INSIDE_PERIMETER 1
 #define OUTSIDE_PERIMETER 0
 
-#define WALL_INTERCEPTED 1
+//checks pint on the circumference when the player is at the center of a circumference
+#define CIRCUMFERENCE_CHECKS 8
 
-#define WALL_IS_NOT_INTERCEPTED 0
-
-//delta, path, section
-#define DELTA_X 1
-#define DELTA_Y 2
-#define PATH_X 1
-#define PATH_Y 2
-#define SECTION_X 1
-#define SECTION_Y 2
+//map_img_charateristics
+#define TILE_SIZE 50
 
 //player charactieristics
 #define RAY_LENGTH RADIUS * 8
@@ -77,12 +77,6 @@
 #define CAMERA_DISTANCE RADIUS * 10
 #define FOV_ANGLE (M_PI / 2)
 //#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
-
-//checks pint on the circumference when the player is at the center of a circumference
-#define CIRCUMFERENCE_CHECKS 8
-
-//angles utils
-#define DEGREE 2 * M_PI / 150
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
@@ -190,14 +184,14 @@ char	**get_map_from_file(char *file_content, int width, int height);
 
 //initializing
 void	initialize_player(t_c3d *c3d);
-void initialize_ray(t_ray *ray);
+void 	initialize_ray(t_ray *ray);
 
 //dda
 t_point dda(t_point start_point, double alpha, t_c3d *c3d);
 t_point chose_side_point(t_point first_point, int cardinal_direction);
-int	get_cardinal_direction(double angle);
+int		get_cardinal_direction(double angle);
 t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);
-t_path calculate_path(t_delta delta, double alpha);
+t_path	calculate_path(t_delta delta, double alpha);
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
 
 //dda checks
@@ -227,12 +221,12 @@ int		update_alpha_rotation(void *param);
 int		update_player_movement(void *param);
 int 	is_collision(int player_next_x, int player_next_y, t_c3d *c3d);
 t_point tile_reference(t_point point);
+
 //moving_utils
 void    key_press_player_alpha_rotation(int keycode, t_c3d *c3d);
 void    key_release_player_alpha_rotation(int keycode, t_c3d *c3d);
 void 	key_press_player_position(int keycode, t_c3d *c3d);
 void    key_release_player_position(int keycode, t_c3d *c3d);
-
 
 //text
 void	print_map(char **map, int width, int height);

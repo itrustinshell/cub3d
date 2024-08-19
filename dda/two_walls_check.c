@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
 {
     t_point p; //to better imporve readability
     int px; //for readability: è il p.x castato ad int
@@ -24,7 +24,7 @@ int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardina
     return (NOT_THROUGH_TWO_WALLS);
 }
 
-int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
 {
     t_point p; //to better imporve readability
     int px; //for readability: è il p.x castato ad int
@@ -49,7 +49,7 @@ int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardina
     return (NOT_THROUGH_TWO_WALLS);
 }
 
-int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
 {
     t_point p; //to better imporve readability
     int px; //for readability: è il p.x castato ad int
@@ -74,7 +74,7 @@ int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardina
     return (NOT_THROUGH_TWO_WALLS);
 }
 
-int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
 {
     t_point p; //to better imporve readability
     int px; //for readability: è il p.x castato ad int
