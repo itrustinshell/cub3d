@@ -54,10 +54,10 @@ void	draw_map(t_c3d *c3d)
 	starting_drawing_x = 0;
 	starting_drawing_y = 0;
 	y = starting_drawing_y;
-	while (y < starting_drawing_y + c3d->map_fm_file.h)
+	while (y < starting_drawing_y + c3d->map_fm_file.dimension.heigth)
 	{
 		x = starting_drawing_x; 
-		while (x < starting_drawing_x + c3d->map_fm_file.w)
+		while (x < starting_drawing_x + c3d->map_fm_file.dimension.width)
 		{
 		   if(c3d->map_fm_file.grid[y][x] == '1')
 				draw_tile_with_internal_margin(x * TILE_SIZE, y * TILE_SIZE, GRAY, c3d);			  

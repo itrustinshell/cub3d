@@ -53,10 +53,11 @@
 #define IT_IS_NOT_A_WALL 0
 #define THROUGH_TWO_WALLS 1
 #define NOT_THROUGH_TWO_WALLS 0
+#define INSIDE_PERIMETER 1
+#define OUTSIDE_PERIMETER 0
 
 #define WALL_INTERCEPTED 1
-#define INSIDE_PERIMETER 2
-#define OUTSIDE_PERIMETER 0
+
 #define WALL_IS_NOT_INTERCEPTED 0
 
 //delta, path, section
@@ -92,11 +93,17 @@ typedef struct s_win
 	int		h;
 } t_win;
 
+typedef struct s_dimension
+{
+	int width;
+	int heigth;
+
+} t_dimension;
+
 typedef struct s_map
 {
 	char	*data_from_file;
-	int		w;
-	int		h;
+	t_dimension dimension;
 	char	**grid;
 	int		x;
 	int		y;
@@ -109,7 +116,6 @@ typedef struct s_img
 	int		size_line;
 	int		bits_per_pixel;
 	int		endian;
-
 }	t_img;
 
 typedef struct s_delta
@@ -136,9 +142,6 @@ typedef struct s_camera
 	double fov;
 	t_point fov_rigth_point;
 	t_point fov_left_point;
-
-
-	
 } t_camera;
 
 typedef struct s_ray
@@ -198,7 +201,7 @@ t_path calculate_path(t_delta delta, double alpha);
 t_point trigonometric_pointCalculation(t_point player_position, double path, double alpha);
 
 //dda checks
-int		is_it_inside_map_perimeter(t_point point, t_c3d *c3d);
+int		is_it_inside_map_perimeter(t_point point_to_verify, t_dimension map_dimension);
 int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_to_verify);
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 

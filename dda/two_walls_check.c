@@ -17,7 +17,7 @@ int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardina
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
-            //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, RED);
+          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, RED);
             return (THROUGH_TWO_WALLS);
         }
     }
@@ -42,7 +42,7 @@ int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardina
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
-        //    bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (THROUGH_TWO_WALLS);
         }
     }
@@ -67,7 +67,7 @@ int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardina
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
-            //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (THROUGH_TWO_WALLS);
         }
     }
@@ -92,7 +92,7 @@ int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double cardina
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
-         //   bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
+          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
             return (THROUGH_TWO_WALLS);
         }
     }

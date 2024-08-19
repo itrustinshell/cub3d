@@ -26,13 +26,13 @@ int main(int argc, char **argv)
 	c3d.win.h = 9 * FACTOR;
 
 	c3d.map_fm_file.data_from_file = read_the_map(path);
-	get_map_dimensions(c3d.map_fm_file.data_from_file, &c3d.map_fm_file.w, &c3d.map_fm_file.h);
-	c3d.map_fm_file.grid = get_map_from_file(c3d.map_fm_file.data_from_file, c3d.map_fm_file.w, c3d.map_fm_file.h);
+	get_map_dimensions(c3d.map_fm_file.data_from_file, &c3d.map_fm_file.dimension.width, &c3d.map_fm_file.dimension.heigth);
+	c3d.map_fm_file.grid = get_map_from_file(c3d.map_fm_file.data_from_file, c3d.map_fm_file.dimension.width, c3d.map_fm_file.dimension.heigth);
     c3d.win.mlx_connection = mlx_init();
 
     c3d.win.mlx_win = mlx_new_window(c3d.win.mlx_connection, c3d.win.w, c3d.win.h, "cub3d");
 	
-	c3d.img.map_img = mlx_new_image(c3d.win.mlx_connection, c3d.map_fm_file.w * TILE_SIZE, c3d.map_fm_file.h * TILE_SIZE);
+	c3d.img.map_img = mlx_new_image(c3d.win.mlx_connection, c3d.map_fm_file.dimension.width * TILE_SIZE, c3d.map_fm_file.dimension.heigth * TILE_SIZE);
 	c3d.img.data_img = mlx_get_data_addr(c3d.img.map_img, &c3d.img.bits_per_pixel, &c3d.img.size_line, &c3d.img.endian);
 	draw_map(&c3d);
 	mlx_put_image_to_window(c3d.win.mlx_connection, c3d.win.mlx_win, c3d.img.map_img, 0, 0);

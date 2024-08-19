@@ -59,7 +59,7 @@ int update_alpha_rotation(void *param)
     if (check == 1)
     {
         mlx_destroy_image(c3d->win.mlx_connection, c3d->img.map_img);
-        c3d->img.map_img = mlx_new_image(c3d->win.mlx_connection, c3d->map_fm_file.w * TILE_SIZE, c3d->map_fm_file.h * TILE_SIZE);
+        c3d->img.map_img = mlx_new_image(c3d->win.mlx_connection, c3d->map_fm_file.dimension.width * TILE_SIZE, c3d->map_fm_file.dimension.heigth * TILE_SIZE);
         c3d->img.data_img = mlx_get_data_addr(c3d->img.map_img, &c3d->img.bits_per_pixel, &c3d->img.size_line, &c3d->img.endian);
         draw_map(c3d);
         mlx_put_image_to_window(c3d->win.mlx_connection, c3d->win.mlx_win, c3d->img.map_img, 0, 0);

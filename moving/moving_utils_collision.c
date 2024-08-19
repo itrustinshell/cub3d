@@ -30,7 +30,7 @@ int is_collision(int player_next_x, int player_next_y, t_c3d *c3d)
         c3d->map_fm_file.x = circumference_x(player_next_x, angle) / TILE_SIZE;
         c3d->map_fm_file.y = circumference_y(player_next_y, angle) / TILE_SIZE; 
         printf("If you do another step in this direction you will be in grid: %d, %d\n", c3d->map_fm_file.x, c3d->map_fm_file.y);
-        if (c3d->map_fm_file.x >= 0 && c3d->map_fm_file.x < c3d->map_fm_file.w && c3d->map_fm_file.y >= 0 && c3d->map_fm_file.y < c3d->map_fm_file.h) 
+        if (c3d->map_fm_file.x >= 0 && c3d->map_fm_file.x < c3d->map_fm_file.dimension.width && c3d->map_fm_file.y >= 0 && c3d->map_fm_file.y < c3d->map_fm_file.dimension.heigth) 
         {
             if (c3d->map_fm_file.grid[c3d->map_fm_file.y][c3d->map_fm_file.x] == '1')
                 return (1);
