@@ -56,8 +56,8 @@ void draw_field_of_view( t_c3d *c3d)
 	end_point.y = 0;
 	degree = 0;
 	degree = DEGREE;
-	alpha_min = c3d->player.alpha_direction - (8 * degree) ;
-	alpha_max= c3d->player.alpha_direction + (8 * degree);
+	alpha_min = c3d->player.alpha_direction - (FOV_ANGLE / 2) ;
+	alpha_max= c3d->player.alpha_direction + (FOV_ANGLE / 2);
 	int i = 0;
 	while (alpha_min < alpha_max)
 	{
