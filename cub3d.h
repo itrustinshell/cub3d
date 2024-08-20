@@ -18,6 +18,17 @@
 #define ARROW_LEFT 123
 #define ARROW_RIGHT 124
 
+//movement
+#define HAS_MOVED_UP 1
+#define DID_NOT_MOVE_UP 0
+#define HAS_MOVED_DOWN 1
+#define DID_NOT_MOVE_DOWN 0
+#define HAS_MOVED_LEFT 1
+#define DID_NOT_MOVE_LEFT 0
+#define HAS_MOVED_RIGHT 1
+#define DID_NOT_MOVE_RIGHT 0
+#define YES 1
+#define NO 0
 //colors
 #define RED 0xff0000
 #define GREEN 0x00ff00
@@ -151,14 +162,19 @@ typedef struct s_ray
 	double 	right_alpha;
 } t_ray;
 
+typedef struct s_move
+{
+	int			down;
+	int			up;
+	int			left;
+	int			right;
+} t_move;
+
 typedef struct s_player
 {
 	t_point		position;
 	t_point		tile;
-	int			move_down;
-	int			move_up;
-	int			move_left;
-	int			move_right;
+	t_move		move;
 	double		alpha_direction;
 	double		rotate_alpha_right;
 	double		rotate_alpha_left;
@@ -210,6 +226,7 @@ void	ft_color(int x, int y, t_c3d *c3d, int color);
 void	draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 void 	draw_field_of_view( t_c3d *c3d);
+void 	stuff_to_draw(t_c3d *c3d);
 
 //moving;
 int		my_key_hook(int keycode, void *param);
@@ -219,13 +236,13 @@ int		key_release(int keycode, void *param);
 int		update_position(void *param);
 int		update_alpha_rotation(void *param);
 int		update_player_movement(void *param);
-int 	is_collision(int player_next_x, int player_next_y, t_c3d *c3d);
+int is_collision(double player_next_x, double player_next_y, t_c3d *c3d); 
 t_point tile_reference(t_point point);
 
 //moving_utils
-void    key_press_player_alpha_rotation(int keycode, t_c3d *c3d);
+void    key_press_playerDirection(int keycode, t_c3d *c3d);
 void    key_release_player_alpha_rotation(int keycode, t_c3d *c3d);
-void 	key_press_player_position(int keycode, t_c3d *c3d);
+void 	key_press_playerPosition(int keycode, t_c3d *c3d);
 void    key_release_player_position(int keycode, t_c3d *c3d);
 
 //text

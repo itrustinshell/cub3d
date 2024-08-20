@@ -22,6 +22,8 @@ int	is_it_inside_map_perimeter(t_point point_to_verify, t_dimension map_dimensio
 	return (OUTSIDE_PERIMETER);
 }
 
+
+
 // int	is_it_inside_map_perimeter(t_point point_to_verify, t_dimension map_dimension) //AAA QUESTO è il perimwtro che sondiera proprio la parte interna senza muri
 // {
 // 	if (point_to_verify.x >= TILE_SIZE - 1 && point_to_verify.x < (map_dimension.width * TILE_SIZE - TILE_SIZE) + 1  && point_to_verify.y >= TILE_SIZE - 1 && point_to_verify.y < (map_dimension.heigth * TILE_SIZE) - TILE_SIZE + 1)

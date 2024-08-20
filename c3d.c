@@ -3,7 +3,7 @@
 #define MAP_PATH 1
 #define WIDTH 2
 #define HEIGHT 3
-#define FACTOR 80
+#define FACTOR 50
 
 int main(int argc, char **argv)
 {
@@ -22,9 +22,11 @@ int main(int argc, char **argv)
 	// c3d.win.w = atoi(argv[WIDTH]);	//TODO: Substitute with ft_atoi from libft
 	// c3d.win.h = atoi(argv[HEIGHT]);	//TODO: Substitute with ft_atoi from libft
 	
-	c3d.win.w = 16 * FACTOR;	//TODO: Substitute with ft_atoi from libft
-	c3d.win.h = 9 * FACTOR;
+	// c3d.win.w = 16 * FACTOR;	//TODO: Substitute with ft_atoi from libft
+	// c3d.win.h = 9 * FACTOR;
 
+	c3d.win.w = 500;	//TODO: Substitute with ft_atoi from libft
+	c3d.win.h = 500;
 	c3d.map_fm_file.data_from_file = read_the_map(path);
 	get_map_dimensions(c3d.map_fm_file.data_from_file, &c3d.map_fm_file.dimension.width, &c3d.map_fm_file.dimension.heigth);
 	c3d.map_fm_file.grid = get_map_from_file(c3d.map_fm_file.data_from_file, c3d.map_fm_file.dimension.width, c3d.map_fm_file.dimension.heigth);
@@ -41,7 +43,7 @@ int main(int argc, char **argv)
 	c3d.player.position.y = 90;
 	c3d.player.tile = tile_reference(c3d.player.position);
 	
-	c3d.player.alpha_direction = 2 * M_PI;
+	c3d.player.alpha_direction = 0;
 	draw_player(&c3d, c3d.player.position, RADIUS, RED);
 	camera_plane(c3d.player.position,  c3d.player.alpha_direction,  &c3d);
 

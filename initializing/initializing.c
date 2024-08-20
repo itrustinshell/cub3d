@@ -3,15 +3,14 @@
 void initialize_player(t_c3d *c3d)
 {
 	c3d->player.alpha_direction = 0;
-	c3d->player.move_down = 0;
 	c3d->player.position.x = 0;
 	c3d->player.position.y = 0;
 	c3d->player.tile.x = 0;
 	c3d->player.tile.y = 0;
-	c3d->player.move_down = 0;
-	c3d->player.move_up = 0;
-	c3d->player.move_left = 0;
-	c3d->player.move_right = 0;
+	c3d->player.move.down = 0;
+	c3d->player.move.up = 0;
+	c3d->player.move.left = 0;
+	c3d->player.move.right = 0;
 	c3d->player.alpha_direction = 0;
 	c3d->player.rotate_alpha_right = 0;
 	c3d->player.rotate_alpha_left = 0;

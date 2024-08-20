@@ -1,38 +1,38 @@
 #include "../cub3d.h"
 
-static int  circumference_x(int player_next_x, double angle)
+t_point get_circumference_point(t_point player_next_position, double angle)
 {
-    int circumference_x;
+    t_point circumference_point;
 
-    circumference_x = player_next_x + RADIUS * cos(angle);
-    printf("circumference_x %d\n", circumference_x);
-    return circumference_x;
+    circumference_point.x = 0;
+    circumference_point.y = 0;
+    circumference_point.x = player_next_position.x + RADIUS * cos(angle);
+    circumference_point.y = player_next_position.y + RADIUS * sin(angle);
+    return (circumference_point);
 }
 
-static int  circumference_y(int player_next_y, double angle)
-{
-    int circumference_y;
-
-    circumference_y = player_next_y + RADIUS * sin(angle);
-    printf("circumference_y %d\n", circumference_y);
-    return circumference_y;
-}
   
-int is_collision(int player_next_x, int player_next_y, t_c3d *c3d) 
+int is_collision(double player_next_x, double player_next_y, t_c3d *c3d) 
 {
+    t_point player_next_position;
+    t_point circumference_point;
     double angle;
     int i;
+    player_next_position.x = player_next_x;
+    player_next_position.y = player_next_y;
 
+    circumference_point.x = 0;
+    circumference_point.y = 0;
     i = 0; 
     while (i < CIRCUMFERENCE_CHECKS) 
     {
         angle = 2 * M_PI * i / CIRCUMFERENCE_CHECKS; 
-        c3d->map_fm_file.x = circumference_x(player_next_x, angle) / TILE_SIZE;
-        c3d->map_fm_file.y = circumference_y(player_next_y, angle) / TILE_SIZE; 
+        circumference_point = get_circumference_point(player_next_position, angle);
+       // point_along_circumference.y = circumference_y(player_next_y, angle) / TILE_SIZE; 
         printf("If you do another step in this direction you will be in grid: %d, %d\n", c3d->map_fm_file.x, c3d->map_fm_file.y);
-        if (c3d->map_fm_file.x >= 0 && c3d->map_fm_file.x < c3d->map_fm_file.dimension.width && c3d->map_fm_file.y >= 0 && c3d->map_fm_file.y < c3d->map_fm_file.dimension.heigth) 
+        if (is_it_inside_map_perimeter(circumference_point, c3d->map_fm_file.dimension)) 
         {
-            if (c3d->map_fm_file.grid[c3d->map_fm_file.y][c3d->map_fm_file.x] == '1')
+            if (is_it_a_wall(circumference_point, c3d->map_fm_file.grid))
                 return (1);
         }
         else

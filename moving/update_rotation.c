@@ -57,21 +57,7 @@ int update_alpha_rotation(void *param)
     check = 0;
     set_rotation(c3d, &check);
     if (check == 1)
-    {
-        mlx_destroy_image(c3d->win.mlx_connection, c3d->img.map_img);
-        c3d->img.map_img = mlx_new_image(c3d->win.mlx_connection, c3d->map_fm_file.dimension.width * TILE_SIZE, c3d->map_fm_file.dimension.heigth * TILE_SIZE);
-        c3d->img.data_img = mlx_get_data_addr(c3d->img.map_img, &c3d->img.bits_per_pixel, &c3d->img.size_line, &c3d->img.endian);
-        draw_map(c3d);
-        mlx_put_image_to_window(c3d->win.mlx_connection, c3d->win.mlx_win, c3d->img.map_img, 0, 0);
-        draw_player(c3d, c3d->player.position, RADIUS, RED);
-        draw_2d_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.alpha_direction, BLACK);
-        //dda(c3d->player.position, c3d->player.alpha_direction, c3d);
-        draw_field_of_view(c3d);
-	    camera_plane(c3d->player.position,  c3d->player.alpha_direction,  c3d);
-
-        static int loop_test;
-        printf("%d: alpha: %f\n", loop_test, c3d->player.alpha_direction);
-        loop_test++;
-    }
+        stuff_to_draw(c3d);
     return (0);
 }
+
