@@ -32,7 +32,6 @@ It first update the coordinate of this point depending on step_management functi
 Then it checks if the new point is a collision or not.
 if everything was ok, the player position is update with the new valuse.
 This function is also the occasion to update the tile where the player is in.*/
-
 int moving(t_move move, t_point *player_position, t_c3d *c3d)
 {
     t_point position_to_check;

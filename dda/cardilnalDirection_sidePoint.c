@@ -39,7 +39,7 @@ int get_cardinal_direction(double angle)
 	}
     if (fabs(angle - 0) < EPSILON || fabs(angle - 2 * M_PI) < EPSILON)
 	{
-		printf("eh si queto angolo è proprio zero\n");
+		//printf("eh si queto angolo è proprio zero\n");
         cardinal_direction = E;
 	}
     else if (fabs(angle - M_PI) < EPSILON)
@@ -57,8 +57,8 @@ int get_cardinal_direction(double angle)
     else if (angle > (3 * M_PI) / 2 && angle < 2 * M_PI)
         cardinal_direction = NE;
     
-	printf("ma che caz di angolo è: %f\n", angle);
-    printf("You are looking at %d\n", cardinal_direction);
+	//printf("ma che caz di angolo è: %f\n", angle);
+   // printf("You are looking at %d\n", cardinal_direction);
     return cardinal_direction;
 }
 
@@ -77,10 +77,8 @@ t_point chose_side_point(t_point first_point, int cardinal_direction)
 	side_point.y = 0;
 
 	tile_ref = tile_reference(first_point);
-	printf("hei sono fuori\n");
 	if (cardinal_direction == NE || cardinal_direction == E || cardinal_direction == 0)
 	{
-		printf("hei sono dentro...funiona!\n");
 		side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
 		side_point.y = (int)tile_ref.y * TILE_SIZE;
 	}
@@ -99,7 +97,7 @@ t_point chose_side_point(t_point first_point, int cardinal_direction)
 		side_point.x = (int)tile_ref.x * TILE_SIZE;
 		side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
 	}
-	printf("cardinal_direction:%d\n", cardinal_direction);
-	printf("side_point: %f, %f\n",side_point.x, side_point.y);
+	//printf("cardinal_direction:%d\n", cardinal_direction);
+	//printf("side_point: %f, %f\n",side_point.x, side_point.y);
 	return (side_point);
 }

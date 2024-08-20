@@ -101,6 +101,33 @@ void draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int colo
 }
 
 
+void draw_line(t_point point, double angle, int color, t_c3d *c3d)
+{
+	int x;
+	int y;
+	double m;
+	double c;
+
+
+
+	m = tan(angle);
+	c = point.y - (m * point.x);
+
+
+	 x = 0;
+	 y = 0;
+
+
+
+	while (x < 10 * TILE_SIZE)
+	{
+		y = m * x + c;
+		mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_2d.mlx_win, x, y, color);
+		x++;
+	}
+}
+
+
 void bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color) 
 {
 	int dx = abs(x1 - x0);
@@ -123,7 +150,9 @@ void bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color)
 
 	while (1) 
 	{
-		mlx_pixel_put(c3d->win.mlx_connection, c3d->win.mlx_win, x0, y0, color);
+		mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_2d.mlx_win, x0, y0, color);
+		mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, x0, y0, color); //for 3d win
+
 		if (x0 == x1 && y0 == y1) break;
 		int e2 = 2 * err;
 		if (e2 > -dy) {

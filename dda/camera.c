@@ -1,5 +1,8 @@
 #include "../cub3d.h"
 
+
+
+
 //attenzione che qui i punti sono costruiti non in funzione dellap osizione del player ma della camera
 
 //a questo livello funzionano le normali operazioni ancohe on numeri negativi non avendo normalizzato nulal...ma perchè non sono necerssarie
@@ -13,6 +16,34 @@
 //cmq ricorda che la direzione alpfha del giocatore resta normalizzata
 //quindi significa che quando ripoarti da zero dopo una rotazione completa cmq quella direzione riparte da zero o 2pigreco
 //questo è importante perchè è da questa che sono sottratti i fov/2
+
+//qui andrai a metter ele coordinate del plaier e l'altro punto è il punto di impatto 
+//m1 quindi è alpha perpendicolare al player
+//m2 è la retta su cui giace la pruieszione ed in quanto parallela alla direzione del player è angolo di direzione player: guale
+
+
+t_point find_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle) {
+    t_point intersection;
+    double c1;
+    double c2;
+    double m1;
+    double m2;
+    point_init(&intersection);
+    m1 = tan(p1_angle);
+    m2 = tan(p2_angle);
+    // Calcolo degli intercetti
+    c1 = p1.y - (m1 * p1.x);
+    c2 = p2.y - (m2 * p2.x);
+    intersection.x = (c2 - c1) / (m1 - m2);
+    intersection.y = (m1 * intersection.x) + c1;
+
+    return intersection;
+}
+
+
+
+
+
 t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d)
 {
     t_camera    camera;
@@ -30,6 +61,23 @@ t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c
 
     bresenham(c3d, (int)player_position.x, (int)player_position.y, (int)camera.fov_rigth_point.x, (int)camera.fov_rigth_point.y, BLACK);
     bresenham(c3d, (int)camera.fov_left_point.x, (int)camera.fov_left_point.y, (int)player_position.x, (int)player_position.y, BLACK);
+	
+    double alpha;
+	alpha =  player_direction - (M_PI / 2) ;
+
+    draw_line(c3d->player.position,  alpha, BLUE, c3d);
+    // t_point point;
+    // point.x = 245;
+    // point.y = 245;
+    // draw_line(point, player_direction, RED, c3d);
+    // draw_filled_circle(c3d, point, RADIUS, BLACK);
+    // bresenham(c3d, point.x, point.y, player_position.x, player_position.y, YELLOW);
+
+    // t_point intersection;
+    // point_init(&intersection);
+    // intersection =  find_intersection(player_position, alpha, point, player_direction);
+    // draw_filled_circle(c3d, intersection, RADIUS / 2, BLUE);
+
 
 printf("\n\ncameraaaaaaaaaaaaaa\n");
 printf("angolo del giocatore: %f\n", player_direction);
@@ -42,9 +90,13 @@ return camera;
 ///AAA qui si inverte addizione e sottrazione per calclare gli angolo perchè i triangoloi rettangolison capovolti quinid si va a prendere il seno dall'altro lato e il cosedno anche
 }
 
-// double projection()
+// double projection(double path, double ray_angle, double player_direction)
 // {
 //     double projection;
+//     if 
+
+
+
 //     return (projection);
 
 // }

@@ -51,3 +51,9 @@ void initialize_ray(t_ray *ray)
 	ray->right_alpha = 0;
 
 }
+
+void point_init(t_point *point_to_initialize)
+{
+	point_to_initialize->x = 0;
+	point_to_initialize->y = 0;
+}

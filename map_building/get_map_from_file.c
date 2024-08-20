@@ -7,7 +7,7 @@ static void	test_draw_map(char **map, int width, int heigth)
 
 	x = 0;
 	y = 0;
-	printf("start a new stamp\n");
+	//printf("start a new stamp\n");
 	while(y < heigth)
 	{
 		x = 0;

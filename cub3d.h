@@ -72,7 +72,9 @@
 #define NOT_THROUGH_TWO_WALLS 0
 #define INSIDE_PERIMETER 1
 #define OUTSIDE_PERIMETER 0
-
+#define OUT_OF_PERIMETER 1 //this is only for collision function, indeed has a different value from OUTSIDE_PERIMETER
+#define COLLISION_DETECTED 1
+#define NO_COLLISION_DETECTED 0
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
 
@@ -186,7 +188,8 @@ typedef struct s_player
 //for norm reasons this wrap all important info
 typedef struct s_c3d
 {
-	t_win 		win;
+	t_win 		win_2d;
+	t_win		win_3d;
 	t_map		map_fm_file;
 	t_img		img;
 	t_player	player;
@@ -201,6 +204,7 @@ char	**get_map_from_file(char *file_content, int width, int height);
 //initializing
 void	initialize_player(t_c3d *c3d);
 void 	initialize_ray(t_ray *ray);
+void	point_init(t_point *point_to_initialize);
 
 //dda
 t_point dda(t_point start_point, double alpha, t_c3d *c3d);
@@ -214,6 +218,7 @@ t_point trigonometric_pointCalculation(t_point player_position, double path, dou
 int		is_it_inside_map_perimeter(t_point point_to_verify, t_dimension map_dimension);
 int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_to_verify);
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
+t_point find_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
@@ -227,6 +232,7 @@ void	draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int colo
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 void 	draw_field_of_view( t_c3d *c3d);
 void 	stuff_to_draw(t_c3d *c3d);
+void 	draw_line(t_point point, double angle, int color, t_c3d *c3d);
 
 //moving;
 int		my_key_hook(int keycode, void *param);

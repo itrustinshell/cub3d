@@ -14,7 +14,9 @@ void draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color)
         while (point.x <= radius) 
         {
             if (pow(point.x, 2) + pow(point.y , 2) <= radius * radius) 
-                mlx_pixel_put(c3d->win.mlx_connection, c3d->win.mlx_win, center.x + point.x, center.y + point.y, color);
+                mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_2d.mlx_win, center.x + point.x, center.y + point.y, color);
+                mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, center.x + point.x, center.y + point.y, color); //for 3dmap
+
             point.x++;
         }
         point.y++;

@@ -4,12 +4,12 @@ int is_it_a_wall(t_point point_to_verify, char **map_grid)
 {
     if (map_grid[(int)point_to_verify.y / TILE_SIZE][(int)point_to_verify.x / TILE_SIZE] == IS_A_WALL)
     {
-        printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
+       // printf("Si! La cella (%f, %f) è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
         return (IT_IS_A_WALL);
     }
     else
     { 
-        printf("NO! La cella (%f, %f) NON è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
+       // printf("NO! La cella (%f, %f) NON è un muro\n", point_to_verify.x / TILE_SIZE, point_to_verify.y / TILE_SIZE);
         return (IT_IS_NOT_A_WALL);
     }
     return (IT_IS_A_WALL);

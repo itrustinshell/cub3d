@@ -9,6 +9,13 @@ Se ueste proprietà sono settate a 1 da qaualche parte allora la funzione aggior
 coordinate del player.
 Tale settaggio avviene in key_press e key_release
 */
+
+
+
+
+
+
+
 int update_player_movement(void *param)
 {
      update_position(param);
