@@ -46,18 +46,20 @@ int main(int argc, char **argv)
 	
 	mlx_put_image_to_window(c3d.win_2d.mlx_connection, c3d.win_2d.mlx_win, c3d.img.map_img, 0, 0);
 
-	mlx_put_image_to_window(c3d.win_2d.mlx_connection, c3d.win_3d.mlx_win, c3d.img.map_img, 0, 0);
+	// mlx_put_image_to_window(c3d.win_2d.mlx_connection, c3d.win_3d.mlx_win, c3d.img.map_img, 0, 0);
 
 
 
 
-	c3d.player.position.x = 90;
+	c3d.player.position.x = 160;
 	c3d.player.position.y = 90;
 	c3d.player.tile = tile_reference(c3d.player.position);
 	
-	c3d.player.alpha_direction = 0;
+	c3d.player.direction = M_PI / 2;
+	c3d.player.perpendicular_direction = c3d.player.direction  - (M_PI / 2);
+	c3d.player.fov.half_left = c3d.player.direction - (FOV_ANGLE / 2) ;
+	c3d.player.fov.half_right = c3d.player.direction + (FOV_ANGLE / 2);
 	draw_player(&c3d, c3d.player.position, RADIUS, RED);
-	camera_plane(c3d.player.position, c3d.player.alpha_direction,  &c3d);
 
 	//TODO: quando avrai finito tute le propeitò nlla struct della camera e le avrai determinate 
 	// fai una funzione draw camera che si occupa di disegnare tutti insimee qui.
@@ -65,10 +67,10 @@ int main(int argc, char **argv)
 
 
 	
-	//dda(c3d.player.position, c3d.player.alpha_direction, &c3d);
+	//dda(c3d.player.position, c3d.player.direction, &c3d);
 	draw_field_of_view(&c3d);
 
- 	draw_2d_player_direction(&c3d, c3d.player.position.x, c3d.player.position.y, c3d.player.alpha_direction, BLACK);
+ 	//draw_player_direction(&c3d, c3d.player.position.x, c3d.player.position.y, c3d.player.direction, BLACK);
 
 
 
@@ -77,11 +79,15 @@ int main(int argc, char **argv)
     mlx_hook(c3d.win_2d.mlx_win, 3, 1L << 1, key_release, &c3d); // 3 è il codic
 
 	//3D HOOK
-	mlx_hook(c3d.win_3d.mlx_win, 2, 1L << 0, key_press, &c3d); // 2 è il codice evento per KeyPress
-    mlx_hook(c3d.win_3d.mlx_win, 3, 1L << 1, key_release, &c3d); // 3 è il codic
+	// mlx_hook(c3d.win_3d.mlx_win, 2, 1L << 0, key_press, &c3d); // 2 è il codice evento per KeyPress
+    // mlx_hook(c3d.win_3d.mlx_win, 3, 1L << 1, key_release, &c3d); // 3 è il codic
 
 	mlx_loop_hook(c3d.win_2d.mlx_connection, update_player_movement, &c3d);
 
 	mlx_loop(c3d.win_2d.mlx_connection);
     return (0);
 }
+
+
+
+

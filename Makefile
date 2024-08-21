@@ -5,8 +5,9 @@ CFLAGS = -Wall -Wextra -Werror -I$(DIR)
 
 SRC = 	c3d.c \
 		initializing/initializing.c \
+		3d/manage_3d.c \
 		moving/moving.c moving/key_press.c moving/key_release.c moving/moving_utils_collision.c moving/update_rotation.c moving/update_position.c moving/moving_utils.c \
-		drawing/drawing.c drawing/drawing_player.c \
+		drawing/drawing.c drawing/drawing_player.c drawing/projection_stuff.c \
 		dda/dda.c dda/camera.c dda/delta_path_point.c dda/cardilnalDirection_sidePoint.c dda/checks.c dda/two_walls_check.c \
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c
 		

@@ -1,6 +1,7 @@
 #include "../cub3d.h"
 #include <string.h>
 
+//questa funcione riceve un punto di partenza e un angolo e quindi calcola per un singolo raggio il suo percorso fino a che non incontra un muro
 t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 {
 	t_ray   ray;
@@ -23,7 +24,7 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
 			if(is_it_passing_between_two_walls(&ray, c3d->map_fm_file.grid,  ray.end_point))
 			{
-				bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
+				//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 				break;
 			}
 		}
@@ -31,12 +32,12 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.y, alpha);
 		if(is_it_passing_between_two_walls(&ray, c3d->map_fm_file.grid, ray.end_point))
 		{
-			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
+			//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 			break;
 		}
 		if (is_it_a_wall(ray.end_point, c3d->map_fm_file.grid))
 		{
-			bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, GREEN);
+			//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, GREEN);
 			break;
 		}
 		else
@@ -45,36 +46,61 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 	return (ray.end_point);  //da oscurare se attivi la parte sotto
 }
 
-void draw_field_of_view( t_c3d *c3d)
-{
-	double alpha_min = 0;
-	double alpha_max = 0;
-	t_point end_point;
-	double degree;
- t_point intersection;
-     point_init(&intersection);
+/*
+you want to divide FOV / Win_w becouse you will have a ray for evry pixel along the width.
+Doing so you will have an impact point for evry line of x-pixel of your win
+*/
 
-	end_point.x = 0;
-	end_point.y = 0;
-	degree = 0;
-	degree = DEGREE;
-	alpha_min = c3d->player.alpha_direction - (FOV_ANGLE / 2) ;
-	alpha_max= c3d->player.alpha_direction + (FOV_ANGLE / 2);
-	int i = 0;
-	while (alpha_min < alpha_max)
+
+
+void visualize_3d(t_c3d *c3d, t_point end_point, double saved_left_half_fov)
+{
+	c3d->player.ray.projection.point = find_two_lines_intersection(c3d->player.position, c3d->player.perpendicular_direction, end_point, c3d->player.direction);
+	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->map_fm_file.dimension.width * TILE_SIZE);
+	c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
+	c3d->player.ray.view3d.height_wall_line = wall_heigth_3d(c3d->player.ray.projection.length);
+	draw_line_heigths(c3d->player.ray.view3d.x_wall_line,  c3d->player.ray.view3d.height_wall_line,  c3d);
+}
+
+void draw_field_of_view(t_c3d *c3d)
+{
+	double angle_variation;
+	t_point end_point;
+	double	saved_left_half_fov;
+
+	angle_variation = FOV_ANGLE / c3d->win_3d.w;
+	point_init(&end_point);
+
+	end_point = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
+	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);
+	end_point = dda(c3d->player.position, c3d->player.fov.half_right, c3d);
+	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);
+
+
+	saved_left_half_fov = c3d->player.fov.half_left;
+	while (c3d->player.fov.half_left  < c3d->player.fov.half_right)
 	{
-		// end_point = dda(c3d->player.position, alpha_min, c3d);
-		// bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, BLUE);
-		// printf("raggio n.: %d\n", i);
-		double alpha;
-		alpha =  c3d->player.alpha_direction - (M_PI / 2) ;
-		end_point = dda(c3d->player.position, alpha_min, c3d);
-		intersection = find_intersection(c3d->player.position, alpha, end_point, c3d->player.alpha_direction);
+
+		// double alpha;
+		// alpha =  c3d->player.direction - (M_PI / 2);
+		//c3d->player.perpendicular_direction = c3d->player.direction - (M_PI / 2);
+		end_point = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
+		// c3d->player.ray.projection.point = find_two_lines_intersection(c3d->player.position, c3d->player.perpendicular_direction, end_point, c3d->player.direction);
 		
-  		draw_filled_circle(c3d, intersection, RADIUS / 2, BLUE);
-		bresenham(c3d, intersection.x, intersection.y, end_point.x, end_point.y,YELLOW);
-		alpha_min = alpha_min + degree;
-		i++;
+  		// //draw_filled_circle(c3d, intersection, RADIUS / 2, BLUE);
+		// //bresenham(c3d, intersection.x, intersection.y, end_point.x, end_point.y,YELLOW);
+
+		// c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, tmp_ray_left, c3d->map_fm_file.dimension.width * TILE_SIZE);
+		// c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
+		// c3d->player.ray.view3d.height_wall_line = wall_heigth_3d(c3d->player.ray.projection.length);
+		// // printf("projectiooon: %f\n", projection);
+		// // printf("lineheiiiiiight: %f\n", line_heigth);
+		// draw_line_heigths(c3d->player.ray.view3d.x_wall_line,  c3d->player.ray.view3d.height_wall_line,  c3d);
+		
+		visualize_3d(c3d, end_point, saved_left_half_fov);
+
+		c3d->player.fov.half_left = c3d->player.fov.half_left + angle_variation;
+		// i++;
 	}
 }
 

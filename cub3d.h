@@ -29,6 +29,7 @@
 #define DID_NOT_MOVE_RIGHT 0
 #define YES 1
 #define NO 0
+
 //colors
 #define RED 0xff0000
 #define GREEN 0x00ff00
@@ -89,6 +90,9 @@
 //camera
 #define CAMERA_DISTANCE RADIUS * 10
 #define FOV_ANGLE (M_PI / 2)
+
+//3d
+#define SCALE_FACTOR 10000 //for projection
 //#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
@@ -143,25 +147,37 @@ typedef struct	s_point
 	double	y;
 } t_point;
 
-typedef struct s_camera
+typedef struct s_fov
 {
-	t_point position;
-	double fov;
-	t_point fov_rigth_point;
-	t_point fov_left_point;
-} t_camera;
+	double	angle;
+	double	half_left;
+	double	half_right;
+
+} t_fov;
+
+typedef struct s_projection
+{
+	t_point point;
+	double	length;
+} t_projection;
+
+typedef struct s_viwe3d
+{
+	double	height_wall_line;
+	double	x_wall_line;
+} t_view3d;
 
 typedef struct s_ray
 {
-	int 	cardinal_direction;
-	t_point	first_side_point; // è uno dei 4 vertici interni della cella
-	t_point first_impact_point; //è il primo punto diimpatto in quella cella
-	t_delta delta;
-	t_path 	path;
-	t_point first_point;
-	t_point	end_point;
-	double 	left_alpha;
-	double 	right_alpha;
+	int				cardinal_direction;
+	t_point			first_side_point; // è uno dei 4 vertici interni della cella
+	t_point			first_impact_point; //è il primo punto diimpatto in quella cella
+	t_delta			delta;
+	t_path			path;
+	t_point			first_point;
+	t_point			end_point;
+	t_projection	projection;
+	t_view3d		view3d;
 } t_ray;
 
 typedef struct s_move
@@ -177,11 +193,12 @@ typedef struct s_player
 	t_point		position;
 	t_point		tile;
 	t_move		move;
-	double		alpha_direction;
+	t_fov		fov;
+	double		direction;
+	double		perpendicular_direction;
 	double		rotate_alpha_right;
 	double		rotate_alpha_left;
 	t_ray		ray;
-	t_camera	camera;
 } t_player;
 
 
@@ -195,7 +212,16 @@ typedef struct s_c3d
 	t_player	player;
 } t_c3d;
 
-t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
+
+//3d
+t_point find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
+double  find_x_3d(double ray_angle, double fov_left_ray, double win_width);
+double pitagora_theorem(t_point first_point, t_point second_point);
+void draw_line_heigths(double x_3d, double line_heigth, t_c3d *c3d);
+double wall_heigth_3d(double projection);
+
+
+// t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
 //parsing
 char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
@@ -218,7 +244,6 @@ t_point trigonometric_pointCalculation(t_point player_position, double path, dou
 int		is_it_inside_map_perimeter(t_point point_to_verify, t_dimension map_dimension);
 int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_to_verify);
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
-t_point find_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
 
 //drawing
 void	draw_tile(int x, int y, int color, t_c3d *c3d);
@@ -228,7 +253,7 @@ void	clear_current_drawing(void *mlx, void *mlx_win, int win_w, int win_h);
 void 	draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color);
 void    draw_player(t_c3d *c3d, t_point player_position, int radius, int color);
 void	ft_color(int x, int y, t_c3d *c3d, int color);
-void	draw_2d_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
+void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 void 	draw_field_of_view( t_c3d *c3d);
 void 	stuff_to_draw(t_c3d *c3d);

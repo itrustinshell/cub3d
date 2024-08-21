@@ -23,12 +23,11 @@ void stuff_to_draw(t_c3d *c3d)
     c3d->img.data_img = mlx_get_data_addr(c3d->img.map_img, &c3d->img.bits_per_pixel, &c3d->img.size_line, &c3d->img.endian);
     draw_map(c3d);
     mlx_put_image_to_window(c3d->win_2d.mlx_connection, c3d->win_2d.mlx_win, c3d->img.map_img, 0, 0);
-    mlx_put_image_to_window(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, c3d->img.map_img, 0, 0); //per il 3D
+    // mlx_put_image_to_window(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, c3d->img.map_img, 0, 0); //per il 3D
 
     draw_player(c3d, c3d->player.position, RADIUS, RED);
-    draw_2d_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.alpha_direction, BLACK);
-   	//dda(c3d->player.position, c3d->player.alpha_direction, c3d);
-
+    //draw_player_direction(c3d, c3d->player.position.x, c3d->player.position.y, c3d->player.direction, BLACK);
+   	//dda(c3d->player.position, c3d->player.direction, c3d);
+    mlx_clear_window(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win);
     draw_field_of_view(c3d);
-    camera_plane(c3d->player.position, c3d->player.alpha_direction,  c3d);
 }
