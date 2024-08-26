@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	initialization(&c3d);
 	build_map(argv[MAP_PATH], &c3d);
 	set_connection_and_windows(&c3d);
-	create_visualize_map_img(&c3d); //TODO: finire l'immagine con player e rays
+	create_2d_img(&c3d); //TODO: finire l'immagine con player e rays
 	draw_player(&c3d, c3d.player.position, RADIUS, RED);
 
 	double scale;
@@ -56,12 +56,23 @@ int main(int argc, char **argv)
 	// scaling(&c3d.texture, &new,  scale);
 	// mlx_put_image_to_window(c3d.mlx_connection, c3d.win_2d.mlx_win, new.img, 0, 0);
 
+	//t_img src;
+	t_img dest;
+    c3d.texture.img = mlx_xpm_file_to_image(c3d.mlx_connection, "texture/mur.xpm", &c3d.texture.img_dimension.width, &c3d.texture.img_dimension.heigth);
+	printf("dimensiioni di texture img: w = %d, h= %d\n", c3d.texture.img_dimension.width, c3d.texture.img_dimension.heigth);
+    c3d.texture.data_addr = mlx_get_data_addr(c3d.texture.img, &c3d.texture.bits_per_pixel, &c3d.texture.size_line, &c3d.texture.endian);
+
+    dest.img_dimension.width = c3d.texture.img_dimension.width * scale;
+    dest.img_dimension.heigth = c3d.texture.img_dimension.heigth * scale;
+    dest.img = mlx_new_image(c3d.mlx_connection, dest.img_dimension.width, dest.img_dimension.heigth);
+    dest.data_addr = mlx_get_data_addr(dest.img, &dest.bits_per_pixel, &dest.size_line, &dest.endian);
 
 
-/*mlx_hook ha come secondo parametro il codice evento.
-il codice evento è un numero. Questo numero indica che tipologia di evento mlx:hook deve ascolatre.
-Ad esempio il numero 2 indica che ora mlx_hook è in ascolto su eventi di pressione della tastiera
-Inece ad esempio il codice 3 indica che mlx_hook è in ascolto su eventi di rilascio dei tasti della tastiera*/
+ 
+    mlx_put_image_to_window(c3d.mlx_connection, c3d.win_2d.mlx_win, dest.img, 0, 0);
+
+	draw_field_of_view(&c3d);
+
 	mlx_hook(c3d.win_2d.mlx_win, 2, 1L << 0, key_press, &c3d); // 2 è il codice evento per KeyPress
     mlx_hook(c3d.win_2d.mlx_win, 3, 1L << 1, key_release, &c3d); // 3 è il codic
 
@@ -76,49 +87,6 @@ Inece ad esempio il codice 3 indica che mlx_hook è in ascolto su eventi di rila
 	// mlx_key_hook(c3d.win_3d.mlx_win, esc, &c3d);
 
 //new work
-	// t_img src;
-	// t_img dest;
-    // src.img = mlx_xpm_file_to_image(c3d.mlx_connection, "texture/mur.xpm", &src.img_dimension.width, &src.img_dimension.heigth);
-    // src.data_addr = mlx_get_data_addr(src.img, &src.bits_per_pixel, &src.size_line, &src.endian);
-
-    // dest.img_dimension.width = src.img_dimension.width * scale;
-    // dest.img_dimension.heigth = src.img_dimension.heigth * scale;
-    // dest.img = mlx_new_image(c3d.mlx_connection, dest.img_dimension.width, dest.img_dimension.heigth);
-    // dest.data_addr = mlx_get_data_addr(dest.img, &dest.bits_per_pixel, &dest.size_line, &dest.endian);
-
-    // scale_texture(&src, &dest, scale);
-
-    // mlx_put_image_to_window(c3d.mlx_connection, c3d.win_2d.mlx_win, dest.img, 0, 0);
-
-//with subst
-	t_img src;
-    src.img = mlx_xpm_file_to_image(c3d.mlx_connection, "texture/mur.xpm", &src.img_dimension.width, &src.img_dimension.heigth);
-    src.data_addr = mlx_get_data_addr(src.img, &src.bits_per_pixel, &src.size_line, &src.endian);
-
-    c3d.texture.img_dimension.width = src.img_dimension.width * scale;
-     c3d.texture.img_dimension.heigth = src.img_dimension.heigth * scale;
-     c3d.texture.img = mlx_new_image(c3d.mlx_connection,  c3d.texture.img_dimension.width,  c3d.texture.img_dimension.heigth);
-     c3d.texture.data_addr = mlx_get_data_addr( c3d.texture.img, &c3d.texture.bits_per_pixel, &c3d.texture.size_line, &c3d.texture.endian);
-
-    scale_texture(&src, &c3d.texture, scale);
-
-    mlx_put_image_to_window(c3d.mlx_connection, c3d.win_2d.mlx_win,  c3d.texture.img, 0, 0);
-
-int x = 0;
-int y = 0;
-	while (y < TILE_SIZE)
-	{
-		while (x < TILE_SIZE)
-		{
-		//	int color = get_pixel(&src, y, x);
-//printf("color: %d\n", color );
-			x++;
-		}
-		y++;
-	}
-
-	draw_field_of_view(&c3d);
-
 
 
 	mlx_loop_hook(c3d.mlx_connection, update_player_movement, &c3d);
@@ -126,7 +94,3 @@ int y = 0;
 
     return (0);
 }
-
-
-
-

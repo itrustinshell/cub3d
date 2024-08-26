@@ -44,11 +44,18 @@ char	*read_the_map(char *file_path)
 		ma attenzione io non devo aumentare degli ultimi bytes_letti...
 		io di volta in volta devo allocare dell dimensione totale fin qui letta...
 		quinid dovò avere una variabile che mi tiene il conto tale..*/
-		reallocated_reading = realloc(content_file, total_size + 1);
+		reallocated_reading = realloc(content_file, total_size);
 		content_file = reallocated_reading;
 		content_file[total_size] = '\0';
 		strcat(content_file, buffer);
 	}
 	close(fd);
 	return (content_file);
+}
+
+void build_map(char *path, t_c3d *c3d)	
+{	
+	c3d->raw_map.data = read_the_map(path);
+	get_map_dimensions(c3d->raw_map.data, &c3d->raw_map.dimension.width, &c3d->raw_map.dimension.heigth);
+	c3d->raw_map.grid = get_map_from_file(c3d->raw_map.data, c3d->raw_map.dimension.width, c3d->raw_map.dimension.heigth);
 }

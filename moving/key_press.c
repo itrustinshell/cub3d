@@ -1,9 +1,16 @@
 #include "../cub3d.h"
 
 /*this function manages the press of movement's player keycode
-it is called by key_press which is the call-back function managed by mlx_hook
+it is called by key_press() which is the call-back function managed by mlx_hook
+Now, Questa funzioine è void ed ha due parametri perchè per costruzione fornisce 
+elementi di informazioni alla funzione di coll_back che ora abbiao citato.
+La funzione di callback non può essere diversa da come è in termini di firma. 
+E quindi a cascata questa funzione anche è cosi.
+deve avere un keycode. Questa funzione gestisce il keycode che le viene passato .
+se il keycode è di un certo tipo allora setta il movimento del player.
+
 */
-void key_press_playerPosition(int keycode, t_c3d *c3d)
+static void key_press_playerPosition(int keycode, t_c3d *c3d)
 {
     if (keycode == KEY_W)
         c3d->player.move.up = 1;
@@ -15,8 +22,9 @@ void key_press_playerPosition(int keycode, t_c3d *c3d)
         c3d->player.move.right = 1;
 }
 
-/*it is called by key_press which is the call-back function managed by mlx_hook*/
-void    key_press_playerDirection(int keycode, t_c3d *c3d)
+/*it is called by key_press which is the call-back function managed by mlx_hook
+vedi spiegazione di keypress_playerposition*/
+static void    key_press_playerDirection(int keycode, t_c3d *c3d)
 {
     if (keycode == ARROW_RIGHT)
         c3d->player.rotate_alpha_right = 1;
@@ -24,7 +32,18 @@ void    key_press_playerDirection(int keycode, t_c3d *c3d)
         c3d->player.rotate_alpha_left = 1;
 }
 
-/*this function has to be this sign becouse it is called in mlx_hook*/
+/*this function has to be this sign becouse it is called in mlx_hook
+in altri termini è obbligatorio avere un parametro int e uno void*.
+Al parametro int è passato il keycode dalla funzione mlx_hook.
+Quella funziona attualmente è impaostat acon un codice evento (Che non è il keycode)
+2. il codice evento 2 indiche che quella funzione è in ascolto sugli eventi di 
+pressione della tastiera.
+Ecco quindi che restituirà il keycode(codice tel tasto della tastiera)
+che è stato pigiato.
+Ecco quindi che la palla passa alle funzioni che keypress ha internamente.
+In pratica key_press riceve il keycode.
+e successivamente il keycode è gestito da key_oress playerposiziont e keypressplayer direction
+*/
 int key_press(int keycode, void *param) 
 {
     t_c3d   *c3d;
@@ -34,5 +53,3 @@ int key_press(int keycode, void *param)
     key_press_playerDirection(keycode, c3d);
     return (0);
 }
-
-

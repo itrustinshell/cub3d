@@ -1,45 +1,46 @@
 #include "../cub3d.h"
 
-
-//this is useful to fine the intersection between
-//1.: line passing through player and perpendicular to his direction
-//2:: line passing for the impact_point of a ray against a wall, and parallel to player direction 
-//(that is the line where the projection of that point is located)
-//m1: is tan(p1_angle)  
-//the linear equation of a line is: y = mx + c;
-t_point find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle) 
-{
-    t_point intersection;
-    double c1;
-    double c2;
-    double m1;
-    double m2;
-
-    point_init(&intersection);
-    m1 = tan(p1_angle);
-    m2 = tan(p2_angle);
-    c1 = p1.y - (m1 * p1.x);
-    c2 = p2.y - (m2 * p2.x);
-    intersection.x = (c2 - c1) / (m1 - m2);
-    intersection.y = (m1 * intersection.x) + c1;
-    return intersection;
-}
-
 /*  1. per ogni punto di impatto va disegnata una linea verticale sullo schermo.
     2. questa linea passa per una determinata ascissa quindi. 
     3. quel punto di impatto è associato ad un ben preciso angolo che è l'angolo del raggio associato.
 
 Ogni raggio che parte dal giocatore rappresenta una specifica direzione 
 all'interno del FOV. 
-Il raggio che colpisce un punto di impatto (dopo aver percorso una certa distanza) 
-determina quale colonna sullo schermo (ossia quale posizione x) sarà usata 
-per disegnare quel punto di impatto come una linea verticale.
+Il raggio colpisce un punto di impatto (dopo aver percorso una certa distanza).
+Considerando una persona in generale, quando questa guarda davanti a se ha una vista periferica.
+questa vista la chiamiamo FOV: field of view, ovvero campo di vista.
+Supponiamo ora di considerare il raggio centrale del FOV (quindi
+consideriamo proprio quel raggio che idealmente divide il nostro campo di vista in due pati uguali. 
+quello a cui comunemente ci riferiamo con l'espressione guardare dritto davanti a te.)
+Questo raggio prima o poi in contra una superfice.
+consideriamo ora un raggio alla destra di questo (ache questo rggio inconterò una superfice).
+La differenza tra i due raggi p una differenza di un tot angolo.
+Se consideriamo questa cosa per tutti i raggi del nostro campo di vista avremo tanti punti di impatto
+quanti ne sono i raggi. E questi raggi variano l'uno dall'altro di una certa equidistanza angolare.
+Ad esempio se ho un FOV di 90 gradi e voglio rappresentare 90 raggi, ebbene questi saranno
+equidistanti tra loro di 1 grado ciascuno (in variaizone angolare).
+Attenzione ora a questo passaggio.
+La finestra che vedi in cube3d, o la finestra che vedi un un gioco sparatutto, se ci pensi 
+rappresenta il tuo FOV. è come se i tuoi occhi fossero sulla superfice dello schermo e tu 
+vedessi proprio quello che lo schermo ti fa vedere.
+In altre parole si inutisce che c'è una correlazione tra i limiti del tuo FOV ed i limiti destro e sinistro
+dello schermo (sicuramente c'è una correlazione anche con i limiti alto e basso dello schermo ma 
+non probabilmente non rientrano nelle considerazione di questo progetto).
+Per ora io so che su un pinao bidimensionale visto dall'alto, posso rappresentare un player con un certo
+campo di vista. Posso rappreentare questo campo di vista con due lineete. E mentre si muove il player io dll'alto vedo che si muove insime 
+al suo campo di vista ...avendo quindi la percezinoe di dove sta puntado il giocatore.
+Ebbene quel campo di vista portato nella visualizzazione 3D corrisponde ai limiti della finestra del gioco.
+Quindi se la finestra è ad esempio di 500 pixel, e il FOV è di 90 gradi, allora queste corrisponderanno.
+il margine sinistro della finestra corrisponde al marigne sinistro del fov, il centro al centro e la destr alla destra.
+Se dividi la finestra per il numero di raggi che hai scelto, avrai la visualizzazione di ogni raggio su quella finestra.
+Questo indica dove dovrà essere disegnato quel raggio.
+O meglio dove dovrò essere disegnato il punto di impatto incontrato da quel raggio.
+Se il raggio è quello dritto davanti a te....dove tocca toca il muro, che sia a 1 metro, che sia adue metri, che sia a 100 metri
+sempre davanti a te viene disegnato.
+Stessa cosa vale per tutte i raggi del FOV. I rispetivi punti di impatti saranno disegnati in corrispondenza 
+della x della window associata a quel raggio.
+ // continuare la spiegazione sotto facendola prosegueire a questa sopra.
 
-La posizione orizzontale (x della linea) sullo schermo è direttamente correlata all'angolo del raggio
-rispetto alla direzione centrale di vista. 
-I raggi più a sinistra (con angoli negativi rispetto alla direzione di vista) 
-saranno disegnati sulla sinistra dello schermo, e quelli più a destra saranno 
-disegnati sulla destra.
 
 la proiezione indica invece l'altezza che dovrà avere quella linea colorata sullo schermo
 
@@ -71,11 +72,10 @@ double  find_x_3d(double ray_angle, double fov_left_ray, double win_width)
     angular_fov_percentage = (ray_angle - fov_left_ray) / FOV_ANGLE;
     winWidth_angle_proportion = angular_fov_percentage * win_width;
     x_3d = winWidth_angle_proportion;
-    //mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, x_3d, 250, WHITE); //for 3d win
     return (x_3d);
 }
 
-double wall_heigth_3d(double projection)
+double calculate_3d_wall_height(double projection)
 {
 	double line_height;
 
@@ -83,30 +83,30 @@ double wall_heigth_3d(double projection)
 	return (line_height);
 }
 
-void draw_line_heigths(double x_3d, double line_heigth, t_c3d *c3d)
+/*attenzione ora non sto guardando alla x_3d,
+non sto calcolando quella x sul piano orizzontale dello schermo corrispondente
+alla variazione angolare del ray.
+qui sto calcolando la x all'interno della texture...ovvero quella x da cui
+risalire lungo lìaltezza della texture da riportare nell'ambiente 3d.
+quindi dato un certo punto di impatto...avrò una x...vedo in che cella ricade
+vedo quindi a che distanza dall'inizio di quella cella la x si trova, e tento
+di riprodurre quella distanza a apartire dall'inizio della texture.
+una volta posizionatomi sulla giusta x nella textur avrò poi una funzione che mi sale lungo 
+quella x...ovvero stessa x ma y diverse....*/
+int find_x_texture(t_point impact_point)
 {
-	double y;
-	y = c3d->win_2d.w / 2 - (line_heigth / 2);
-    double tmp = y + line_heigth;
-	while (y < tmp)
-	{
+    t_point tile_point;
+    int x_texture;
+    x_texture = 0;
+    tile_point = tile_reference(impact_point);
+    x_texture = (impact_point.x - (tile_point.x * TILE_SIZE) );
+    //printf("ecco la x_end_point: %f\n", impact_point.x);
+    //printf("ecco tile_point.x: %f\n", tile_point.x);
+    //printf("ecco la x_texture: %d\n", x_texture);
+    return (x_texture);
 
-    	mlx_pixel_put(c3d->win_2d.mlx_connection, c3d->win_3d.mlx_win, x_3d, y, RED); //for 3d win
-		y++;
-	}
 }
 
-double pitagora_theorem(t_point first_point, t_point second_point)
-{
-	double result;
-	double dx;
-	double dy;
-
-	dx = first_point.x - second_point.x;
-	dy = first_point.y - second_point.y;
-	result = sqrt(pow(dx, 2) + pow(dy, 2));
-	return (result);
-}
 
 
 

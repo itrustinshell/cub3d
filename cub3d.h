@@ -80,7 +80,7 @@
 #define CIRCUMFERENCE_CHECKS 8
 
 //map_img_charateristics
-#define TILE_SIZE 50
+#define TILE_SIZE 64
 
 //player charactieristics
 #define RAY_LENGTH RADIUS * 8
@@ -98,7 +98,6 @@
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
 typedef struct s_win
 {
-	void	*mlx_connection;
 	void	*mlx_win;
 	int		w;
 	int		h;
@@ -111,9 +110,24 @@ typedef struct s_dimension
 
 } t_dimension;
 
+typedef struct s_color
+{
+	char c;
+	int	color;
+} t_color;
+
+typedef struct s_my_texture
+{
+	t_dimension dimension;
+	char	*data_addr;
+	int how_many_colors;
+	t_color	color;
+
+} t_my_texture;
+
 typedef struct s_map
 {
-	char	*data_from_file;
+	char	*data;
 	t_dimension dimension;
 	char	**grid;
 	int		x;
@@ -122,11 +136,12 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*map_img;
-	char	*data_img;
-	int		size_line;
-	int		bits_per_pixel;
-	int		endian;
+	void		*img;
+	char		*data_addr;
+	int			size_line;
+	int			bits_per_pixel;
+	int			endian;
+	t_dimension	img_dimension;
 }	t_img;
 
 typedef struct s_delta
@@ -201,36 +216,64 @@ typedef struct s_player
 	t_ray		ray;
 } t_player;
 
-
 //for norm reasons this wrap all important info
 typedef struct s_c3d
 {
+	void		*mlx_connection;
 	t_win 		win_2d;
 	t_win		win_3d;
-	t_map		map_fm_file;
-	t_img		img;
+	t_map		raw_map;
+	t_img		map;
+	t_img		texture;
 	t_player	player;
 } t_c3d;
 
+typedef struct s_image
+{
+    void    *img;
+    char    *data;
+    int     width;
+    int     height;
+    int     bpp;
+    int     size_line;
+    int     endian;
+}              t_image;
+//texture
+char	*read_texture(char *file_path);
+char	**ft_split(const char *s, char c);
+size_t	ft_strlen(const char *s);
+int		find_x_texture(t_point impact_point);
+
+//closing
+int		close_win(t_c3d *c3d);
+int		esc(int esc, t_c3d *c3d);
+void	close_program(t_c3d *c3d);
 
 //3d
 t_point find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
 double  find_x_3d(double ray_angle, double fov_left_ray, double win_width);
 double pitagora_theorem(t_point first_point, t_point second_point);
-void draw_line_heigths(double x_3d, double line_heigth, t_c3d *c3d);
-double wall_heigth_3d(double projection);
+double calculate_3d_wall_height(double projection);
 
+//img
+void create_visualize_map_img(t_c3d *c3d);
+int get_pixel(t_img *img, int x, int y);
+void put_pixel(t_img *img, int x, int y, int color);
+void scale_texture(t_img *src, t_img *dest, double scale);
 
-// t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
 //parsing
 char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
 char	**get_map_from_file(char *file_content, int width, int height);
+void 	build_map(char *path, t_c3d *c3d);
 
 //initializing
-void	initialize_player(t_c3d *c3d);
+void initialization(t_c3d *c3d);
 void 	initialize_ray(t_ray *ray);
 void	point_init(t_point *point_to_initialize);
+
+//window management
+void set_connection_and_windows(t_c3d *c3d);
 
 //dda
 t_point dda(t_point start_point, double alpha, t_c3d *c3d);
@@ -246,18 +289,19 @@ int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 
 //drawing
-void	draw_tile(int x, int y, int color, t_c3d *c3d);
-void	draw_tile_with_internal_margin(int x, int y, int color, t_c3d *c3d);
-void	draw_map(t_c3d *c3d);
+
+void	draw_2d_map(t_img *img, t_c3d *c3d);
 void	clear_current_drawing(void *mlx, void *mlx_win, int win_w, int win_h);
 void 	draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color);
 void    draw_player(t_c3d *c3d, t_point player_position, int radius, int color);
-void	ft_color(int x, int y, t_c3d *c3d, int color);
 void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 void 	draw_field_of_view( t_c3d *c3d);
 void 	stuff_to_draw(t_c3d *c3d);
 void 	draw_line(t_point point, double angle, int color, t_c3d *c3d);
+int 	get_pixel(t_img *img, int x, int y);
+void 	put_pixel(t_img *img, int x, int y, int color);
+void	draw_2d_fov_boundaries(t_c3d *c3d);
 
 //moving;
 int		my_key_hook(int keycode, void *param);
@@ -271,10 +315,21 @@ int is_collision(double player_next_x, double player_next_y, t_c3d *c3d);
 t_point tile_reference(t_point point);
 
 //moving_utils
-void    key_press_playerDirection(int keycode, t_c3d *c3d);
 void    key_release_player_alpha_rotation(int keycode, t_c3d *c3d);
-void 	key_press_playerPosition(int keycode, t_c3d *c3d);
 void    key_release_player_position(int keycode, t_c3d *c3d);
 
 //text
 void	print_map(char **map, int width, int height);
+
+
+//da eliminare
+// void 	key_press_playerPosition(int keycode, t_c3d *c3d);
+// void    key_press_playerDirection(int keycode, t_c3d *c3d);
+// void	initialize_player(t_player *player);
+// void	initialize_img(t_img *img);
+// void	initialize_win(t_win *win);
+// void	inizialize_map_fm_file(t_map *map);
+// void	draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);
+// t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
+// void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, double line_heigth, t_c3d *c3d);
+// void scaling(t_img *new, int scale);
