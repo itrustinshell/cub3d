@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 static int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
 {

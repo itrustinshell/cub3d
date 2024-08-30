@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 static void set_win_dimensions(t_win *win_2d, t_win *win_3d, t_dimension map_fm_file_dimension)
 {

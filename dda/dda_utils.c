@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 double pitagora_theorem(t_point first_point, t_point second_point)
 {

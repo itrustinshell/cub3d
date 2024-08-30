@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 static void	test_draw_map(char **map, int width, int heigth)
 {

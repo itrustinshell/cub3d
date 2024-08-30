@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 /* this function receives a "file path",
 opens it, reads it, saves its content in a malloced string

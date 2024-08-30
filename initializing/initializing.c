@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 void inizialize_map_fm_file(t_map *map)
 {
@@ -16,7 +16,6 @@ void initialize_win(t_win *win)
 	win->w = 0;
 	win->mlx_win = NULL;
 }
-
 
 void initialize_player(t_player *player)
 {
@@ -74,6 +73,7 @@ void initialize_ray(t_ray *ray)
 	ray->projection.point.y = 0;
 	ray->view3d.height_wall_line = 0;
 	ray->view3d.x_wall_line = 0;
+	ray->last_increment = 0;
 }
 
 void point_init(t_point *point_to_initialize)

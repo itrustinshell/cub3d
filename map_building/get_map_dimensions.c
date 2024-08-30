@@ -1,4 +1,4 @@
-# include "../cub3d.h"
+# include "../c3d.h"
 
 void	get_map_dimensions(char *file_content, int *width, int *height)
 {

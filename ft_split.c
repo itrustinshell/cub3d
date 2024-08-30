@@ -6,11 +6,11 @@
 /*   By: largenzi <largenzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:17:24 by largenzi          #+#    #+#             */
-/*   Updated: 2024/08/24 13:44:03 by largenzi         ###   ########.fr       */
+/*   Updated: 2024/08/30 09:16:05 by largenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "c3d.h"
 
 
 void	*ft_memset(void *s, int c, size_t n)

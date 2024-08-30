@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 t_point get_circumference_point(t_point player_next_position, double angle)
 {
@@ -11,7 +11,6 @@ t_point get_circumference_point(t_point player_next_position, double angle)
     return (circumference_point);
 }
 
-  
 int is_collision(double player_next_x, double player_next_y, t_c3d *c3d) 
 {
     t_point player_next_position;

@@ -1,29 +1,4 @@
-#include "../cub3d.h"
-
-// int get_cardinal_direction(double angle)
-// {
-// 	int	cardinal_direction;
-// 	cardinal_direction = 0;
-
-// 	if (angle == 0 || angle == 2 * M_PI)
-// 		cardinal_direction = E;
-// 	else if (angle == M_PI)    
-// 		cardinal_direction = W;
-// 	else if (angle == M_PI / 2)    
-// 		cardinal_direction = S;
-// 	else if (angle > 0  && angle < M_PI / 2)
-// 		cardinal_direction = SE;
-// 	else if (angle >  M_PI / 2  && angle < M_PI)
-// 		cardinal_direction = SW;
-// 	else if (angle > M_PI && angle < ((3 * M_PI) / 2))
-// 		cardinal_direction = NW;
-// 	else if (angle > ((3 * M_PI) / 2)  && angle < 2 * M_PI)
-// 		cardinal_direction = NE;
-// 	else if (angle == (3 * M_PI) / 2)
-// 		cardinal_direction = N;
-// 	printf("you are looking at %d\n", cardinal_direction);
-// 	return (cardinal_direction);
-// }
+#include "../c3d.h"
 
 int get_cardinal_direction(double angle)
 {

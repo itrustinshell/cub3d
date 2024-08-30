@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 #include <string.h>
 
 //questa funcione riceve un punto di partenza e un angolo e quindi calcola per un singolo raggio il suo percorso fino a che non incontra un muro
@@ -20,26 +20,20 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 		ray.path = calculate_path(ray.delta, alpha);
 		if (fabs(ray.path.x) < fabs(ray.path.y))
 		{
-			// printf("si sono entrato in x\n");
+			c3d->player.ray.last_increment = INCREMENT_X;	//per colorare bene in prospettiva....
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
 			if(is_it_passing_between_two_walls(&ray, c3d->raw_map.grid,  ray.end_point))
-			{
-				//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 				break;
-			}
 		}
-		else
+		else	
+		{
+			c3d->player.ray.last_increment = INCREMENT_Y;	
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.y, alpha);
+		}
 		if(is_it_passing_between_two_walls(&ray, c3d->raw_map.grid, ray.end_point))
-		{
-			//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, RED);
 			break;
-		}
 		if (is_it_a_wall(ray.end_point, c3d->raw_map.grid))
-		{
-			//bresenham(c3d, start_point.x, start_point.y, ray.end_point.x, ray.end_point.y, GREEN);
 			break;
-		}
 		else
 			ray.first_point = ray.end_point;
 	}

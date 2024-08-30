@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 
 /*questa funzione è la stessa di circle...semplicemente la racchiude

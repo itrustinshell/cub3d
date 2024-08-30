@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 /*this function manages the press of movement's player keycode
 it is called by key_press() which is the call-back function managed by mlx_hook
@@ -10,7 +10,7 @@ deve avere un keycode. Questa funzione gestisce il keycode che le viene passato 
 se il keycode è di un certo tipo allora setta il movimento del player.
 
 */
-static void key_press_playerPosition(int keycode, t_c3d *c3d)
+static void mov_key_press_position(int keycode, t_c3d *c3d)
 {
     if (keycode == KEY_W)
         c3d->player.move.up = 1;
@@ -24,7 +24,7 @@ static void key_press_playerPosition(int keycode, t_c3d *c3d)
 
 /*it is called by key_press which is the call-back function managed by mlx_hook
 vedi spiegazione di keypress_playerposition*/
-static void    key_press_playerDirection(int keycode, t_c3d *c3d)
+static void    mov_key_press_rotation(int keycode, t_c3d *c3d)
 {
     if (keycode == ARROW_RIGHT)
         c3d->player.rotate_alpha_right = 1;
@@ -44,12 +44,12 @@ Ecco quindi che la palla passa alle funzioni che keypress ha internamente.
 In pratica key_press riceve il keycode.
 e successivamente il keycode è gestito da key_oress playerposiziont e keypressplayer direction
 */
-int key_press(int keycode, void *param) 
+int mov_key_press(int keycode, void *param) 
 {
     t_c3d   *c3d;
 
     c3d = (t_c3d *)param;
-    key_press_playerPosition(keycode, c3d);
-    key_press_playerDirection(keycode, c3d);
+    mov_key_press_position(keycode, c3d);
+    mov_key_press_rotation(keycode, c3d);
     return (0);
 }

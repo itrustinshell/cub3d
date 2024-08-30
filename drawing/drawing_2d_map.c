@@ -1,22 +1,4 @@
-#include "../cub3d.h"
-/*questa stampa le celle senza margine*/
-// static void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d)
-// {
-// 	int	i;
-// 	int	j;
-	
-// 	i = 0;
-// 	while (i < TILE_SIZE)
-// 	{
-// 		j = 0;
-// 		while (j < TILE_SIZE)
-// 		{
-// 		  	ft_color(img_data_addr, x + j, y + i, c3d, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+#include "../c3d.h"
 
 static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, t_c3d *c3d)
 {
@@ -44,14 +26,20 @@ static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, 
     }
 }
 
-/*questa funzione stampa il confie destro e sinistro del FOV! Punto!*/
+/*questa funzione stampa il confie destro e sinistro del FOV! Punto!
+
+*/
 void	draw_2d_fov_boundaries(t_c3d *c3d)
 {	
-
-	t_point end_point;
-
-	point_init(&end_point);
-	end_point = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
+	t_point end_point; /*dichiaro un t_point end_point*/
+	point_init(&end_point); /*lo inizializzo*/
+	end_point = dda(c3d->player.position, c3d->player.fov.half_left, c3d); /*calcolo
+	l'end point in questione con il dda. In tal caso passo la variabile della struct
+	fov.half_left. In pratica in ogni momento il giocatore avrà sempre una direzione
+	ed avrà sempre un fov ed un half_left e half_rigth aggiornati. Sempre!.
+	Questo aggiornamento continuo è possibile grazie alla logica che trovi in: initializaztion
+	e in update_rotation. Ad ogni rotazione infatti il valore di fov è aggiornato.
+	Infatto si riferisce sempre e solo ad un calcolo effettuato rispetto alal direzione del giocatore.*/
 	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);
 	end_point = dda(c3d->player.position, c3d->player.fov.half_right, c3d);
 	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);

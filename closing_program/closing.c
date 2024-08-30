@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 void	close_program(t_c3d *c3d)
 {

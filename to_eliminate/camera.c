@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 //attenzione che qui i punti sono costruiti non in funzione dellap osizione del player ma della camera
 

@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 /*  1. per ogni punto di impatto va disegnata una linea verticale sullo schermo.
     2. questa linea passa per una determinata ascissa quindi. 
@@ -91,15 +91,19 @@ risalire lungo lìaltezza della texture da riportare nell'ambiente 3d.
 quindi dato un certo punto di impatto...avrò una x...vedo in che cella ricade
 vedo quindi a che distanza dall'inizio di quella cella la x si trova, e tento
 di riprodurre quella distanza a apartire dall'inizio della texture.
-una volta posizionatomi sulla giusta x nella textur avrò poi una funzione che mi sale lungo 
+una volta posizionatomi sulla giu
+sta x nella textur avrò poi una funzione che mi sale lungo 
 quella x...ovvero stessa x ma y diverse....*/
-int find_x_texture(t_point impact_point)
+int find_x_texture(t_point impact_point, t_ray ray)
 {
     t_point tile_point;
     int x_texture;
     x_texture = 0;
     tile_point = tile_reference(impact_point);
-    x_texture = (impact_point.x - (tile_point.x * TILE_SIZE) );
+    if (ray.last_increment == INCREMENT_Y)
+        x_texture = (impact_point.x - (tile_point.x * TILE_SIZE) ); 
+    else 
+        x_texture = (impact_point.y - (tile_point.y * TILE_SIZE) );
     //printf("ecco la x_end_point: %f\n", impact_point.x);
     //printf("ecco tile_point.x: %f\n", tile_point.x);
     //printf("ecco la x_texture: %d\n", x_texture);

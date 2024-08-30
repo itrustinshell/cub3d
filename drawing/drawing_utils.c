@@ -1,11 +1,23 @@
-#include "../cub3d.h"
+#include "../c3d.h"
 
 
+/*questa funzione va a posizionare il puntatore all'inizio di un colore.
+lo casta poi ad int.
+in questo modo veranno letto i 4 byte consecutivi come un singolo valore intero
+che rappresenterà il colore.
+siccome parliamo di byte e codice bianrio avrai un'area di emroia 10010111000110100101010100 
+tutta sta roe è il colore.
+ricordati che ogni elemento del charone è una componente del colore: 8 bits = 1 byte.
+quindi tu qui avanzi di 4 byte in 4 byte (0vvero 8 bits * 4 in 8bits * 4)
+*/
 int get_pixel(t_img *img, int x, int y)
 {
     int *pixel;
 
-    pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));	
+	if (x < 0 || x > img->img_dimension.width || y < 0 || y > img->img_dimension.heigth)
+		return RED;
+
+    pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));
 	return *pixel;
 }
 
@@ -18,11 +30,9 @@ poi dereferenzia lo stesso per l'assrgnazione del colore, di volta in volta*/
 void put_pixel(t_img *img, int x, int y, int color)
 {
     int *pixel;
-
-    pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));
-    *pixel = color;
+	pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));
+   	*pixel = color;
 }
-
 
 /*if you know a point and an angle, you can determin the line passing for that point
 along that direction. You can use the linear equation of a line. Indeed the angula coefficient
@@ -36,8 +46,7 @@ void	draw_line(t_point point, double angle, int color, t_c3d *c3d)
 	double c;
 
 	m = tan(angle);
-	c = point.y - (m * point.x);
-	
+	c = point.y - (m * point.x);	
 	while (point.x < 10 * TILE_SIZE)
 	{
 		point.y = m * point.x + c;
@@ -54,7 +63,6 @@ ma non vado a colorare pixel per pixel altrimenti otterrei un quadrato.
 Color, invece, solo quei punto per i quali è soddisfatta l'equazone della circonferenza.*/
 void draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color) 
 {
-
     t_point point;
 
     point.x = 0;
