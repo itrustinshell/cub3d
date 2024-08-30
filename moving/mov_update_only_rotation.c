@@ -63,7 +63,7 @@ int update_alpha_rotation(void *param)
     c3d->player.fov.half_left = c3d->player.direction - (FOV_ANGLE / 2); //update fov half left
 	c3d->player.fov.half_right = c3d->player.direction + (FOV_ANGLE / 2); //update fov half right
     if (check == 1)
-        stuff_to_draw(c3d);
+        drawing_routine(c3d);
     return (0);
 }
 

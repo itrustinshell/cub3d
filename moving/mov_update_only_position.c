@@ -74,7 +74,7 @@ int update_position(void *param)
     if (moving(c3d->player.move, &c3d->player.position,  c3d))
         does_it_move = YES;
     if (does_it_move == YES)
-        stuff_to_draw(c3d);
+        drawing_routine(c3d);
     return (0); 
 }
 

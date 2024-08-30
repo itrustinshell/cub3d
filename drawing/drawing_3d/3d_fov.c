@@ -1,39 +1,5 @@
-#include "../c3d.h"
+#include "../../c3d.h"
 
-/*remember that the coordinates of y go greater down*/
-static void draw_floor(t_c3d *c3d)
-{
-	int x = 0;
-	int y = (c3d->raw_map.dimension.heigth * TILE_SIZE) / 2;
-
-	while (y < c3d->raw_map.dimension.heigth * TILE_SIZE)
-	{
-		x = 0;
-		while (x < c3d->raw_map.dimension.width * TILE_SIZE)
-		{
-			put_pixel(&c3d->scene_3d, x, y, GRAY);
-			x++;
-		}
-		y++;
-	}
-}
-
-static void draw_ceiling(t_c3d *c3d)
-{
-	int x = 0;
-	int y = 0;
-
-	while (y < (c3d->raw_map.dimension.heigth * TILE_SIZE) / 2)
-	{
-		x = 0;
-		while (x < c3d->raw_map.dimension.width * TILE_SIZE)
-		{
-			put_pixel(&c3d->scene_3d, x, y, BLUE);
-			x++;
-		}
-		y++;
-	}
-}
 
 /*la seguente funzione:ha l'obiettivo di intercettare i colori della striscie di pixl della texture...
 e riportarli sulla striscia della rappresentazione 3D.
@@ -74,25 +40,21 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 	
 	win e la tagil a meta ...poi prnde la height, la divide a meta ...e la sottrae alla metà delo schermo
 	quindi quando disegn ...una meta arriva alla meta dello schermo e l'altra proseue...essendo cosi a specchiovv*/
-
 	y_min = y; //questa è la y_min uguale a y che serve per interpolare
 	max_iteration = y + line_heigth; //questa variabile serve per l'iterazione
-
-
 	while (y < max_iteration)
 	{ 
 		y_texture = (c3d->texture.img_dimension.heigth * ( y - y_min) ) / line_heigth; /*interpolazione*/
 		color = get_pixel(&c3d->texture, x_texture, y_texture);
-		put_pixel(&c3d->scene_3d, x_3d, y, color);
+		put_pixel(&c3d->scene_3d, x_3d, y, color); /*AAA ora coloro nella scena_3d*/
 		y_texture++;
 		y++;
 	}
 }
 
-/*
-objective: visualiza all you can see in 3D Window.
+/*objective: visualiza all you can see in 3D Window.
 This functions wrap-up different functions IOT print one vertical line in the 3D win.*/
-void draw_3d_visualization(t_c3d *c3d, t_point end_point, double saved_left_half_fov)
+void draw_3d_vertical_line(t_c3d *c3d, t_point end_point, double saved_left_half_fov)
 {
 	int x_text;
 	c3d->player.ray.projection.point = find_two_lines_intersection(c3d->player.position, c3d->player.perpendicular_direction, end_point, c3d->player.direction);
@@ -101,14 +63,11 @@ void draw_3d_visualization(t_c3d *c3d, t_point end_point, double saved_left_half
 	//bresenham(c3d, end_point.x, end_point.y, c3d->player.ray.projection.point.x, c3d->player.ray.projection.point.y, GREEN);
 	/*##TESTING ## per vedere tutti i puntini delle proiezioni rivela il seguente draw_filled_circle*/
 	//draw_filled_circle(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
-	
-	
 	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->raw_map.dimension.width * TILE_SIZE);
-	
 	x_text = find_x_texture(end_point, c3d->player.ray);
 	c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
 	c3d->player.ray.view3d.height_wall_line = calculate_3d_wall_height(c3d->player.ray.projection.length);
-	draw_3d_wall_height_with_textute_colors(c3d->player.ray.view3d.x_wall_line, x_text, c3d->player.ray.view3d.height_wall_line,  c3d); 
+	draw_3d_wall_height_with_textute_colors(c3d->player.ray.view3d.x_wall_line, x_text, c3d->player.ray.view3d.height_wall_line, c3d); 
 }
 
 /*itero dal confine sinistro del fov al confine destro.
@@ -116,7 +75,7 @@ cosi facendo vado a prendere di vola in volta, in ogni iterazione,
 il punto di ipatto calcolato con il dda.
 questo punto di impatto lo passo (sempre nell'ambito di quella iterazione)
 alla funzione visualize_3d*/
-void draw_3d_field_of_view(t_c3d *c3d)
+void draw_3d_fov(t_c3d *c3d)
 {
 	double angle_variation; /*l'ho chiamata variazione angolare!!! è una variazinoe angolare
 	è la variaione angolare che di volta in volta interessa il raggio del fov che dal 
@@ -128,13 +87,12 @@ void draw_3d_field_of_view(t_c3d *c3d)
 	t_point end_point;
 	double	saved_left_half_fov; /*devo salvarmi l'half end perchè poi la faccio variare aumentandola
 	fino alla parte destra del FOV*/
-
+	point_init(&end_point);
 	saved_left_half_fov = c3d->player.fov.half_left;
 	angle_variation = FOV_ANGLE / NUM_OF_RAYS; /*se divido un'angolo per 10, avrò 10 
 	angoli uguali più piccoli la cui somma mi da quell'angolo intero. Ora, se la mia finestra è lunga 
 	500 pixel, ebbene io potrei dividere l'angolo per 500, in questo modo avrei un'iniziale corrispondenza
 	di 500 angoli piccoli con 500 pixel*/
-	point_init(&end_point);
 	// draw_fov_boundaries(end_point, c3d); /*approfitto per stamapare visivamente
 	// i confini del fov*/
 	while (c3d->player.fov.half_left < c3d->player.fov.half_right)
@@ -144,12 +102,8 @@ void draw_3d_field_of_view(t_c3d *c3d)
 		/*## TESTING ## se vuoi vedere i raggi sparati che incontrano i muri tieni scoperto
 		il seguente brehenam*/
 		//bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, YELLOW);
-		
-		
-		draw_3d_visualization(c3d, end_point, saved_left_half_fov); 
-		
-		
-		/*passo il punto di impatto a visualize 3d---e vedi cosa fa visualize 3d*/
+		draw_3d_vertical_line(c3d, end_point, saved_left_half_fov);/*disegno la linea 3d corrispondente a quel
+		punto di impatto*/
 		c3d->player.fov.half_left = c3d->player.fov.half_left + angle_variation; /* aumento il raggio corrente di una variazione angolare.
 		man mano la parte sinistra del fov l'aumento di un piccolo angolino.
 		questo piccolo angolino l'ho calcolato prima. 
@@ -159,18 +113,4 @@ void draw_3d_field_of_view(t_c3d *c3d)
 		quindi c'è un incremento minuscolo della x che va a prendere il successivo punto di impattp
 		e da questo punto di impatto si va a fare il visualize 3d.*/
 	}
-}
-
-/*disegna la scena 3d: ovvero mette tutto nello stringone:
-prima il celo, poi la terra, e poi i muri...*/
-void draw_3d_scene(t_c3d *c3d)
-{
-	c3d->scene_3d.img_dimension.width = c3d->raw_map.dimension.width * TILE_SIZE;
-	c3d->scene_3d.img_dimension.heigth = c3d->raw_map.dimension.heigth * TILE_SIZE;
-	c3d->scene_3d.img = mlx_new_image(c3d->mlx_connection,c3d->scene_3d.img_dimension.width, c3d->scene_3d.img_dimension.heigth);
-	c3d->scene_3d.data_addr = mlx_get_data_addr(c3d->scene_3d.img, &c3d->scene_3d.bits_per_pixel, &c3d->scene_3d.size_line, &c3d->scene_3d.endian);
-	draw_ceiling(c3d);
-	draw_floor(c3d);
-	draw_3d_field_of_view(c3d); /*TODO in draw_3d c0è un segfault*/
-    mlx_put_image_to_window(c3d->mlx_connection, c3d->win_3d.mlx_win, c3d->scene_3d.img, 0, 0);
 }

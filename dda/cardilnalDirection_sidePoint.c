@@ -1,22 +1,21 @@
 #include "../c3d.h"
 
+static void	angle_normalization(double *angle)
+{
+	while (*angle < 0)
+		*angle = *angle + 2 * M_PI;
+    while (*angle >= 2 * M_PI) 
+		*angle =  *angle - 2 * M_PI;
+}
+
 int get_cardinal_direction(double angle)
 {
-    int cardinal_direction = 0;
+    int cardinal_direction; 
 
-	while (angle < 0)
-	{
-		angle += 2 * M_PI;
-	}
-    while (angle >= 2 * M_PI) 
-	{
-		angle -= 2 * M_PI;
-	}
+	angle_normalization(&angle);
+	cardinal_direction= 0;
     if (fabs(angle - 0) < EPSILON || fabs(angle - 2 * M_PI) < EPSILON)
-	{
-		//printf("eh si queto angolo è proprio zero\n");
         cardinal_direction = E;
-	}
     else if (fabs(angle - M_PI) < EPSILON)
         cardinal_direction = W;
     else if (fabs(angle - M_PI / 2) < EPSILON)
@@ -31,9 +30,6 @@ int get_cardinal_direction(double angle)
         cardinal_direction = NW;
     else if (angle > (3 * M_PI) / 2 && angle < 2 * M_PI)
         cardinal_direction = NE;
-    
-	//printf("ma che caz di angolo è: %f\n", angle);
-   // printf("You are looking at %d\n", cardinal_direction);
     return cardinal_direction;
 }
 
@@ -72,7 +68,5 @@ t_point chose_side_point(t_point first_point, int cardinal_direction)
 		side_point.x = (int)tile_ref.x * TILE_SIZE;
 		side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
 	}
-	//printf("cardinal_direction:%d\n", cardinal_direction);
-	//printf("side_point: %f, %f\n",side_point.x, side_point.y);
 	return (side_point);
 }

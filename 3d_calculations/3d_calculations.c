@@ -108,7 +108,6 @@ int find_x_texture(t_point impact_point, t_ray ray)
     //printf("ecco tile_point.x: %f\n", tile_point.x);
     //printf("ecco la x_texture: %d\n", x_texture);
     return (x_texture);
-
 }
 
 

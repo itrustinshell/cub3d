@@ -99,7 +99,7 @@
 #define SCALE_FACTOR 10000 //for projection
 //#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
 
-
+// 3D Resolution
 #define NUM_OF_RAYS 800
 
 
@@ -265,7 +265,6 @@ double calculate_3d_wall_height(double projection);
 void create_visualize_2d_map_img(t_c3d *c3d);
 int get_pixel(t_img *img, int x, int y);
 void put_pixel(t_img *img, int x, int y, int color);
-void scale_texture(t_img *src, t_img *dest, double scale);
 
 //parsing
 char	*read_the_map(char *file_path);
@@ -274,7 +273,7 @@ char	**get_map_from_file(char *file_content, int width, int height);
 void 	build_map(char *path, t_c3d *c3d);
 
 //initializing
-void initialization(t_c3d *c3d);
+void 	initialization(t_c3d *c3d);
 void 	initialize_ray(t_ray *ray);
 void	point_init(t_point *point_to_initialize);
 
@@ -295,20 +294,20 @@ int 	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_
 int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 
 //drawing
-
 void	draw_2d_map(t_img *img, t_c3d *c3d);
-void	clear_current_drawing(void *mlx, void *mlx_win, int win_w, int win_h);
 void 	draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color);
 void    draw_player(t_c3d *c3d, t_point player_position, int radius, int color);
 void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
-void 	draw_3d_field_of_view( t_c3d *c3d);
-void 	stuff_to_draw(t_c3d *c3d);
 void 	draw_line(t_point point, double angle, int color, t_c3d *c3d);
 int 	get_pixel(t_img *img, int x, int y);
 void 	put_pixel(t_img *img, int x, int y, int color);
 void	draw_2d_fov_boundaries(t_c3d *c3d);
+void	draw_floor(t_c3d *c3d);
+void	draw_ceiling(t_c3d *c3d);
+void	draw_3d_fov(t_c3d *c3d);
 void 	draw_3d_scene(t_c3d *c3d);
+void 	drawing_routine(t_c3d *c3d);
 
 //moving;
 int		my_key_hook(int keycode, void *param);
@@ -318,30 +317,11 @@ int		mov_key_release(int keycode, void *param);
 int		update_position(void *param);
 int		update_alpha_rotation(void *param);
 int		update_movement(void *param);
-int is_collision(double player_next_x, double player_next_y, t_c3d *c3d); 
+int		is_collision(double player_next_x, double player_next_y, t_c3d *c3d); 
 t_point tile_reference(t_point point);
-
-//moving_utils
-// void    key_release_player_alpha_rotation(int keycode, t_c3d *c3d);
-// void    key_release_player_position(int keycode, t_c3d *c3d);
 
 //text
 void	print_map(char **map, int width, int height);
-
-
-//da eliminare
-// void 	key_press_playerPosition(int keycode, t_c3d *c3d);
-// void    key_press_playerDirection(int keycode, t_c3d *c3d);
-// void	initialize_player(t_player *player);
-// void	initialize_img(t_img *img);
-// void	initialize_win(t_win *win);
-// void	inizialize_map_fm_file(t_map *map);
-// void	draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);
-// t_camera camera_plane(t_point player_position, double player_direction, t_c3d *c3d);
-// void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, double line_heigth, t_c3d *c3d);
-// void scaling(t_img *new, int scale);
-
-
 
 //testing
 void draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);

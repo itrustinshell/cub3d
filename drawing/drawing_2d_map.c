@@ -26,9 +26,7 @@ static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, 
     }
 }
 
-/*questa funzione stampa il confie destro e sinistro del FOV! Punto!
-
-*/
+/*questa funzione stampa il confie destro e sinistro del FOV! Punto!*/
 void	draw_2d_fov_boundaries(t_c3d *c3d)
 {	
 	t_point end_point; /*dichiaro un t_point end_point*/
@@ -72,5 +70,3 @@ void	draw_2d_map(t_img *img, t_c3d *c3d)
 		y++;
 	}
 }
-
-
