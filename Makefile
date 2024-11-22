@@ -1,7 +1,7 @@
 NAME = cube
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(DIR)
+#CFLAGS = -Wall -Wextra -Werror -I$(DIR)
 
 SRC = 	c3d.c \
 		ft_split.c \
@@ -19,22 +19,33 @@ SRC = 	c3d.c \
 #SRC = main.c moving.c read_the_map.c get_map_dimensions.c get_map_from_file.c drawing.c
 OBJ = $(SRC:.c=.o)
 
-DIR = minilibx
+DIR = minilibx-linux
 
 LIB = $(DIR)/libmlx.a
 
 # Regola per compilare i file .c in file .o
+# %.o: %.c
+# $(CC) $(CFLAGS) -c $< -o $@
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 
 # Regola per creare l'eseguibile finale
-$(NAME): $(OBJ) $(LIB)
-	$(CC) $(OBJ) -L$(DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
+# $(NAME): $(OBJ) $(LIB)
+# 	$(CC) $(OBJ) -L$(DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 # Regola per compilare la libreria MiniLibX
+
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(OBJ) -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+
+
 $(LIB):
 	make -C $(DIR)
+
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+
+
 
 # Regola per pulire i file oggetto e i file della libreria
 clean:

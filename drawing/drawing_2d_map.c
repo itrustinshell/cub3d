@@ -2,8 +2,8 @@
 
 static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, t_c3d *c3d)
 {
-	t_c3d *ciao;
-	ciao = c3d;
+
+
     int x_value;
     int y_value;
 

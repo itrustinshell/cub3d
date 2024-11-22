@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <ctype.h> //this is for isspace
 #include <math.h>
-#include "minilibx/mlx.h"
+#include "minilibx-linux/mlx.h"
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
@@ -15,12 +15,12 @@
 
 
 //keycode
-#define KEY_W 13
-#define KEY_S 1
-#define KEY_A 0
-#define KEY_D 2
-#define ARROW_LEFT 123
-#define ARROW_RIGHT 124
+#define KEY_W 119
+#define KEY_S 115
+#define KEY_A 97
+#define KEY_D 100
+#define ARROW_LEFT 65361
+#define ARROW_RIGHT 65363
 
 //movement
 #define HAS_MOVED_UP 1
