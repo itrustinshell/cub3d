@@ -79,7 +79,7 @@ void draw_3d_fov(t_c3d *c3d)
 {
 	double angle_variation; /*l'ho chiamata variazione angolare!!! è una variazinoe angolare
 	è la variaione angolare che di volta in volta interessa il raggio del fov che dal 
-	limite sinistro va fino al liminte destro...
+	limite sinistro va fino al limite destro...
 	in pratica cosi facendo ho avviato un while che incrementa di una tot variazione angolare
 	partendo dal confine sinistro del fov fino al confine destro.
 	Ogi raggi oovviamente impatta su un muro...e tramite appunto il dda posso calcolare
