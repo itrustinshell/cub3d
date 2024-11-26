@@ -77,15 +77,8 @@ If there is a collision simpli don't do anything. so don't update coordinates of
 int update_position(void *param) 
 {
     t_c3d   *c3d;
-    int does_it_move;
-      
-    does_it_move = 0;
     c3d = (t_c3d *)param;   
-    if (moving(c3d))
-        does_it_move = YES;
-    if (does_it_move == YES)
-        drawing_routine(c3d);
-    return (0); 
+    return (moving(c3d));
 }
 
 

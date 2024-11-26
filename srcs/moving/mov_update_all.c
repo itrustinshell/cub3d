@@ -9,7 +9,12 @@ Tale settaggio avviene in key_press e key_release*/
 
 int update_movement(void *param)
 {
-    update_alpha_rotation(param);
-	update_position(param);
+	int pos_updated;
+	int rot_updated;
+
+	pos_updated = update_position(param);
+	rot_updated = update_alpha_rotation(param);
+	if (pos_updated || rot_updated)
+		drawing_routine((t_c3d *)param);
 	return (0);
 }
