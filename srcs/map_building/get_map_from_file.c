@@ -83,18 +83,11 @@ char	**get_map_from_file(char *file_content, int width, int height)
 		while (map[y][x])
 		{
 			if (file_content[i] != '\n')
-			{
 				map[y][x] = file_content[i];
-				i++;
-			}
-			else if (file_content[i] == '\n' && x == width)
-				i++;
-			else 
-			{
-				i++;
+			else if (x != width)
 				while (map[y][x])
 					x++;
-			}
+			i++;
 			x++;
 			/*questo era un passaggio che non riuscivo a trovare
 			dopo che ho aumentato la x potrei torivarmi in una condizione 
@@ -108,6 +101,6 @@ char	**get_map_from_file(char *file_content, int width, int height)
 		}
 		y++;
 	}
-	test_draw_map(map, width, height);
+	//test_draw_map(map, width, height);
 	return (map);
 }

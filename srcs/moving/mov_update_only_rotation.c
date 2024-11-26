@@ -59,7 +59,7 @@ int update_alpha_rotation(void *param)
     c3d->player.perpendicular_direction = c3d->player.direction - (M_PI / 2); //update perpedicular
     /*#TESTING TEESTING## SE VUOI VEDERE LA retta perpendicolare alla direzionedel giocatore
     tieni rivelata la seguente funzione*/
-    //draw_line(c3d->player.position, c3d->player.perpendicular_direction, RED, c3d);
+    draw_line(c3d->player.position, c3d->player.perpendicular_direction, RED, c3d);
     c3d->player.fov.half_left = c3d->player.direction - (FOV_ANGLE / 2); //update fov half left
 	c3d->player.fov.half_right = c3d->player.direction + (FOV_ANGLE / 2); //update fov half right
     if (check == 1)

@@ -6,13 +6,13 @@ it is called by key_release which is the call-back function managed by mlx_hook
 static void    mov_key_release_position(int keycode, t_c3d *c3d)
 {    
     if (keycode == KEY_W)
-        c3d->player.move.up = 0;
+        c3d->player.move.w = 0;
     if (keycode == KEY_S)
-        c3d->player.move.down = 0;
+        c3d->player.move.s = 0;
     if (keycode == KEY_A)
-       c3d->player.move.left = 0;
+       c3d->player.move.a = 0;
     if (keycode == KEY_D)
-        c3d->player.move.right = 0;
+        c3d->player.move.d = 0;
 }
 
 /*this function manages the release of rotaionn of player's alpha direction

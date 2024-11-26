@@ -14,5 +14,4 @@ void set_connection_and_windows(t_c3d *c3d)
     c3d->mlx_connection = mlx_init();
     c3d->win_2d.mlx_win = mlx_new_window(c3d->mlx_connection, c3d->win_2d.w, c3d->win_2d.h, "cub3d_2d");
 	c3d->win_3d.mlx_win = mlx_new_window(c3d->mlx_connection, c3d->win_3d.w, c3d->win_3d.h, "cub3d_3d");
-	
 }

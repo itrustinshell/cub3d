@@ -9,7 +9,7 @@ Tale settaggio avviene in key_press e key_release*/
 
 int update_movement(void *param)
 {
-     update_position(param);
-     update_alpha_rotation(param);
-     return (0);
+    update_alpha_rotation(param);
+	update_position(param);
+	return (0);
 }
