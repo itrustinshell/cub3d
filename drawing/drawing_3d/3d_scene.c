@@ -1,7 +1,7 @@
 #include "../../c3d.h"
 
 /*disegna la scena 3d: ovvero mette tutto nello stringone:
-prima il celo, poi la terra, e poi i muri...*/
+prima il cielo, poi la terra, e poi i muri...*/
 void draw_3d_scene(t_c3d *c3d)
 {
 	c3d->scene_3d.img_dimension.width = c3d->raw_map.dimension.width * TILE_SIZE;

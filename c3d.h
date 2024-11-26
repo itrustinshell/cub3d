@@ -86,12 +86,13 @@
 //map_img_charateristics
 #define TILE_SIZE 64
 
-//player charactieristics
+//player charactieristics .........AAAAAAAAAAAAA
 #define RAY_LENGTH RADIUS * 8
-#define FOOT_STEP 4
-#define RADIUS 6
+#define FOOT_STEP 1
+#define RADIUS 10
 
 //camera
+
 #define CAMERA_DISTANCE RADIUS * 10
 #define FOV_ANGLE (M_PI / 2)
 
@@ -100,7 +101,7 @@
 //#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
 
 // 3D Resolution
-#define NUM_OF_RAYS 800
+#define NUM_OF_RAYS 640
 
 
 //start_draw indica da dove iniziare a stampare la mappa all'interno delle coordinate in mlx_win
@@ -120,8 +121,8 @@ typedef struct s_dimension
 
 typedef struct s_color
 {
-	char c;
-	int	color;
+	char	c;
+	int		color;
 } t_color;
 
 typedef struct s_my_texture

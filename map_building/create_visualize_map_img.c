@@ -25,8 +25,6 @@ int radius = RADIUS;
         }
         point.y++;
     }
-
-
 }
 
 
