@@ -2,7 +2,7 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -I$(MLXDIR) -Iincludes #-Wall -Wextra -Werror
 
-MAP_PATH = srcs/map_building/map.cub
+MAP_PATH = res/maps/map.cub
 EXE = $(NAME) $(MAP_PATH)
 
 MLXDIR = ./mlx
