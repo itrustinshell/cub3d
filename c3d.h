@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <ctype.h> //this is for isspace
 #include <math.h>
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc

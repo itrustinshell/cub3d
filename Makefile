@@ -2,12 +2,12 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -I$(MLXDIR) #-Wall -Wextra -Werror
 
-MLXDIR = ./minilibx-linux
+MLXDIR = ./mlx
 MLXLIB = $(MLXDIR)/libmlx.a
-INCLUDES = -I/usr/include -Imlx_linux -O3
-MLX_FLAGS = -Lminilibx-linux -lmlx -L/usr/lib/X11 -lXext -lX11
+INCLUDES = -I/usr/include -I$(MLXDIR) -O3
+MLX_FLAGS = -L$(MLXDIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 
-SRC = 	c3d.c \
+SRCS = 	c3d.c \
 		ft_split.c \
 		initializing/initializing.c \
 		texture/texture_init.c \
@@ -20,10 +20,12 @@ SRC = 	c3d.c \
 		dda/dda.c dda/dda_utils.c dda/delta_path_point.c dda/cardilnalDirection_sidePoint.c dda/checks.c dda/two_walls_check.c \
 		map_building/read_the_map.c map_building/get_map_dimensions.c map_building/get_map_from_file.c map_building/create_visualize_map_img.c
 		
-OBJS = $(SRC:.c=.o)
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-.c.o:
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 all: $(MLXLIB) $(NAME)
 
@@ -34,11 +36,12 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) -lm -lz
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJS)
+	rm -rf $(OBJDIR)
 	make -C $(MLXDIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 	make -C $(MLXDIR) clean
 	
 re: fclean all

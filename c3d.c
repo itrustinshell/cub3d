@@ -5,7 +5,6 @@
 #define HEIGHT 3
 #define FACTOR 50
 
-#include "minilibx-linux/mlx.h"
 #include <stdlib.h>
 
 int main(int argc, char **argv)
