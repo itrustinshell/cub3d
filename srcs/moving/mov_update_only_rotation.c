@@ -15,22 +15,26 @@ the angle will restart from 360 or 0.
 To make a faster rotation you should decrese the denominator to calculate degree.
 
 */
-static void set_rotation(t_c3d *c3d, int *check)
+int set_rotation(t_c3d *c3d)
 {
+	int has_rotated;
+
+	has_rotated = 0;
     if (c3d->player.rotate_alpha_right)
     {
         c3d->player.direction += DEGREE;
         if (c3d->player.direction > 2 * M_PI)
             c3d->player.direction = c3d->player.direction - (2 * M_PI);
-        *check = 1;
+        has_rotated = 1;
     }
     else if (c3d->player.rotate_alpha_left)
     {
         c3d->player.direction -= DEGREE;
          if (c3d->player.direction < 0)
             c3d->player.direction = 2 * M_PI + c3d->player.direction;
-        *check = 1;
+        has_rotated = 1;
     }
+	return (has_rotated);
 }
 
 /*
@@ -51,19 +55,17 @@ left_half and right_half of the fov.
 int update_alpha_rotation(void *param)
 {
     t_c3d *c3d;
-    int check;
+    int has_rotated;
 
     c3d = (t_c3d *)param;
-    check = 0;
-    set_rotation(c3d, &check);
+    has_rotated = 0;
+    has_rotated = set_rotation(c3d);
     c3d->player.perpendicular_direction = c3d->player.direction - (M_PI / 2); //update perpedicular
     /*#TESTING TEESTING## SE VUOI VEDERE LA retta perpendicolare alla direzionedel giocatore
     tieni rivelata la seguente funzione*/
-    draw_line(c3d->player.position, c3d->player.perpendicular_direction, RED, c3d);
+    //draw_line(c3d->player.position, c3d->player.perpendicular_direction, RED, c3d);
     c3d->player.fov.half_left = c3d->player.direction - (FOV_ANGLE / 2); //update fov half left
 	c3d->player.fov.half_right = c3d->player.direction + (FOV_ANGLE / 2); //update fov half right
-    if (check == 1)
-        drawing_routine(c3d);
-    return (0);
+    return (has_rotated);
 }
 
