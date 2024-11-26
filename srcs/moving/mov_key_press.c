@@ -13,13 +13,13 @@ se il keycode è di un certo tipo allora setta il movimento del player.
 static void mov_key_press_position(int keycode, t_c3d *c3d)
 {
     if (keycode == KEY_W)
-        c3d->player.move.up = 1;
+        c3d->player.move.w = 1;
     if (keycode == KEY_S)
-        c3d->player.move.down = 1;
+        c3d->player.move.s = 1;
     if (keycode == KEY_A)
-       c3d->player.move.left = 1;
+       c3d->player.move.a = 1;
     if (keycode == KEY_D)
-        c3d->player.move.right = 1;
+        c3d->player.move.d = 1;
 }
 
 /*it is called by key_press which is the call-back function managed by mlx_hook
@@ -49,6 +49,8 @@ int mov_key_press(int keycode, void *param)
     t_c3d   *c3d;
 
     c3d = (t_c3d *)param;
+	if (keycode == ESC)
+		on_destroy(c3d);
     mov_key_press_position(keycode, c3d);
     mov_key_press_rotation(keycode, c3d);
     return (0);

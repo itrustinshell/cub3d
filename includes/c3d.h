@@ -6,9 +6,14 @@
 #include <ctype.h> //this is for isspace
 #include <math.h>
 #include "mlx.h"
-
+#include <X11/X.h>
+#include <X11/keysym.h>
 
 #define PATH_TO_TEXTURE "res/texture/mur.xpm"
+
+
+//Error messages
+#define INVALID_PARAMS "The only allowed parameter is the path of the map!\nUsage:\n./cub3d <map_path>\n"
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
@@ -22,6 +27,7 @@
 #define KEY_S 115
 #define KEY_A 97
 #define KEY_D 100
+#define ESC 65307
 #define ARROW_LEFT 65361
 #define ARROW_RIGHT 65363
 
@@ -70,6 +76,7 @@
 #define EPSILON 1e-9 //to better manage precision erro. 1e-6 = (0.000001): used when a small tolerance is acceptable.
 
 //angles utils
+#define M_PI 3.14159265358979323846
 #define DEGREE 2 * M_PI / 150
 
 //wall_check
@@ -210,10 +217,10 @@ typedef struct s_ray
 
 typedef struct s_move
 {
-	int			down;
-	int			up;
-	int			left;
-	int			right;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
 } t_move;
 
 typedef struct s_player
@@ -222,6 +229,7 @@ typedef struct s_player
 	t_point		tile;
 	t_move		move;
 	t_fov		fov;
+	int			cardinal_direction;
 	double		direction;
 	double		perpendicular_direction;
 	double		rotate_alpha_right;
@@ -330,3 +338,7 @@ void	print_map(char **map, int width, int height);
 //testing
 void draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);
 void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d);
+int		on_destroy(t_c3d *c3d);
+void	error_exit(t_c3d *c3d, char *message);
+void	move_player_mains(int direction, t_move move, t_point *position);
+void	move_player_oblq(int direction, t_move move, t_point *position);

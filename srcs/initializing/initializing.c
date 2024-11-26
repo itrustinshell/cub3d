@@ -24,10 +24,10 @@ void initialize_player(t_player *player)
 	player->position.x = 160;
 	player->position.y = 90;
 	player->tile = tile_reference(player->position);
-	player->move.down = 0;
-	player->move.up = 0;
-	player->move.left = 0;
-	player->move.right = 0;
+	player->move.w = 0;
+	player->move.a = 0;
+	player->move.s = 0;
+	player->move.d = 0;
 	player->rotate_alpha_right = 0;
 	player->rotate_alpha_left = 0;
 	player->ray.cardinal_direction = 0;

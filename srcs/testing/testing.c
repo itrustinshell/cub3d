@@ -1,4 +1,4 @@
-#include "../c3d.h"
+#include "c3d.h"
 
 /*questa funzione è inutilizzata...serve per scopi di testing.
 se vuoi usarla la inserisci al posto di draw_3d_wall_height_with_textute_colors.
@@ -55,7 +55,8 @@ void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-		  	ft_color(img_data_addr, x + j, y + i, c3d, color);
+			printf("aaaaaa\n");
+		  	//ft_color(img_data_addr, x + j, y + i, c3d, color);
 			j++;
 		}
 		i++;

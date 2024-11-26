@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = gcc
-CFLAGS = -I$(MLXDIR) -Iincludes #-Wall -Wextra -Werror
+CFLAGS = -I$(MLXDIR) -Iincludes -g #-Wall -Wextra -Werror
 
 MAP_PATH = res/maps/map.cub
 EXE = $(NAME) $(MAP_PATH)
@@ -17,6 +17,8 @@ SRCS = 	srcs/main.c \
 		srcs/window/window.c \
 		srcs/3d_calculations/3d_calculations.c \
 		srcs/closing_program/closing.c \
+		srcs/testing/testing.c \
+		srcs/moving/moving_main_direction.c srcs/moving/moving_oblq_direction.c \
 		srcs/moving/mov_update_all.c srcs/moving/mov_key_press.c srcs/moving/mov_key_release.c srcs/moving/mov_collision.c srcs/moving/mov_update_only_rotation.c srcs/moving/mov_update_only_position.c srcs/moving/mov_utils.c \
 		srcs/drawing/drawing_2d_map.c srcs/drawing/drawing_routine.c srcs/drawing/drawing_player.c srcs/drawing/drawing_utils.c \
 		srcs/drawing/drawing_3d/floor_and_ceiling.c srcs/drawing/drawing_3d/3d_fov.c srcs/drawing/drawing_3d/3d_scene.c\

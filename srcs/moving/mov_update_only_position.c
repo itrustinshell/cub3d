@@ -1,29 +1,37 @@
 #include "c3d.h"
 
-
-int step_management(t_point *position, t_move move)
+int	get_direction(double perpendicular_direction)
 {
-    if(move.up)
-    {
-        position->y -= FOOT_STEP;
-        return (HAS_MOVED_UP);
-    }
-    else if(move.down)
-    {
-        position->y += FOOT_STEP;
-        return (HAS_MOVED_UP);
-    }
-    else if(move.left)
-    {
-        position->x -= FOOT_STEP;
-        return (HAS_MOVED_UP);
-    }
-    else if(move.right)
-    {
-        position->x += FOOT_STEP;
-        return (HAS_MOVED_UP);
-    }
-    return (DID_NOT_MOVE_UP);
+	if (perpendicular_direction >= -0.3925 && perpendicular_direction < 0.3925)
+		return (S);
+	if (perpendicular_direction >= 0.3925 && perpendicular_direction < 1.1775)
+		return (SW);
+	if (perpendicular_direction >= 1.1775 && perpendicular_direction < 1.9625)
+		return (W);
+	if (perpendicular_direction >= 1.9625 && perpendicular_direction < 2.7475)
+		return (NW);
+	if (perpendicular_direction >= 2.7475 && perpendicular_direction < 3.5325)
+		return (N);
+	if (perpendicular_direction >= 3.5325 && perpendicular_direction < 4.3175)
+		return (NE);
+	if ((perpendicular_direction >= 4.3175 && perpendicular_direction <= 4.71) || \
+		(perpendicular_direction >= -1.57 && perpendicular_direction < -1.1775))
+		return (E);
+	if (perpendicular_direction >= -1.1775 && perpendicular_direction < -0.3925)
+		return (SE);
+}
+
+int step_management(t_player *player)
+{
+	t_move move;
+	t_point *position;
+	int	direction;
+
+	move = player->move;
+	position = &player->position;
+	direction = get_direction(player->perpendicular_direction);
+	move_player_mains(direction, move, position);
+    return ((move.w || move.s || move.a || move.d));
 }
 
 /*this functions save the position of the player in a tmp variable.
@@ -32,20 +40,22 @@ It first update the coordinate of this point depending on step_management functi
 Then it checks if the new point is a collision or not.
 if everything was ok, the player position is update with the new valuse.
 This function is also the occasion to update the tile where the player is in.*/
-int moving(t_move move, t_point *player_position, t_c3d *c3d)
+int moving(t_c3d *c3d)
 {
-    t_point position_to_check;
-    
-    position_to_check = *player_position;
-    if (step_management(&position_to_check, move))
+	t_point tmp;
+
+	tmp.x = c3d->player.position.x;
+	tmp.y = c3d->player.position.y;
+    if (step_management(&c3d->player))
     {
-        if(!is_collision(position_to_check.x, position_to_check.y, c3d))
+        if(!is_collision(c3d->player.position.x, c3d->player.position.y, c3d))
         {
-            *player_position = position_to_check;
-            c3d->player.tile = tile_reference(*player_position);
+            c3d->player.tile = tile_reference(c3d->player.position);
             return (HAS_MOVED_UP);
         }
     }
+	c3d->player.position.x = tmp.x;
+	c3d->player.position.y = tmp.y;
     return (DID_NOT_MOVE_UP);
 }
 
@@ -71,7 +81,7 @@ int update_position(void *param)
       
     does_it_move = 0;
     c3d = (t_c3d *)param;   
-    if (moving(c3d->player.move, &c3d->player.position,  c3d))
+    if (moving(c3d))
         does_it_move = YES;
     if (does_it_move == YES)
         drawing_routine(c3d);

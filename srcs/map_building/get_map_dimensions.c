@@ -20,18 +20,14 @@ void	get_map_dimensions(char *file_content, int *width, int *height)
 			//ricorda che quella riga potrebbe essere piu corta della precedente quindi la larghezza della mappa deve esser quella più lunga trovata sin ora.
 			if (*width < current_width)
 			{
-			*width = current_width;
-			current_width = 0;
-			}
-			else
-			{
+				*width = current_width;
 				current_width = 0;
 			}
+			else
+				current_width = 0;
 		}
 		else
-		{
 			current_width++;
-		}
 		i++;
 	}
 }
