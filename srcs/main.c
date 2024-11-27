@@ -7,16 +7,6 @@
 
 #include <stdlib.h>
 
-int	on_destroy(t_c3d *c3d)
-{
-	return (exit(0), 0);
-}
-
-void	error_exit(t_c3d *c3d, char *message)
-{
-	printf("%s\n", message);
-	on_destroy(c3d);
-}
 
 void	parse_parameters(int argc, char **argv)
 {

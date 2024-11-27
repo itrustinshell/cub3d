@@ -6,6 +6,7 @@
 #include <ctype.h> //this is for isspace
 #include <math.h>
 #include "mlx.h"
+#include "libft.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 
@@ -254,8 +255,6 @@ typedef struct s_c3d
 
 //texture
 //char	*read_texture(char *file_path);
-//char	**ft_split(const char *s, char c);
-size_t	ft_strlen(const char *s);
 int		find_x_texture(t_point impact_point, t_ray ray);
 void	set_texture(t_img *texture, void *mlx_connection);
 
@@ -264,8 +263,8 @@ void	set_texture(t_img *texture, void *mlx_connection);
 
 //closing
 int		close_win(t_c3d *c3d);
-int		esc(int esc, t_c3d *c3d);
-void	close_program(t_c3d *c3d);
+int		on_destroy(t_c3d *c3d);
+void	error_exit(t_c3d *c3d, char *message);
 
 //3d
 t_point find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
@@ -287,6 +286,7 @@ void 	build_map(char *path, t_c3d *c3d);
 //initializing
 void 	initialization(t_c3d *c3d);
 void 	initialize_ray(t_ray *ray);
+void	initialize_win(t_win *win);
 void	point_init(t_point *point_to_initialize);
 
 //window management
@@ -307,8 +307,8 @@ int 	is_it_a_wall(t_point point_to_verify, char **map_grid);
 
 //drawing
 void	draw_2d_map(t_img *img, t_c3d *c3d);
-void 	draw_filled_circle(t_c3d *c3d, t_point center, int radius, int color);
-void    draw_player(t_c3d *c3d, t_point player_position, int radius, int color);
+void 	draw_player(t_c3d *c3d, t_point center, int radius, int color);
+void	draw_player_in_img(t_c3d *c3d);
 void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color);
 void 	bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color);
 void 	draw_line(t_point point, double angle, int color, t_c3d *c3d);
@@ -338,7 +338,5 @@ void	print_map(char **map, int width, int height);
 //testing
 void draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);
 void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d);
-int		on_destroy(t_c3d *c3d);
-void	error_exit(t_c3d *c3d, char *message);
 void	move_player_mains(int direction, t_move move, t_point *position);
 void	move_player_oblq(int direction, t_move move, t_point *position);

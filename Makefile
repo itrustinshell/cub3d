@@ -1,9 +1,12 @@
 NAME = cub3d
 CC = gcc
-CFLAGS = -I$(MLXDIR) -Iincludes -g #-Wall -Wextra -Werror
+CFLAGS = -I$(MLXDIR) -Iincludes -I$(LIBFTDIR) -g #-Wall -Wextra -Werror
 
 MAP_PATH = res/maps/map.cub
 EXE = $(NAME) $(MAP_PATH)
+
+LIBFTDIR = ./libft
+LIBFT = ./libft/libft.a
 
 MLXDIR = ./mlx
 MLXLIB = $(MLXDIR)/libmlx.a
@@ -11,19 +14,15 @@ INCLUDES = -I/usr/include -I$(MLXDIR) -O3
 MLX_FLAGS = -L$(MLXDIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 
 SRCS = 	srcs/main.c \
-		srcs/utils/ft_split.c \
-		srcs/initializing/initializing.c \
-		srcs/texture/texture_init.c \
-		srcs/window/window.c \
-		srcs/3d_calculations/3d_calculations.c \
-		srcs/closing_program/closing.c \
-		srcs/testing/testing.c \
-		srcs/moving/moving_main_direction.c srcs/moving/moving_oblq_direction.c \
-		srcs/moving/mov_update_all.c srcs/moving/mov_key_press.c srcs/moving/mov_key_release.c srcs/moving/mov_collision.c srcs/moving/mov_update_only_rotation.c srcs/moving/mov_update_only_position.c srcs/moving/mov_utils.c \
-		srcs/drawing/drawing_2d_map.c srcs/drawing/drawing_routine.c srcs/drawing/drawing_player.c srcs/drawing/drawing_utils.c \
-		srcs/drawing/drawing_3d/floor_and_ceiling.c srcs/drawing/drawing_3d/3d_fov.c srcs/drawing/drawing_3d/3d_scene.c\
-		srcs/dda/dda.c srcs/dda/dda_utils.c srcs/dda/delta_path_point.c srcs/dda/cardilnalDirection_sidePoint.c srcs/dda/checks.c srcs/dda/two_walls_check.c \
-		srcs/map_building/read_the_map.c srcs/map_building/get_map_dimensions.c srcs/map_building/get_map_from_file.c srcs/map_building/create_visualize_map_img.c
+		srcs/utils/closing.c srcs/utils/3d_calculations.c srcs/utils/utils.c srcs/utils/testing.c \
+		srcs/utils/initializing/initializing.c srcs/utils/initializing/initializing2.c \
+		srcs/moving/mov_update_all.c srcs/moving/mov_key_press.c srcs/moving/mov_key_release.c srcs/moving/mov_update_only_position.c \
+		srcs/moving/utils/moving_main_direction.c srcs/moving/utils/moving_oblq_direction.c srcs/moving/utils/mov_collision.c \
+		srcs/drawing/drawing_2d_map.c srcs/drawing/drawing_player.c srcs/drawing/drawing_utils.c \
+		srcs/drawing/drawing_3d/3d_fov.c srcs/drawing/drawing_3d/3d_scene.c \
+		srcs/drawing/map_building/build_map.c srcs/drawing/map_building/get_map_from_file.c \
+		srcs/dda/dda.c srcs/dda/delta_path_point.c srcs/dda/cardilnalDirection_sidePoint.c \
+		srcs/dda/utils/dda_utils.c srcs/dda/utils/dda_checks.c
 		
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
@@ -34,10 +33,13 @@ $(OBJDIR)/%.o: %.c
 
 all: $(MLXLIB) $(NAME)
 
+$(LIBFT):
+	$(MAKE) all -C $(LIBFTDIR)
+
 $(MLXLIB):
 	make -C $(MLXDIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) -lm -lz
 
 test: all
@@ -52,10 +54,12 @@ valgrind: all
 clean:
 	rm -rf $(OBJS)
 	rm -rf $(OBJDIR)
+	make -C $(LIBFTDIR) clean 
 	make -C $(MLXDIR) clean
 
 fclean: clean
 	rm -rf $(NAME)
+	make -C .$(LIBFTDIR) fclean 
 	make -C $(MLXDIR) clean
 	
 re: fclean all

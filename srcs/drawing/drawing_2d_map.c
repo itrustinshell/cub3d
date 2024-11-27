@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   drawing_2d_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 11:47:53 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/11/27 11:49:54 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
 
 static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, t_c3d *c3d)
 {
-
-
     int x_value;
     int y_value;
 
@@ -70,3 +80,21 @@ void	draw_2d_map(t_img *img, t_c3d *c3d)
 		y++;
 	}
 }
+
+void create_visualize_2d_map_img(t_c3d *c3d)
+{
+	c3d->map.img = mlx_new_image(c3d->mlx_connection, c3d->raw_map.dimension.width * TILE_SIZE, c3d->raw_map.dimension.heigth * TILE_SIZE);
+	c3d->map.data_addr = mlx_get_data_addr(c3d->map.img, &c3d->map.bits_per_pixel, &c3d->map.size_line, &c3d->map.endian);
+	draw_2d_map(&c3d->map, c3d); //a questo punto il charone ha disegnata lamappa....ora il charone lo passo a drow player per fargli colorare il playerone sopra
+	draw_player_in_img(c3d);	
+	draw_2d_fov_boundaries(c3d); 
+	mlx_put_image_to_window(c3d->mlx_connection, c3d->win_2d.mlx_win, c3d->map.img, 0, 0);
+}
+
+void drawing_routine(t_c3d *c3d)
+{
+    mlx_destroy_image(c3d->mlx_connection, c3d->map.img);
+    create_visualize_2d_map_img(c3d);
+    mlx_destroy_image(c3d->mlx_connection, c3d->scene_3d.img); 
+    draw_3d_scene(c3d);
+}   

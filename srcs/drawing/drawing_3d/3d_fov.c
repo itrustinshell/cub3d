@@ -61,8 +61,8 @@ void draw_3d_vertical_line(t_c3d *c3d, t_point end_point, double saved_left_half
 	/*##TESTING ## per vedere il collegamtno tra punto di impatto e la sua proiezione sull'asse perpendicolare alla direzione
 	del giocatore...tieni scoperto il seguente bresenahm.*/
 	bresenham(c3d, end_point.x, end_point.y, c3d->player.ray.projection.point.x, c3d->player.ray.projection.point.y, GREEN);
-	/*##TESTING ## per vedere tutti i puntini delle proiezioni rivela il seguente draw_filled_circle*/
-	draw_filled_circle(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
+	/*##TESTING ## per vedere tutti i puntini delle proiezioni rivela il seguente draw_player*/
+	draw_player(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
 	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->raw_map.dimension.width * TILE_SIZE);
 	x_text = find_x_texture(end_point, c3d->player.ray);
 	c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
