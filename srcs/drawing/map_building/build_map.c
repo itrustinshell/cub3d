@@ -53,13 +53,13 @@ char	*read_the_map(char *file_path)
 	return (content_file);
 }
 
-void	get_map_dimensions(char *file_content, int *width, int *height)
+void	get_map_dimensions(char *file_content, int *w, int *height)
 {
 	int	i;
 	int	current_width;
 	i = 0;
 	current_width = 0;
-	*width = 0;
+	*w = 0;
 	*height = 0;
 
 	if (file_content)
@@ -71,9 +71,9 @@ void	get_map_dimensions(char *file_content, int *width, int *height)
 		{
 			*height = *height + 1;
 			//ricorda che quella riga potrebbe essere piu corta della precedente quindi la larghezza della mappa deve esser quella più lunga trovata sin ora.
-			if (*width < current_width)
+			if (*w < current_width)
 			{
-				*width = current_width;
+				*w = current_width;
 				current_width = 0;
 			}
 			else
@@ -89,6 +89,6 @@ void	get_map_dimensions(char *file_content, int *width, int *height)
 void build_map(char *path, t_c3d *c3d)	
 {	
 	c3d->raw_map.data = read_the_map(path);
-	get_map_dimensions(c3d->raw_map.data, &c3d->raw_map.dimension.width, &c3d->raw_map.dimension.heigth);
-	c3d->raw_map.grid = get_map_from_file(c3d->raw_map.data, c3d->raw_map.dimension.width, c3d->raw_map.dimension.heigth);
+	get_map_dimensions(c3d->raw_map.data, &c3d->raw_map.dimension.w, &c3d->raw_map.dimension.h);
+	c3d->raw_map.grid = get_map_from_file(c3d->raw_map.data, c3d->raw_map.dimension.w, c3d->raw_map.dimension.h);
 }

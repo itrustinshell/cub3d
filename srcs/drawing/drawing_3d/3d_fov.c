@@ -34,9 +34,9 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 	essere fatto esternamente prima del whle..perchè prima del while
 	viene impostata anche la variabile temp che va 
 	a memorizzare appunto il valore in relazione alla y.*/
-	if (line_heigth > c3d->win_2d.h)
-		line_heigth = c3d->win_2d.h;	
-	y = c3d->win_2d.w / 2 - (line_heigth / 2); /*questo centra il disegno perch+ prende la 
+	if (line_heigth > c3d->win_2d.dimension.h)
+		line_heigth = c3d->win_2d.dimension.h;	
+	y = c3d->win_2d.dimension.w / 2 - (line_heigth / 2); /*questo centra il disegno perch+ prende la 
 	
 	win e la tagil a meta ...poi prnde la height, la divide a meta ...e la sottrae alla metà delo schermo
 	quindi quando disegn ...una meta arriva alla meta dello schermo e l'altra proseue...essendo cosi a specchiovv*/
@@ -44,7 +44,7 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 	max_iteration = y + line_heigth; //questa variabile serve per l'iterazione
 	while (y < max_iteration)
 	{ 
-		y_texture = (c3d->texture.img_dimension.heigth * ( y - y_min) ) / line_heigth; /*interpolazione*/
+		y_texture = (c3d->texture.img_dimension.h * ( y - y_min) ) / line_heigth; /*interpolazione*/
 		color = get_pixel(&c3d->texture, x_texture, y_texture);
 		put_pixel(&c3d->scene_3d, x_3d, y, color); /*AAA ora coloro nella scena_3d*/
 		y_texture++;
@@ -63,7 +63,7 @@ void draw_3d_vertical_line(t_c3d *c3d, t_point end_point, double saved_left_half
 	bresenham(c3d, end_point.x, end_point.y, c3d->player.ray.projection.point.x, c3d->player.ray.projection.point.y, GREEN);
 	/*##TESTING ## per vedere tutti i puntini delle proiezioni rivela il seguente draw_player*/
 	draw_player(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
-	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->raw_map.dimension.width * TILE_SIZE);
+	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->raw_map.dimension.w * TILE_SIZE);
 	x_text = find_x_texture(end_point, c3d->player.ray);
 	c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
 	c3d->player.ray.view3d.height_wall_line = calculate_3d_wall_height(c3d->player.ray.projection.length);

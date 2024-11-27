@@ -51,12 +51,12 @@ int moving(t_c3d *c3d)
         if(!is_collision(c3d->player.position.x, c3d->player.position.y, c3d))
         {
             c3d->player.tile = tile_reference(c3d->player.position);
-            return (HAS_MOVED_UP);
+            return (True);
         }
     }
 	c3d->player.position.x = tmp.x;
 	c3d->player.position.y = tmp.y;
-    return (DID_NOT_MOVE_UP);
+    return (False);
 }
 
 /*

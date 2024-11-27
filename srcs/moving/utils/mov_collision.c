@@ -31,11 +31,11 @@ int is_collision(double player_next_x, double player_next_y, t_c3d *c3d)
         if (is_it_inside_map_perimeter(circumference_point, c3d->raw_map.dimension)) 
         {
             if (is_it_a_wall(circumference_point, c3d->raw_map.grid))
-                return (COLLISION_DETECTED);
+                return (True);
         }
         else
-            return (OUT_OF_PERIMETER);
+            return (True);
         loop++;
     }
-    return (NO_COLLISION_DETECTED);
+    return (False);
 }

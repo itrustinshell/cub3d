@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:47:53 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 11:49:54 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:32:20 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	draw_2d_map(t_img *img, t_c3d *c3d)
 	starting_drawing_x = 0;
 	starting_drawing_y = 0;
 	y = starting_drawing_y;
-	while (y < starting_drawing_y + c3d->raw_map.dimension.heigth)
+	while (y < starting_drawing_y + c3d->raw_map.dimension.h)
 	{	
 		x = starting_drawing_x; 
-		while (x < starting_drawing_x + c3d->raw_map.dimension.width)
+		while (x < starting_drawing_x + c3d->raw_map.dimension.w)
 		{
 			if (c3d->raw_map.grid[y][x] == '1')
 				draw_tile_with_internal_margin(img, x * TILE_SIZE, y * TILE_SIZE, GRAY, c3d);			  
@@ -83,7 +83,7 @@ void	draw_2d_map(t_img *img, t_c3d *c3d)
 
 void create_visualize_2d_map_img(t_c3d *c3d)
 {
-	c3d->map.img = mlx_new_image(c3d->mlx_connection, c3d->raw_map.dimension.width * TILE_SIZE, c3d->raw_map.dimension.heigth * TILE_SIZE);
+	c3d->map.img = mlx_new_image(c3d->mlx_connection, c3d->raw_map.dimension.w * TILE_SIZE, c3d->raw_map.dimension.h * TILE_SIZE);
 	c3d->map.data_addr = mlx_get_data_addr(c3d->map.img, &c3d->map.bits_per_pixel, &c3d->map.size_line, &c3d->map.endian);
 	draw_2d_map(&c3d->map, c3d); //a questo punto il charone ha disegnata lamappa....ora il charone lo passo a drow player per fargli colorare il playerone sopra
 	draw_player_in_img(c3d);	

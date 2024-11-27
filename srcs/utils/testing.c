@@ -11,7 +11,7 @@ un solo colore.*/
 void draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d)
 {
 	double y;
-	y = c3d->win_2d.w / 2 - (line_heigth / 2);
+	y = c3d->win_2d.dimension.w / 2 - (line_heigth / 2);
     double tmp = y + line_heigth;
 	while (y < tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:05 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 11:18:09 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:31:52 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void inizialize_map_fm_file(t_map *map)
 {
 	map->data = NULL;
-	map->dimension.heigth = 0;
-	map->dimension.width = 0;
+	map->dimension.h = 0;
+	map->dimension.w = 0;
 	map->grid = NULL;
 	map->x = 0;
 	map->y = 0;
@@ -53,8 +53,8 @@ void initialize_img(t_img *img)
 	img->data_addr = NULL;
 	img->endian = 0;
 	img->img = NULL;
-	img->img_dimension.width = 0;
-	img->img_dimension.heigth = 0;
+	img->img_dimension.w = 0;
+	img->img_dimension.h = 0;
 	img->size_line = 0;
 }
 

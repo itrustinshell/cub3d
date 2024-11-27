@@ -13,15 +13,15 @@ static int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double 
     py = (int)p.y; //associo a py il valore castato dell'ordinata di p 
     if (cardinal_direction == NE)
     {
-        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == IS_A_WALL && map_grid[(py + 1) / TILE_SIZE][(px / TILE_SIZE)] == IS_A_WALL)
+        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' && map_grid[(py + 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
           //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, RED);
-            return (THROUGH_TWO_WALLS);
+            return (True);
         }
     }
-    return (NOT_THROUGH_TWO_WALLS);
+    return (False);
 }
 
 static int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
@@ -38,15 +38,16 @@ static int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double 
 
     if (cardinal_direction == NW)
     {
-        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == IS_A_WALL && map_grid[(py + 1) / TILE_SIZE][px / TILE_SIZE] == IS_A_WALL)
+        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && \
+		map_grid[(py + 1) / TILE_SIZE][px / TILE_SIZE] == '1')
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
           //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (THROUGH_TWO_WALLS);
+            return (True);
         }
     }
-    return (NOT_THROUGH_TWO_WALLS);
+    return (False);
 }
 
 static int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
@@ -63,15 +64,15 @@ static int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double 
 
     if (cardinal_direction == SE)
     {
-        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == IS_A_WALL && map_grid[(py - 1) / TILE_SIZE][(px / TILE_SIZE)] == IS_A_WALL)
+        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' && map_grid[(py - 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
           //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (THROUGH_TWO_WALLS);
+            return (True);
         }
     }
-    return (NOT_THROUGH_TWO_WALLS);
+    return (False);
 }
 
 static int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
@@ -88,15 +89,15 @@ static int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double 
 
     if (cardinal_direction == SW)
     {
-        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == IS_A_WALL && map_grid[(py - 1) / TILE_SIZE][px / TILE_SIZE] == IS_A_WALL)
+        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && map_grid[(py - 1) / TILE_SIZE][px / TILE_SIZE] == '1')
         {
             p.x = p.x - 1;
             p.y = p.y + 1;
           //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (THROUGH_TWO_WALLS);
+            return (True);
         }
     }
-    return (NOT_THROUGH_TWO_WALLS);
+    return (False);
 }
 
 /*gli passo un punto per frlo verificare. Se il muro ha attraversato due muri, setta il corrispettivo end_point
@@ -109,12 +110,12 @@ int is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_t
 
     direction = ray->cardinal_direction;
     if (check_NE_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (THROUGH_TWO_WALLS);
+        return (True);
     else if(check_SE_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (THROUGH_TWO_WALLS);
+        return (True);
     else if (check_NW_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (THROUGH_TWO_WALLS);
+        return (True);
     else if(check_SW_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (THROUGH_TWO_WALLS);
-    return (NOT_THROUGH_TWO_WALLS);
+        return (True);
+    return (False);
 }

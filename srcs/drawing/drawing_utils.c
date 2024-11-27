@@ -14,7 +14,7 @@ int get_pixel(t_img *img, int x, int y)
 {
     int *pixel;
 
-	if (x < 0 || x > img->img_dimension.width || y < 0 || y > img->img_dimension.heigth)
+	if (x < 0 || x > img->img_dimension.w || y < 0 || y > img->img_dimension.h)
 		return RED;
 
     pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));

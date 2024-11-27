@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:17:10 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 11:58:05 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:32:04 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	initialize_win(t_win *win)
 {
-	win->h = 0;
-	win->w = 0;
+	win->dimension.h = 0;
+	win->dimension.w = 0;
 	win->mlx_win = NULL;
 }
 
