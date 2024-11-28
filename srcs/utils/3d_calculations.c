@@ -75,11 +75,13 @@ double  find_x_3d(double ray_angle, double fov_left_ray, double win_width)
     return (x_3d);
 }
 
-double calculate_3d_wall_height(double projection)
+double calculate_3d_wall_height(t_player player)
 {
 	double line_height;
-
-	line_height = SCALE_FACTOR / projection;
+	double center_distance;
+	
+	line_height = ((SCALE_FACTOR) / player.ray.projection.length);
+	line_height *= (1 - line_height * 0.00027);
 	return (line_height);
 }
 

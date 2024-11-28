@@ -10,7 +10,7 @@ LIBFT = ./libft/libft.a
 
 MLXDIR = ./mlx
 MLXLIB = $(MLXDIR)/libmlx.a
-INCLUDES = -I/usr/include -I$(MLXDIR) -O3
+INCLUDES = -I/usr/include -I$(MLXDIR) 
 MLX_FLAGS = -L$(MLXDIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 
 SRCS = 	srcs/main.c \
@@ -21,7 +21,7 @@ SRCS = 	srcs/main.c \
 		srcs/drawing/drawing_2d_map.c srcs/drawing/drawing_player.c srcs/drawing/drawing_utils.c \
 		srcs/drawing/drawing_3d/3d_fov.c srcs/drawing/drawing_3d/3d_scene.c \
 		srcs/drawing/map_building/build_map.c srcs/drawing/map_building/get_map_from_file.c \
-		srcs/dda/dda.c srcs/dda/delta_path_point.c srcs/dda/cardilnalDirection_sidePoint.c \
+		srcs/dda/dda.c srcs/dda/delta_path_point.c srcs/dda/sidePoint.c \
 		srcs/dda/utils/dda_utils.c srcs/dda/utils/dda_checks.c
 		
 OBJDIR = objs
@@ -31,7 +31,7 @@ $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-all: $(MLXLIB) $(NAME)
+all: $(MLXLIB) $(NAME) 
 
 $(LIBFT):
 	$(MAKE) all -C $(LIBFTDIR)

@@ -53,7 +53,3 @@ int main(int argc, char **argv)
 	set_hook_and_loop(&c3d);
     return (0);
 }
-
-
-
-

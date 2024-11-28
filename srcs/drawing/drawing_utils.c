@@ -30,6 +30,8 @@ poi dereferenzia lo stesso per l'assrgnazione del colore, di volta in volta*/
 void put_pixel(t_img *img, int x, int y, int color)
 {
     int *pixel;
+	if (y < 0 || x < 0)
+		return;
 	pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));
    	*pixel = color;
 }

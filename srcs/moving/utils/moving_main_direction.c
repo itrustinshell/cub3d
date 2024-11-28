@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:58:33 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/26 21:05:32 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:59:20 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	move_face_north(t_move move, t_point *position)
 {
 	if (move.w)
 		position->y -= FOOT_STEP;
-	else if (move.s)
+	if (move.s)
 		position->y += FOOT_STEP;
-	else if (move.a)
+	if (move.a)
 		position->x -= FOOT_STEP;
-	else if (move.d)
+	if (move.d)
 		position->x += FOOT_STEP;
 }
 
@@ -28,11 +28,11 @@ void	move_face_south(t_move move, t_point *position)
 {
 	if (move.w)
 		position->y += FOOT_STEP;
-	else if (move.s)
+	if (move.s)
 		position->y -= FOOT_STEP;
-	else if (move.a)
+	if (move.a)
 		position->x += FOOT_STEP;
-	else if (move.d)
+	if (move.d)
 		position->x -= FOOT_STEP;
 }
 
@@ -40,11 +40,11 @@ void	move_face_east(t_move move, t_point *position)
 {
 	if (move.w)
 		position->x += FOOT_STEP;
-	else if (move.s)
+	if (move.s)
 		position->x -= FOOT_STEP;
-	else if (move.a)
+	if (move.a)
 		position->y -= FOOT_STEP;
-	else if (move.d)
+	if (move.d)
 		position->y += FOOT_STEP;
 }
 
@@ -52,11 +52,11 @@ void	move_face_west(t_move move, t_point *position)
 {
 	if (move.w)
 		position->x -= FOOT_STEP;
-	else if (move.s)
+	if (move.s)
 		position->x += FOOT_STEP;
-	else if (move.a)
+	if (move.a)
 		position->y += FOOT_STEP;
-	else if (move.d)
+	if (move.d)
 		position->y -= FOOT_STEP;
 }
 

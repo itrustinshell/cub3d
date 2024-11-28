@@ -47,4 +47,5 @@ void draw_3d_scene(t_c3d *c3d)
 	draw_floor(c3d);
 	draw_3d_fov(c3d);
     mlx_put_image_to_window(c3d->mlx_connection, c3d->win_3d.mlx_win, c3d->scene_3d.img, 0, 0);
+	// draw_3d_fov(c3d);
 }

@@ -10,7 +10,7 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define PATH_TO_TEXTURE "res/texture/mur.xpm"
+#define PATH_TO_TEXTURE "res/texture/muro.xpm"
 
 //Error messages
 #define INVALID_PARAMS "The only allowed parameter is the path of the map!\nUsage:\n./cub3d <map_path>\n"
@@ -74,14 +74,13 @@
 //camera
 
 #define CAMERA_DISTANCE RADIUS * 10
-#define FOV_ANGLE (M_PI / 2)
+#define FOV_ANGLE (M_PI / 2.5)
 
 //3d
 #define SCALE_FACTOR 10000 //for projection
-//#define NUM_RAYS 100   // numero di raggi a cui applicare il raycast
 
 // 3D Resolution
-#define NUM_OF_RAYS 640
+#define NUM_OF_RAYS 641
 
 typedef struct s_dimension
 {
@@ -168,6 +167,7 @@ typedef struct s_ray
 	t_projection	projection;
 	t_view3d		view3d;
 	int				last_increment;
+	int				orientation;
 } t_ray;
 
 typedef struct s_move
@@ -207,6 +207,7 @@ typedef struct s_c3d
 	t_player	player;
 } t_c3d;
 
+int	get_direction(double perpendicular_direction);
 //texture
 int		find_x_texture(t_point impact_point, t_ray ray);
 void	set_texture(t_img *texture, void *mlx_connection);
@@ -219,7 +220,7 @@ void	error_exit(t_c3d *c3d, char *message);
 t_point	find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, double p2_angle);
 double	find_x_3d(double ray_angle, double fov_left_ray, double win_width);
 double	pitagora_theorem(t_point first_point, t_point second_point);
-double	calculate_3d_wall_height(double projection);
+double	calculate_3d_wall_height(t_player player);
 
 //img
 void	create_visualize_2d_map_img(t_c3d *c3d);
@@ -242,7 +243,7 @@ void	point_init(t_point *point_to_initialize);
 void	set_connection_and_windows(t_c3d *c3d);
 
 //dda
-t_point	dda(t_point start_point, double alpha, t_c3d *c3d);
+t_ray	dda(t_point start_point, double alpha, t_c3d *c3d);
 t_point	chose_side_point(t_point first_point, int cardinal_direction);
 int		get_cardinal_direction(double angle);
 t_point	calculate_delta(t_point first_point, t_point second_point, int cardinal_direction);

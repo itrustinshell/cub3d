@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:47:53 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 12:32:20 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:39:44 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static void draw_tile_with_internal_margin(t_img *img, int x, int y, int color, 
 void	draw_2d_fov_boundaries(t_c3d *c3d)
 {	
 	t_point end_point; /*dichiaro un t_point end_point*/
+	t_ray ray; /*dichiaro un t_ray ray*/
 	point_init(&end_point); /*lo inizializzo*/
-	end_point = dda(c3d->player.position, c3d->player.fov.half_left, c3d); /*calcolo
+	ray = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
+	end_point = ray.end_point; /*calcolo
 	l'end point in questione con il dda. In tal caso passo la variabile della struct
 	fov.half_left. In pratica in ogni momento il giocatore avrà sempre una direzione
 	ed avrà sempre un fov ed un half_left e half_rigth aggiornati. Sempre!.
@@ -49,7 +51,8 @@ void	draw_2d_fov_boundaries(t_c3d *c3d)
 	e in update_rotation. Ad ogni rotazione infatti il valore di fov è aggiornato.
 	Infatto si riferisce sempre e solo ad un calcolo effettuato rispetto alal direzione del giocatore.*/
 	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);
-	end_point = dda(c3d->player.position, c3d->player.fov.half_right, c3d);
+	ray = dda(c3d->player.position, c3d->player.fov.half_right, c3d);
+	end_point = ray.end_point;
 	bresenham(c3d, c3d->player.position.x, c3d->player.position.y, end_point.x, end_point.y, RED);
 }
 
@@ -86,9 +89,9 @@ void create_visualize_2d_map_img(t_c3d *c3d)
 	c3d->map.img = mlx_new_image(c3d->mlx_connection, c3d->raw_map.dimension.w * TILE_SIZE, c3d->raw_map.dimension.h * TILE_SIZE);
 	c3d->map.data_addr = mlx_get_data_addr(c3d->map.img, &c3d->map.bits_per_pixel, &c3d->map.size_line, &c3d->map.endian);
 	draw_2d_map(&c3d->map, c3d); //a questo punto il charone ha disegnata lamappa....ora il charone lo passo a drow player per fargli colorare il playerone sopra
-	draw_player_in_img(c3d);	
-	draw_2d_fov_boundaries(c3d); 
+	draw_player_in_img(c3d);	 
 	mlx_put_image_to_window(c3d->mlx_connection, c3d->win_2d.mlx_win, c3d->map.img, 0, 0);
+	draw_2d_fov_boundaries(c3d);
 }
 
 void drawing_routine(t_c3d *c3d)

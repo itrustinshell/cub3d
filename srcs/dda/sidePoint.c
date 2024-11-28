@@ -13,7 +13,7 @@ int get_cardinal_direction(double angle)
     int cardinal_direction; 
 
 	angle_normalization(&angle);
-	cardinal_direction= 0;
+	cardinal_direction = BLACK;
     if (fabs(angle - 0) < EPSILON || fabs(angle - 2 * M_PI) < EPSILON)
         cardinal_direction = E;
     else if (fabs(angle - M_PI) < EPSILON)
