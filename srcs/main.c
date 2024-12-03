@@ -7,16 +7,6 @@
 
 #include <stdlib.h>
 
-int	on_destroy(t_c3d *c3d)
-{
-	return (exit(0), 0);
-}
-
-void	error_exit(t_c3d *c3d, char *message)
-{
-	printf("%s\n", message);
-	on_destroy(c3d);
-}
 
 void	parse_parameters(int argc, char **argv)
 {
@@ -34,10 +24,15 @@ void	set_hook_and_loop(t_c3d *c3d)
 	mlx_hook(c3d->win_3d.mlx_win, KeyPress, KeyPressMask, &mov_key_press, c3d);
     mlx_hook(c3d->win_3d.mlx_win, KeyRelease, KeyReleaseMask, &mov_key_release, c3d);
 	mlx_hook(c3d->win_3d.mlx_win, DestroyNotify, StructureNotifyMask, &on_destroy, c3d);
+	mlx_hook(c3d->win_3d.mlx_win, ResizeRequest, ResizeRedirectMask, &on_3d_resize, c3d);
 	//hook for 2d scene
-	mlx_hook(c3d->win_2d.mlx_win, KeyPress, KeyPressMask, &mov_key_press, c3d);
-    mlx_hook(c3d->win_2d.mlx_win, KeyRelease, KeyReleaseMask, &mov_key_release, c3d);
-	mlx_hook(c3d->win_2d.mlx_win, DestroyNotify, StructureNotifyMask, &on_destroy, c3d);
+	if (SHOW_2D)
+	{
+		mlx_hook(c3d->win_2d.mlx_win, KeyPress, KeyPressMask, &mov_key_press, c3d);
+		mlx_hook(c3d->win_2d.mlx_win, KeyRelease, KeyReleaseMask, &mov_key_release, c3d);
+		mlx_hook(c3d->win_2d.mlx_win, DestroyNotify, StructureNotifyMask, &on_destroy, c3d);
+		mlx_hook(c3d->win_2d.mlx_win, ResizeRequest, ResizeRedirectMask, &on_2d_resize, c3d);
+	}
 	/*questo mlx_loop_hook ascolta costantemente per update movement
 	l'update movement avviene effettivamente se ci sono
 	nuovi valori ..altrimenti gli stessi valori sono richiamati
@@ -56,14 +51,10 @@ int main(int argc, char **argv)
 	initialization(&c3d);
 	build_map(argv[MAP_PATH], &c3d);
 	set_connection_and_windows(&c3d);
-	
-	create_visualize_2d_map_img(&c3d); 
-	set_texture(&c3d.texture, c3d.mlx_connection);
+	set_texture(&c3d);
+	if (SHOW_2D)
+		create_visualize_2d_map_img(&c3d); 
 	draw_3d_scene(&c3d);
 	set_hook_and_loop(&c3d);
     return (0);
 }
-
-
-
-

@@ -32,9 +32,9 @@ double calculate_deltaY(t_point first_point, t_point second_point, int cardinal_
     return (deltaY);
 }
 
-t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_direction)
+t_point calculate_delta(t_point first_point, t_point second_point, int cardinal_direction)
 {
-    t_delta delta;
+    t_point delta;
 
     delta.x = 0;
     delta.y = 0;
@@ -44,9 +44,9 @@ t_delta calculate_delta(t_point first_point, t_point second_point, int cardinal_
     return (delta);
 }
 
-t_path calculate_path(t_delta delta, double alpha) //TODO: Verifica se hai bisogno di fabs
+t_point calculate_path(t_point delta, double alpha) //TODO: Verifica se hai bisogno di fabs
 {
-    t_path path;
+    t_point path;
 
     path.x = 0;
     path.y = 0;

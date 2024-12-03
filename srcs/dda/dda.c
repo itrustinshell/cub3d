@@ -1,7 +1,25 @@
 #include "c3d.h"
 
+void	enstabilish_orientation(t_ray *ray, int ray_direction, int last_increment)
+{
+	if (last_increment == INCREMENT_X)
+	{
+		if (ray_direction == NW || ray_direction == SW || ray_direction == W)
+			ray->orientation = E;
+		else
+			ray->orientation = W;
+	}
+	else
+	{
+		if (ray_direction == NW || ray_direction == NE || ray_direction == N)
+			ray->orientation = S;
+		else
+			ray->orientation = N;
+	}
+}
+
 //questa funcione riceve un punto di partenza e un angolo e quindi calcola per un singolo raggio il suo percorso fino a che non incontra un muro
-t_point dda(t_point start_point, double alpha, t_c3d *c3d)
+t_ray dda(t_point start_point, double alpha, t_c3d *c3d)
 {
 	t_ray   ray;
  	initialize_ray(&ray);
@@ -21,8 +39,6 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 		{
 			c3d->player.ray.last_increment = INCREMENT_X;	//per colorare bene in prospettiva....
 			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
-			if(is_it_passing_between_two_walls(&ray, c3d->raw_map.grid,  ray.end_point))
-				break;
 		}
 		else	
 		{
@@ -33,16 +49,8 @@ t_point dda(t_point start_point, double alpha, t_c3d *c3d)
 			break;
 		if (is_it_a_wall(ray.end_point, c3d->raw_map.grid))
 			break;
-		else
-			ray.first_point = ray.end_point;
+		ray.first_point = ray.end_point;
 	}
-	return (ray.end_point);  //da oscurare se attivi la parte sotto
+	enstabilish_orientation(&ray, ray.cardinal_direction, c3d->player.ray.last_increment);
+	return (ray);
 }
-
-/*
-you want to divide FOV / Win_w becouse you will have a ray for evry pixel along the width.
-Doing so you will have an impact point for evry line of x-pixel of your win
-*/
-
-
-
