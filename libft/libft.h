@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:47:15 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/09/09 14:22:26 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:11:25 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdio.h>
 # undef INT_MIN
 # undef INT_MAX
 
 # define INT_MIN -2147483648
 # define INT_MAX 2147483647
+
+# define BUFFER_SIZE 32
 
 typedef struct s_list
 {
@@ -84,6 +87,15 @@ int		ft_put_unsnbr(unsigned int n);
 int		ft_puthex(unsigned int n, char flag);
 long	ft_atol(const char *str);
 char	*ft_strtok(char *str, const char *delim);
-char	*ft_strcpy(char *to_copy);
+size_t	ft_strcpy(char* dest, const char *src);
+void	ft_free_matrix(char **matrix, int len);
+void	ft_free_matrix_3d(char ***matrix);
+void	*ft_safe_malloc(size_t size);
+void	*ft_realloc(void *ptr, size_t size);
+char	*get_next_line(int fd);
+char	get_last(char *str);
+int		is_blank_line(char *line);
+char	*ft_get_extention(char *pathfile);
+
 
 #endif

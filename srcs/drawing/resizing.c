@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   resizing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:48:07 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 16:58:37 by lpennisi         ###   ########.fr       */
+/*   Created: 2024/11/29 11:31:03 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/11/29 11:41:10 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "c3d.h"
 
-char	*ft_strdup(char *src)
+int	on_2d_resize(t_c3d *c3d)
 {
-	char	*dest;
-	int		i;
+    mlx_destroy_image(c3d->mlx_connection, c3d->map.img);
+    create_visualize_2d_map_img(c3d);
+	return (0);
+}
 
-	dest = (char *)malloc(ft_strlen(src) + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = src[i];
-	return (dest);
+int	on_3d_resize(t_c3d *c3d)
+{
+    mlx_destroy_image(c3d->mlx_connection, c3d->scene_3d.img); 
+    draw_3d_scene(c3d);
+	return (0);
 }

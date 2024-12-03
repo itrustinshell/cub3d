@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:05 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 12:31:52 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:54:53 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 void inizialize_map_fm_file(t_map *map)
 {
-	map->data = NULL;
+	map->texture_data = NULL;
+	map->map_data = NULL;
 	map->dimension.h = 0;
 	map->dimension.w = 0;
 	map->grid = NULL;
-	map->x = 0;
-	map->y = 0;
+	map->player_orientation = 0;
+	map->player_position = (t_point){0, 0};
+	map->NO_texture = 0;
+	map->SO_texture = 0;
+	map->WE_texture = 0;
+	map->EA_texture = 0;
+	map->F_color = 0;
+	map->C_color = 0;
 }
 
 void initialize_player(t_player *player)
 {
-	player->direction = M_PI / 2;
-	player->perpendicular_direction = player->direction  - (M_PI / 2);;
-	player->position.x = 160;
-	player->position.y = 90;
-	player->tile = tile_reference(player->position);
+	player->direction = 0;
+	player->perpendicular_direction = 0;
+	player->position.x = 0;
+	player->position.y = 0;
 	player->move.w = 0;
 	player->move.a = 0;
 	player->move.s = 0;
@@ -43,8 +49,8 @@ void initialize_player(t_player *player)
 	player->ray.end_point.x = 0;
 	player->ray.end_point.y = 0;
 	player->fov.angle = FOV_ANGLE;
-	player->fov.half_left = player->direction - (FOV_ANGLE / 2) ;;
-	player->fov.half_right = player->direction + (FOV_ANGLE / 2);;
+	player->fov.half_left = 0;
+	player->fov.half_right = 0;
 	
 }
 void initialize_img(t_img *img)
@@ -84,7 +90,10 @@ void initialize_ray(t_ray *ray)
 void initialization(t_c3d *c3d)
 {
 	initialize_img(&c3d->map);
-	initialize_img(&c3d->texture);
+	initialize_img(&c3d->texture[0]);
+	initialize_img(&c3d->texture[1]);
+	initialize_img(&c3d->texture[2]);
+	initialize_img(&c3d->texture[3]);
 	initialize_player(&c3d->player);
 	initialize_win(&c3d->win_2d);
 	initialize_win(&c3d->win_3d);

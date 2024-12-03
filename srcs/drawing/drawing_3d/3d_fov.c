@@ -1,6 +1,6 @@
 #include "c3d.h"
 
-int get_oriented_texture(int orientation)
+int get_oriented_texture_color(int orientation)
 {
 	if (orientation == N)
 		return (RED);
@@ -10,6 +10,18 @@ int get_oriented_texture(int orientation)
 		return (PINK);
 	else if (orientation == E)
 		return (YELLOW);
+}
+
+int get_orientation_id(int orientation)
+{
+	if (orientation == N)
+		return (0);
+	else if (orientation == S)
+		return (1);
+	else if (orientation == W)
+		return (2);
+	else if (orientation == E)
+		return (3);
 }
 
 /*la seguente funzione:ha l'obiettivo di intercettare i colori della striscie di pixl della texture...
@@ -25,6 +37,7 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 	double max_iteration;
 	double y;
 	double y_min; //questa è la y_min uguale a y che serve per interpolare
+	int texture_id;
 	
 	/*ecco risolto il segfault del while di sotto. in pratica mi sono 
 	accorto che nel while con la funzione put_pixel c'era un segfault.
@@ -48,7 +61,7 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 
 	// if (line_heigth > c3d->win_2d.dimension.h)
 	// 	line_heigth = c3d->win_2d.dimension.h;	
-	y = c3d->win_2d.dimension.w / 2 - (line_heigth / 2); /*questo centra il disegno perch+ prende la 
+	y = c3d->win_2d.dimension.h / 2 - (line_heigth / 2); /*questo centra il disegno perch+ prende la 
 	
 	win e la tagil a meta ...poi prnde la height, la divide a meta ...e la sottrae alla metà delo schermo
 	quindi quando disegn ...una meta arriva alla meta dello schermo e l'altra proseue...essendo cosi a specchiovv*/
@@ -58,9 +71,10 @@ static void draw_3d_wall_height_with_textute_colors(double x_3d, int x_texture, 
 		y = 0;
 	while (y < max_iteration && y < c3d->win_2d.dimension.h)
 	{
-		y_texture = (c3d->texture.img_dimension.h * ( y - y_min) ) / line_heigth; /*interpolazione*/
-		color = get_pixel(&c3d->texture, x_texture, y_texture);
-		color = get_oriented_texture(ray.orientation);
+		texture_id = get_orientation_id(ray.orientation);
+		y_texture = (c3d->texture[texture_id].img_dimension.h * ( y - y_min) ) / line_heigth; /*interpolazione*/
+		color = get_pixel(&c3d->texture[texture_id], x_texture, y_texture);
+		color = get_oriented_texture_color(ray.orientation);
 		// mlx_pixel_put(c3d->mlx_connection, c3d->win_3d.mlx_win, x_3d, y, color);
 		put_pixel(&c3d->scene_3d, x_3d, y, color); /*AAA ora coloro nella scena_3d*/
 		y++;
@@ -78,10 +92,12 @@ void draw_3d_vertical_line(t_c3d *c3d, t_ray ray, double saved_left_half_fov)
 	c3d->player.ray.projection.point = find_two_lines_intersection(c3d->player.position, c3d->player.perpendicular_direction, end_point, c3d->player.direction);
 	/*##TESTING ## per vedere il collegamtno tra punto di impatto e la sua proiezione sull'asse perpendicolare alla direzione
 	del giocatore...tieni scoperto il seguente bresenahm.*/
-	bresenham(c3d, end_point.x, end_point.y, c3d->player.ray.projection.point.x, c3d->player.ray.projection.point.y, GREEN);
+	//if (SHOW_2D)
+	//	bresenham(c3d, end_point.x, end_point.y, c3d->player.ray.projection.point.x, c3d->player.ray.projection.point.y, GREEN);
 	/*##TESTING ## per vedere tutti i puntini delle proiezioni rivela il seguente draw_player*/
-	draw_player(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
-	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->raw_map.dimension.w * TILE_SIZE);
+	// if (SHOW_2D)
+	//	draw_player(c3d,c3d->player.ray.projection.point, RADIUS/2, BLUE);
+	c3d->player.ray.view3d.x_wall_line = find_x_3d(c3d->player.fov.half_left, saved_left_half_fov, c3d->win_3d.dimension.w);
 	x_text = find_x_texture(end_point, c3d->player.ray);
 	c3d->player.ray.projection.length = pitagora_theorem(end_point, c3d->player.ray.projection.point);
 	c3d->player.ray.view3d.height_wall_line = calculate_3d_wall_height(c3d->player);
@@ -119,7 +135,8 @@ void draw_3d_fov(t_c3d *c3d)
 		ray = dda(c3d->player.position, c3d->player.fov.half_left, c3d); /*caldolo punto di impatto del raggio corrente*/
 		/*## TESTING ## se vuoi vedere i raggi sparati che incontrano i muri tieni scoperto
 		il seguente brehenam*/
-		bresenham(c3d, c3d->player.position.x, c3d->player.position.y, ray.end_point.x, ray.end_point.y, PINK);
+		if (SHOW_2D)
+			bresenham(c3d, c3d->player.position.x, c3d->player.position.y, ray.end_point.x, ray.end_point.y, PINK);
 		
 		draw_3d_vertical_line(c3d, ray, saved_left_half_fov);/*disegno la linea 3d corrispondente a quel
 		punto di impatto*/

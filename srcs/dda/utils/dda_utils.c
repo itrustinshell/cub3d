@@ -25,8 +25,15 @@ t_point find_two_lines_intersection(t_point p1, double p1_angle, t_point p2, dou
     double c2;
     double m1;
     double m2;
+	double c;
 
     point_init(&intersection);
+	c = cos(p1_angle);
+	if (c <= PI_FIX && c >= -PI_FIX)
+		p1_angle += PI_FIX;
+	c = cos(p2_angle);
+	if (c  <= PI_FIX && c >= -PI_FIX)
+		p2_angle += PI_FIX;
     m1 = tan(p1_angle);
     m2 = tan(p2_angle);
     c1 = p1.y - (m1 * p1.x);

@@ -14,24 +14,30 @@ int	get_direction(double perpendicular_direction)
 		return (N);
 	if (perpendicular_direction >= 3.5325 && perpendicular_direction < 4.3175)
 		return (NE);
-	if ((perpendicular_direction >= 4.3175 && perpendicular_direction <= 4.71) || \
-		(perpendicular_direction >= -1.57 && perpendicular_direction < -1.1775))
+	if ((perpendicular_direction >= 4.3175 && perpendicular_direction <= 4.713) ||
+		(perpendicular_direction >= -1.571 && perpendicular_direction < -1.1775))
 		return (E);
 	if (perpendicular_direction >= -1.1775 && perpendicular_direction < -0.3925)
 		return (SE);
+	printf("error in get_direction with angle: %f\n", perpendicular_direction);
+	return (0);
 }
 
-int step_management(t_player *player)
+int step_management(t_player *player, int foot_step_decrement)
 {
 	t_move move;
 	t_point *position;
 	int	direction;
 
 	move = player->move;
-	position = &player->position;
-	direction = get_direction(player->perpendicular_direction);
-	move_player_mains(direction, move, position);
-    return ((move.w || move.s || move.a || move.d));
+	if ((move.w || move.s || move.a || move.d))
+	{
+		position = &player->position;
+		direction = get_direction(player->perpendicular_direction);
+		move_player_mains(direction, move, position, foot_step_decrement);
+		return (True);
+	}
+    return (False);
 }
 
 /*this functions save the position of the player in a tmp variable.
@@ -43,19 +49,25 @@ This function is also the occasion to update the tile where the player is in.*/
 int moving(t_c3d *c3d)
 {
 	t_point tmp;
+	int foot_step_decrement;
 
+	foot_step_decrement = 0;
 	tmp.x = c3d->player.position.x;
 	tmp.y = c3d->player.position.y;
-    if (step_management(&c3d->player))
+	while (foot_step_decrement <= FOOT_STEP - 3)
     {
-        if(!is_collision(c3d->player.position.x, c3d->player.position.y, c3d))
-        {
-            c3d->player.tile = tile_reference(c3d->player.position);
-            return (True);
-        }
-    }
-	c3d->player.position.x = tmp.x;
-	c3d->player.position.y = tmp.y;
+		if (step_management(&c3d->player, foot_step_decrement))
+		{
+			if(!is_collision(c3d->player.position.x, c3d->player.position.y, c3d))
+			{
+				c3d->player.tile = tile_reference(c3d->player.position);
+				return (True);
+			}
+		}
+		c3d->player.position.x = tmp.x;
+		c3d->player.position.y = tmp.y;
+		foot_step_decrement++;
+	}
     return (False);
 }
 

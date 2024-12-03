@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:48:07 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 16:58:37 by lpennisi         ###   ########.fr       */
+/*   Created: 2024/02/02 13:27:23 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/04/03 20:52:09 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strdup(char *src)
+char	get_last(char *str)
 {
-	char	*dest;
-	int		i;
+	int	len;
 
-	dest = (char *)malloc(ft_strlen(src) + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = src[i];
-	return (dest);
+	len = ft_strlen(str);
+	if (len)
+		len--;
+	return (str[len]);
 }

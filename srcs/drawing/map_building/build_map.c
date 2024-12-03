@@ -13,82 +13,85 @@ So even if buffer is not completely full..I can know how manu bytes of buffer ha
 This means that I can put a null terminator exactly at the end of the reading. With buffer[read_bytes] = \0
  */
 
-char	*read_the_map(char *file_path)
-{
-	int	fd;
-	int	read_bytes;
-	int	total_size;
-	int	buffer_size;
-	char 	buffer[1024];	
-	char	*content_file;
-	char 	*reallocated_reading;
-	
-	total_size = 0;
-	buffer_size = 1024;
-	content_file = malloc(1);
-	content_file[0] = '\0';
-	fd = open(file_path, O_RDONLY);
+char *read_texture_data(int fd) {
+    char *line;
+    char *content_file;
+    char *temp;
+    size_t total_size = 0;
+	int i;
 
-	while((read_bytes = read(fd, buffer, buffer_size - 1)) > 0)
-	{
-		buffer[read_bytes] = '\0';
-		total_size += read_bytes;
-		/* ora ho quanti byte ho letto e un buffer pieno di questi elementi.
-
-		questo bufferlo posso coipare altrove cosi che non lo perdo.. 
-		a tal proposito mi sono fatto un char *content_file. che man mano verra' popolato 
-		dei nuovi buffer letti.
-	
-		rialloco content_file..aumentando la sua dimensione della lettura fatta...
-		cosi poi posso ineserire appunto la lettura fatta + un null terminaitor..
-		ma attenzione io non devo aumentare degli ultimi bytes_letti...
-		io di volta in volta devo allocare dell dimensione totale fin qui letta...
-		quinid dovò avere una variabile che mi tiene il conto tale..*/
-		reallocated_reading = realloc(content_file, total_size);
-		content_file = reallocated_reading;
-		content_file[total_size] = '\0';
-		strcat(content_file, buffer);
-	}
-	close(fd);
-	return (content_file);
-}
-
-void	get_map_dimensions(char *file_content, int *w, int *height)
-{
-	int	i;
-	int	current_width;
+    content_file = ft_safe_malloc(1);
+    content_file[0] = '\0';
 	i = 0;
-	current_width = 0;
-	*w = 0;
-	*height = 0;
-
-	if (file_content)
-		*height = 1;
-	
-	while (file_content[i])
-	{
-		if (file_content[i] == '\n')
+    while (i < 6) {
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		if (is_blank_line(line))
 		{
-			*height = *height + 1;
-			//ricorda che quella riga potrebbe essere piu corta della precedente quindi la larghezza della mappa deve esser quella più lunga trovata sin ora.
-			if (*w < current_width)
-			{
-				*w = current_width;
-				current_width = 0;
-			}
-			else
-				current_width = 0;
+			free(line);
+			continue;
 		}
-		else
-			current_width++;
+        content_file = ft_strjoin_free(content_file, line, 3);
 		i++;
-	}
+    }
+    return content_file;
 }
 
+char *read_map_data(t_c3d *c3d, int fd) {
+    char *line;
+    char *content_file;
+    char *temp;
+    size_t total_size = 0;
+	int i;
+	int	before_content;
+	int blank_line_after_content;
+
+    content_file = ft_safe_malloc(1);
+    content_file[0] = '\0';
+	i = -1;
+	before_content = 1;
+	blank_line_after_content = 0;
+    while (1) {
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		if (is_blank_line(line))
+		{
+			free(line);
+			if (!before_content)
+				blank_line_after_content = 1;
+			continue;
+		}
+		if (blank_line_after_content)
+			error_exit(c3d, INVALID_MAP);
+		before_content = 0;
+        content_file = ft_strjoin_free(content_file, line, 3);
+    }
+    return content_file;
+}
 
 void build_map(char *path, t_c3d *c3d)	
 {	
-	c3d->raw_map.data = read_the_map(path);
-	get_map_dimensions(c3d->raw_map.data, &c3d->raw_map.dimension.w, &c3d->raw_map.dimension.h);
-	c3d->raw_map.grid = get_map_from_file(c3d->raw_map.data, c3d->raw_map.dimension.w, c3d->raw_map.dimension.h);
+	int		fd;
+	char	*ext;
+
+	ext = ft_get_extention(path);
+	if (ext)
+	{
+		if (ft_strcmp(ext,"cub"))
+		{
+			free(ext);
+			error_exit(c3d, INVALID_MAP);
+		}
+		free(ext);
+	}
+	if (access(path, F_OK) == -1)
+		error_exit(c3d, INVALID_PATH);
+    fd = open(path, O_RDONLY);
+    if (fd == -1)
+        error_exit(c3d, FILE_READ_ERROR);
+	c3d->raw_map.texture_data = read_texture_data(fd);
+	c3d->raw_map.map_data = read_map_data(c3d, fd);
+	parse_and_check(c3d);
 }

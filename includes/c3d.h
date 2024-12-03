@@ -10,10 +10,19 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define PATH_TO_TEXTURE "res/texture/muro.xpm"
+#define SHOW_2D 1
 
-//Error messages
-#define INVALID_PARAMS "The only allowed parameter is the path of the map!\nUsage:\n./cub3d <map_path>\n"
+// Error messages
+#define INVALID_PATH "Error\nInvalid path!\n"
+#define INVALID_PARAMS "Error\nThe only allowed parameter is the path of the map with .cub extension!\nUsage:\n./cub3d <map_path>\n"
+#define INVALID_MAP "Error\nInvalid map!\n"
+#define MAP_NOT_CLOSED "Error\nThe map must be closed/surrounded by walls!\n"
+#define INVALID_CHARACTER "Error\nThe map must contains: only 'space', '0', '1', and one of 'N', 'S', 'E', 'W'.\n"
+#define INVALID_TEXTURE_PATH "Error\nInvalid texture path!\n"
+#define INVALID_COLOR_FORMAT "Error\nInvalid color format! Colors must be in the format R,G,B with values in the range [0,255].\n"
+#define MISSING_INFORMATION "Error\nMissing texture or color information!\n"
+#define INVALID_ELEMENT_ORDER "Error\nInvalid element order! The map content must be the last element in the file.\n"
+#define FILE_READ_ERROR "Error\nAn error occurred while reading the file!\n"
 
 //aaa rimpiazza strcat e altre di libft
 //attanziena realloc
@@ -58,7 +67,8 @@
 
 //angles utils
 #define M_PI 3.14159265358979323846
-#define DEGREE 2 * M_PI / 150
+#define PI_FIX 0.00000001
+#define DEGREE 2 * M_PI / 80
 
 //checks pint on the circumference when the player is at the center of a circumference
 #define CIRCUMFERENCE_CHECKS 8
@@ -68,11 +78,11 @@
 
 //player charactieristics .........AAAAAAAAAAAAA
 #define RAY_LENGTH RADIUS * 8
-#define FOOT_STEP 1
-#define RADIUS 10
+#define FOOT_STEP 5
+#define RADIUS 2
 
 //camera
-
+// fixa fish eye con varie texture, freea tutto
 #define CAMERA_DISTANCE RADIUS * 10
 #define FOV_ANGLE (M_PI / 2.5)
 
@@ -80,7 +90,7 @@
 #define SCALE_FACTOR 10000 //for projection
 
 // 3D Resolution
-#define NUM_OF_RAYS 641
+#define NUM_OF_RAYS 1000
 
 typedef struct s_dimension
 {
@@ -95,28 +105,41 @@ typedef struct s_win
 	t_dimension dimension;
 } t_win;
 
-typedef struct s_color
-{
-	char	c;
-	int		color;
-} t_color;
+// typedef struct s_color
+// {
+// 	char	c;
+// 	int		color;
+// } t_color;
 
-typedef struct s_my_texture
-{
-	t_dimension dimension;
-	char	*data_addr;
-	int how_many_colors;
-	t_color	color;
+// typedef struct s_my_texture
+// {
+// 	t_dimension dimension;
+// 	char	*data_addr;
+// 	int how_many_colors;
+// 	t_color	color;
 
-} t_my_texture;
+// } t_my_texture;
+
+typedef struct	s_point
+{
+	double	x;
+	double	y;
+} t_point;
 
 typedef struct s_map
 {
-	char	*data;
+	char	*texture_data;
+	char	*map_data;
 	t_dimension dimension;
 	char	**grid;
-	int		x;
-	int		y;
+	t_point		player_position;
+	int			player_orientation;
+	char		*NO_texture;
+	char		*SO_texture;
+	char		*WE_texture;
+	char		*EA_texture;
+	char		*F_color;
+	char		*C_color;
 } t_map;
 
 typedef struct s_img
@@ -128,12 +151,6 @@ typedef struct s_img
 	int			endian;
 	t_dimension	img_dimension;
 }	t_img;
-
-typedef struct	s_point
-{
-	double	x;
-	double	y;
-} t_point;
 
 typedef struct s_fov
 {
@@ -200,17 +217,17 @@ typedef struct s_c3d
 	t_win		win_3d;
 	t_map		raw_map;
 	t_img		map;
-	t_img		texture;
+	t_img		texture[4];
 	t_img		scene_3d;
-	t_img		ceil;
-	t_img		floor;
+	// t_img		ceil;
+	// t_img		floor;
 	t_player	player;
 } t_c3d;
 
 int	get_direction(double perpendicular_direction);
 //texture
 int		find_x_texture(t_point impact_point, t_ray ray);
-void	set_texture(t_img *texture, void *mlx_connection);
+void	set_texture(t_c3d *c3d);
 
 //closing
 int		on_destroy(t_c3d *c3d);
@@ -232,6 +249,7 @@ char	*read_the_map(char *file_path);
 void	get_map_dimensions(char * file_content, int *width, int *height);
 char	**get_map_from_file(char *file_content, int width, int height);
 void	build_map(char *path, t_c3d *c3d);
+void	parse_and_check(t_c3d *c3d);
 
 //initializing
 void	initialization(t_c3d *c3d);
@@ -270,17 +288,20 @@ void	draw_ceiling(t_c3d *c3d);
 void	draw_3d_fov(t_c3d *c3d);
 void	draw_3d_scene(t_c3d *c3d);
 void	drawing_routine(t_c3d *c3d);
+int		on_2d_resize(t_c3d *c3d);
+int		on_3d_resize(t_c3d *c3d);
 
 //moving;
 int		mov_key_press(int keycode, void *param);
 int		mov_key_release(int keycode, void *param);
 int		update_position(void *param);
-void	move_player_mains(int direction, t_move move, t_point *position);
-void	move_player_oblq(int direction, t_move move, t_point *position);
+void	move_player_mains(int direction, t_move move, t_point *position, int step_decr);
+void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr);
 int		update_alpha_rotation(void *param);
 int		update_movement(void *param);
 int		is_collision(double player_next_x, double player_next_y, t_c3d *c3d); 
 t_point	tile_reference(t_point point);
+void	set_player_orientation(t_c3d *c3d);
 
 //testing
 void	draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d);

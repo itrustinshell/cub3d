@@ -81,7 +81,7 @@ double calculate_3d_wall_height(t_player player)
 	double center_distance;
 	
 	line_height = ((SCALE_FACTOR) / player.ray.projection.length);
-	line_height *= (1 - line_height * 0.00027);
+	line_height *= (1 - line_height * 0.0001);
 	return (line_height);
 }
 

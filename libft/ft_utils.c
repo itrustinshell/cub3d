@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:48:07 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 16:58:37 by lpennisi         ###   ########.fr       */
+/*   Created: 2024/11/30 13:29:24 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/11/30 14:21:56 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+int	is_blank_line(char *line)
 {
-	char	*dest;
-	int		i;
+	int i;
 
-	dest = (char *)malloc(ft_strlen(src) + 1);
-	if (!dest)
-		return (NULL);
 	i = 0;
-	while (src[i] != '\0')
+	while (line[i])
 	{
-		dest[i] = src[i];
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (0);
 		i++;
 	}
-	dest[i] = src[i];
-	return (dest);
+	return (1);
 }

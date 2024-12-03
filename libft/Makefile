@@ -1,5 +1,10 @@
 NAME = libft.a
 
+CC		= gcc
+RM		= rm -rf
+
+CFLAGS = -Wall -Wextra -Werror -g
+
 SRCS = ft_isdigit.c ft_memset.c ft_strjoin.c ft_strtrim.c ft_isprint.c \
 		ft_putchar_fd.c ft_strlcat.c ft_substr.c ft_atoi.c ft_itoa.c ft_putendl_fd.c \
 		ft_strlcpy.c ft_tolower.c ft_bzero.c ft_putnbr_fd.c ft_strlen.c \
@@ -9,24 +14,20 @@ SRCS = ft_isdigit.c ft_memset.c ft_strjoin.c ft_strtrim.c ft_isprint.c \
 		ft_printf.c prntf_num_utils.c prntf_ptr_utils.c prntf_utils.c \
 		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_strcpy.c\
 		ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_atol.c \
+		ft_alloc.c gnl/get_next_line.c gnl/get_next_line_utils.c ft_utils.c ft_get_extention.c\
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-CC		= gcc
-RM		= rm -rf
-
-CFLAGS = -Wall -Wextra -Werror -g
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all:	${NAME}
 
-$(NAME):	${OBJS}
-			ar rcs ${NAME} ${OBJS}
+$(NAME): ${OBJS}
+	ar rcs ${NAME} ${OBJS}
 			
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $(OBJDIR)
-	${CC} ${CFLAGS} -c $< -o $@
-
 clean:
 		${RM} ${OBJDIR}
 		${RM} ${OBJS}

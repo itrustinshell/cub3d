@@ -6,116 +6,116 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:00:44 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/27 14:59:43 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:32:22 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c3d.h"
 
-void	move_face_north_east(t_move move, t_point *position)
+void	move_face_north_east(t_move move, t_point *position, int step_decr)
 {
 	if (move.w)
 	{
-		position->y -= FOOT_STEP;
-		position->x += FOOT_STEP;
+		position->y -= (FOOT_STEP - step_decr);
+		position->x += (FOOT_STEP - step_decr);
 	}
 	if (move.s)
 	{
-		position->y += FOOT_STEP;
-		position->x -= FOOT_STEP;
+		position->y += (FOOT_STEP - step_decr);
+		position->x -= (FOOT_STEP - step_decr);
 	}
 	if (move.a)
 	{
-		position->x -= FOOT_STEP;
-		position->y -= FOOT_STEP;
+		position->x -= (FOOT_STEP - step_decr);
+		position->y -= (FOOT_STEP - step_decr);
 	}
 	if (move.d)
 	{
-		position->x += FOOT_STEP;
-		position->y += FOOT_STEP;
+		position->x += (FOOT_STEP - step_decr);
+		position->y += (FOOT_STEP - step_decr);
 	}
 }
 
-void	move_face_north_west(t_move move, t_point *position)
+void	move_face_north_west(t_move move, t_point *position, int step_decr)
 {
 	if (move.w)
 	{
-		position->y -= FOOT_STEP;
-		position->x -= FOOT_STEP;
+		position->y -= (FOOT_STEP - step_decr);
+		position->x -= (FOOT_STEP - step_decr);
 	}
 	if (move.s)
 	{
-		position->y += FOOT_STEP;
-		position->x += FOOT_STEP;
+		position->y += (FOOT_STEP - step_decr);
+		position->x += (FOOT_STEP - step_decr);
 	}
 	if (move.a)
 	{
-		position->x -= FOOT_STEP;
-		position->y += FOOT_STEP;
+		position->x -= (FOOT_STEP - step_decr);
+		position->y += (FOOT_STEP - step_decr);
 	}
 	if (move.d)
 	{
-		position->x += FOOT_STEP;
-		position->y -= FOOT_STEP;
+		position->x += (FOOT_STEP - step_decr);
+		position->y -= (FOOT_STEP - step_decr);
 	}
 }
 
-void	move_face_south_east(t_move move, t_point *position)
+void	move_face_south_east(t_move move, t_point *position, int step_decr)
 {
 	if (move.w)
 	{
-		position->y += FOOT_STEP;
-		position->x += FOOT_STEP;
+		position->y += (FOOT_STEP - step_decr);
+		position->x += (FOOT_STEP - step_decr);
 	}
 	if (move.s)
 	{
-		position->y -= FOOT_STEP;
-		position->x -= FOOT_STEP;
+		position->y -= (FOOT_STEP - step_decr);
+		position->x -= (FOOT_STEP - step_decr);
 	}
 	if (move.a)
 	{
-		position->x += FOOT_STEP;
-		position->y -= FOOT_STEP;
+		position->x += (FOOT_STEP - step_decr);
+		position->y -= (FOOT_STEP - step_decr);
 	}
 	if (move.d)
 	{
-		position->x -= FOOT_STEP;
-		position->y += FOOT_STEP;
+		position->x -= (FOOT_STEP - step_decr);
+		position->y += (FOOT_STEP - step_decr);
 	}
 }
 
-void	move_face_south_west(t_move move, t_point *position)
+void	move_face_south_west(t_move move, t_point *position, int step_decr)
 {
 	if (move.w)
 	{
-		position->y += FOOT_STEP;
-		position->x -= FOOT_STEP;
+		position->y += (FOOT_STEP - step_decr);
+		position->x -= (FOOT_STEP - step_decr);
 	}
 	if (move.s)
 	{
-		position->y -= FOOT_STEP;
-		position->x += FOOT_STEP;
+		position->y -= (FOOT_STEP - step_decr);
+		position->x += (FOOT_STEP - step_decr);
 	}
 	if (move.a)
 	{
-		position->x += FOOT_STEP;
-		position->y += FOOT_STEP;
+		position->x += (FOOT_STEP - step_decr);
+		position->y += (FOOT_STEP - step_decr);
 	}
 	if (move.d)
 	{
-		position->x -= FOOT_STEP;
-		position->y -= FOOT_STEP;
+		position->x -= (FOOT_STEP - step_decr);
+		position->y -= (FOOT_STEP - step_decr);
 	}
 }
 
-void	move_player_oblq(int direction, t_move move, t_point *position)
+void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr)
 {
 	if (direction == NE)
-		move_face_north_east(move, position);
+		move_face_north_east(move, position, step_decr);
 	else if (direction == NW)
-		move_face_north_west(move, position);
+		move_face_north_west(move, position, step_decr);
 	else if (direction == SE)
-		move_face_south_east(move, position);
+		move_face_south_east(move, position, step_decr);
 	else if (direction == SW)
-		move_face_south_west(move, position);
+		move_face_south_west(move, position, step_decr);
 }

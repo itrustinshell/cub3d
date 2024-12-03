@@ -1,27 +1,5 @@
 #include "c3d.h"
 
-static void	test_draw_map(char **map, int width, int heigth)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	//printf("start a new stamp\n");
-	while(y < heigth)
-	{
-		x = 0;
-		while(x < width)
-		{
-			printf("%c", map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("finish stamp\n");
-}
-
 char	**get_map_from_file(char *file_content, int width, int height)
 {
 	char	**map;
@@ -100,6 +78,5 @@ char	**get_map_from_file(char *file_content, int width, int height)
 		}
 		y++;
 	}
-	//test_draw_map(map, width, height);
 	return (map);
 }

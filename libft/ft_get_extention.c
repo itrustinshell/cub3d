@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_get_extention.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:48:07 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 16:58:37 by lpennisi         ###   ########.fr       */
+/*   Created: 2024/12/03 16:11:00 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/12/03 16:11:28 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+char	*ft_get_extention(char *pathfile)
 {
-	char	*dest;
+	char	**words;
+	char	*ext;
 	int		i;
 
-	dest = (char *)malloc(ft_strlen(src) + 1);
-	if (!dest)
-		return (NULL);
 	i = 0;
-	while (src[i] != '\0')
+	ext = NULL;
+	words = ft_split(pathfile, '.');
+	while (words[i])
 	{
-		dest[i] = src[i];
+		if (ext)
+			free(ext);
+		ext = ft_strdup(words[i]);
+		free(words[i]);
 		i++;
 	}
-	dest[i] = src[i];
-	return (dest);
+	free(words);
+	return (ext);
 }
