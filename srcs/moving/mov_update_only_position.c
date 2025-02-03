@@ -35,9 +35,9 @@ int step_management(t_player *player, int foot_step_decrement)
 		position = &player->position;
 		direction = get_direction(player->perpendicular_direction);
 		move_player_mains(direction, move, position, foot_step_decrement);
-		return (True);
+		return (TRUE);
 	}
-    return (False);
+    return (FALSE);
 }
 
 /*this functions save the position of the player in a tmp variable.
@@ -61,14 +61,14 @@ int moving(t_c3d *c3d)
 			if(!is_collision(c3d->player.position.x, c3d->player.position.y, c3d))
 			{
 				c3d->player.tile = tile_reference(c3d->player.position);
-				return (True);
+				return (TRUE);
 			}
 		}
 		c3d->player.position.x = tmp.x;
 		c3d->player.position.y = tmp.y;
 		foot_step_decrement++;
 	}
-    return (False);
+    return (FALSE);
 }
 
 /*

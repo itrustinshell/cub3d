@@ -1,72 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sidePoint.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 18:01:28 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/12/07 18:11:22 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
 
-static void	angle_normalization(double *angle)
+static t_point	get_side_point_ne_e(t_point tile_ref)
 {
-	while (*angle < 0)
-		*angle = *angle + 2 * M_PI;
-    while (*angle >= 2 * M_PI) 
-		*angle =  *angle - 2 * M_PI;
+	t_point	side_point;
+
+	side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
+	side_point.y = (int)tile_ref.y * TILE_SIZE;
+	return (side_point);
 }
 
-int get_cardinal_direction(double angle)
+static t_point	get_side_point_nw_w_n(t_point tile_ref)
 {
-    int cardinal_direction; 
+	t_point	side_point;
 
-	angle_normalization(&angle);
-	cardinal_direction = BLACK;
-    if (fabs(angle - 0) < EPSILON || fabs(angle - 2 * M_PI) < EPSILON)
-        cardinal_direction = E;
-    else if (fabs(angle - M_PI) < EPSILON)
-        cardinal_direction = W;
-    else if (fabs(angle - M_PI / 2) < EPSILON)
-        cardinal_direction = S;
-    else if (fabs(angle - (3 * M_PI) / 2) < EPSILON)
-        cardinal_direction = N;
-    else if (angle > 0 && angle < M_PI / 2)
-        cardinal_direction = SE;
-    else if (angle > M_PI / 2 && angle < M_PI)
-        cardinal_direction = SW;
-    else if (angle > M_PI && angle < (3 * M_PI) / 2)
-        cardinal_direction = NW;
-    else if (angle > (3 * M_PI) / 2 && angle < 2 * M_PI)
-        cardinal_direction = NE;
-    return cardinal_direction;
+	side_point.x = (int)tile_ref.x * TILE_SIZE;
+	side_point.y = (int)tile_ref.y * TILE_SIZE;
+	return (side_point);
 }
 
-/*this function chose the side of the tile, and consequently the point 
-according to angle_direction. This is useful to get the later the distance
-dx and dy from that side.
-*/
-t_point chose_side_point(t_point first_point, int cardinal_direction)
+static t_point	get_side_point_se(t_point tile_ref)
 {
-	t_point tile_ref;
-	tile_ref.x = 0;
-	tile_ref.y = 0;
+	t_point	side_point;
 
-	t_point side_point;
-	side_point.x = 0;
-	side_point.y = 0;
+	side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
+	side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
+	return (side_point);
+}
+
+static t_point	get_side_point_sw_s(t_point tile_ref)
+{
+	t_point	side_point;
+
+	side_point.x = (int)tile_ref.x * TILE_SIZE;
+	side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
+	return (side_point);
+}
+
+t_point	chose_side_point(t_point first_point, int cardinal_direction)
+{
+	t_point	tile_ref;
 
 	tile_ref = tile_reference(first_point);
-	if (cardinal_direction == NE || cardinal_direction == E || cardinal_direction == 0)
-	{
-		side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
-		side_point.y = (int)tile_ref.y * TILE_SIZE;
-	}
-	else if (cardinal_direction == NW || cardinal_direction == W || cardinal_direction == N)
-	{
-		side_point.x = (int)tile_ref.x * TILE_SIZE;
-		side_point.y = (int)tile_ref.y * TILE_SIZE;
-	}
+	if (cardinal_direction == NE || cardinal_direction == E \
+	|| cardinal_direction == 0)
+		return (get_side_point_ne_e(tile_ref));
+	else if (cardinal_direction == NW || cardinal_direction == W \
+	|| cardinal_direction == N)
+		return (get_side_point_nw_w_n(tile_ref));
 	else if (cardinal_direction == SE)
-	{
-		side_point.x = ((int)tile_ref.x + 1) * TILE_SIZE;
-		side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
-	}
+		return (get_side_point_se(tile_ref));
 	else if (cardinal_direction == SW || cardinal_direction == S)
-	{
-		side_point.x = (int)tile_ref.x * TILE_SIZE;
-		side_point.y = ((int)tile_ref.y + 1) * TILE_SIZE;
-	}
-	return (side_point);
+		return (get_side_point_sw_s(tile_ref));
+	return ((t_point){0, 0});
 }

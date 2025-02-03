@@ -2,7 +2,7 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -I$(MLXDIR) -Iincludes -I$(LIBFTDIR) -g #-fsanitize=address #-Wall -Wextra -Werror
 
-MAP_PATH = res/maps/subject.cub
+MAP_PATH = res/maps/matrix_corridor.cub
 EXE = $(NAME) $(MAP_PATH)
 
 LIBFTDIR = ./libft
@@ -23,7 +23,9 @@ SRCS = 	srcs/main.c \
 		srcs/drawing/drawing_3d/3d_fov.c srcs/drawing/drawing_3d/3d_scene.c \
 		srcs/drawing/map_building/build_map.c srcs/drawing/map_building/get_map_from_file.c srcs/drawing/map_building/build_map_utils.c\
 		srcs/dda/dda.c srcs/dda/delta_path_point.c srcs/dda/sidePoint.c \
-		srcs/dda/utils/dda_utils.c srcs/dda/utils/dda_checks.c
+		srcs/dda/utils/dda_utils.c srcs/dda/utils/dda_checks.c srcs/dda/utils/direction.c \
+		srcs/drawing/map_building/check_map_closed.c srcs/drawing/map_building/check_map_closed2.c \
+		srcs/drawing/map_building/check_utils.c srcs/drawing/map_building/check_utils2.c 
 		
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

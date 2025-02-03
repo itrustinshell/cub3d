@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:35:07 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/29 15:47:24 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:49:39 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,19 @@ void	*ft_safe_malloc(size_t size)
 	return (ret);
 }
 
-void	*ft_realloc(void *ptr, size_t size) {
+void	*ft_realloc(void *ptr, size_t size)
+{
 	void	*ret;
 
 	if (ptr == NULL)
 	{
 		ret = ft_safe_malloc(size);
-		return ret;
+		return (ret);
 	}
 	if (size == 0)
 		return (free(ptr), NULL);
 	ret = ft_safe_malloc(size);
 	ft_memcpy(ret, ptr, size);
 	free(ptr);
-	return ret;
+	return (ret);
 }

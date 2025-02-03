@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 13:29:24 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/11/30 14:21:56 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:51:08 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_blank_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])

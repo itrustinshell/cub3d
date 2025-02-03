@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:34:10 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 18:24:15 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:42:58 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	set_texture(t_c3d *c3d)
     che saranno associate alle texture. 
     Questo significa che non dovrai impostare tu le dimensioni.*/
 	
-	c3d->texture[0].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.NO_texture, &c3d->texture[0].img_dimension.w, &c3d->texture[0].img_dimension.h);
+	c3d->texture[0].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.no_texture, &c3d->texture[0].img_dimension.w, &c3d->texture[0].img_dimension.h);
     c3d->texture[0].data_addr = mlx_get_data_addr(c3d->texture[0].img, &c3d->texture[0].bits_per_pixel, &c3d->texture[0].size_line, &c3d->texture[0].endian);
-	c3d->texture[1].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.SO_texture, &c3d->texture[1].img_dimension.w, &c3d->texture[1].img_dimension.h);
+	c3d->texture[1].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.so_texture, &c3d->texture[1].img_dimension.w, &c3d->texture[1].img_dimension.h);
     c3d->texture[1].data_addr = mlx_get_data_addr(c3d->texture[1].img, &c3d->texture[1].bits_per_pixel, &c3d->texture[1].size_line, &c3d->texture[1].endian);
-	c3d->texture[2].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.WE_texture, &c3d->texture[2].img_dimension.w, &c3d->texture[2].img_dimension.h);
+	c3d->texture[2].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.we_texture, &c3d->texture[2].img_dimension.w, &c3d->texture[2].img_dimension.h);
     c3d->texture[2].data_addr = mlx_get_data_addr(c3d->texture[2].img, &c3d->texture[2].bits_per_pixel, &c3d->texture[2].size_line, &c3d->texture[2].endian);
-	c3d->texture[3].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.EA_texture, &c3d->texture[3].img_dimension.w, &c3d->texture[3].img_dimension.h);
+	c3d->texture[3].img = mlx_xpm_file_to_image(c3d->mlx_connection, c3d->raw_map.ea_texture, &c3d->texture[3].img_dimension.w, &c3d->texture[3].img_dimension.h);
     c3d->texture[3].data_addr = mlx_get_data_addr(c3d->texture[3].img, &c3d->texture[3].bits_per_pixel, &c3d->texture[3].size_line, &c3d->texture[3].endian);
 }
 

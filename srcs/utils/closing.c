@@ -10,23 +10,23 @@ void free_raw_map(t_c3d *c3d) {
     if (c3d->raw_map.grid) {
         ft_free_matrix(c3d->raw_map.grid, -1);
     }
-    if (c3d->raw_map.NO_texture) {
-        free(c3d->raw_map.NO_texture);
+    if (c3d->raw_map.no_texture) {
+        free(c3d->raw_map.no_texture);
     }
-    if (c3d->raw_map.SO_texture) {
-        free(c3d->raw_map.SO_texture);
+    if (c3d->raw_map.so_texture) {
+        free(c3d->raw_map.so_texture);
     }
-    if (c3d->raw_map.WE_texture) {
-        free(c3d->raw_map.WE_texture);
+    if (c3d->raw_map.we_texture) {
+        free(c3d->raw_map.we_texture);
     }
-    if (c3d->raw_map.EA_texture) {
-        free(c3d->raw_map.EA_texture);
+    if (c3d->raw_map.ea_texture) {
+        free(c3d->raw_map.ea_texture);
     }
-    if (c3d->raw_map.F_color) {
-        free(c3d->raw_map.F_color);
+    if (c3d->raw_map.f_color) {
+        free(c3d->raw_map.f_color);
     }
-    if (c3d->raw_map.C_color) {
-        free(c3d->raw_map.C_color);
+    if (c3d->raw_map.c_color) {
+        free(c3d->raw_map.c_color);
     }
 }
 

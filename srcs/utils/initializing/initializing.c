@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:05 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/02 19:54:53 by lpennisi         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:43:20 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void inizialize_map_fm_file(t_map *map)
 	map->grid = NULL;
 	map->player_orientation = 0;
 	map->player_position = (t_point){0, 0};
-	map->NO_texture = 0;
-	map->SO_texture = 0;
-	map->WE_texture = 0;
-	map->EA_texture = 0;
-	map->F_color = 0;
-	map->C_color = 0;
+	map->no_texture = 0;
+	map->so_texture = 0;
+	map->we_texture = 0;
+	map->ea_texture = 0;
+	map->f_color = 0;
+	map->c_color = 0;
 }
 
 void initialize_player(t_player *player)
