@@ -36,8 +36,10 @@ void put_pixel(t_img *img, int x, int y, int color)
    	*pixel = color;
 }
 
-void bresenham(t_c3d *c3d, int x0, int y0, int x1, int y1, int color) 
+void bresenham(t_c3d *c3d, int x1, int y1, int color) 
 {
+	int x0 = c3d->player.position.x;
+	int y0 = c3d->player.position.y;
 	int dx = abs(x1 - x0);
 	int dy = abs(y1 - y0);
 	int sx, sy;

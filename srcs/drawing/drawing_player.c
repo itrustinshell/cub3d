@@ -35,7 +35,7 @@ void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, int color)
 	
 	x1 = x0 + RAY_LENGTH * cos(alpha);
 	y1 = y0 + RAY_LENGTH * sin(alpha);
-	bresenham(c3d, x0, y0, x1, y1, color);
+	bresenham(c3d, x1, y1, color);
 }
 
 void	draw_player_in_img(t_c3d *c3d)
