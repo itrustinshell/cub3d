@@ -1,18 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_from_file.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/03 19:00:50 by lpennisi          #+#    #+#             */
+/*   Updated: 2025/02/03 19:01:42 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
+
+char	**allocate_map(int width, int height);
+void	fill_map(char **map, char *file_content, int width, int height);
 
 char	**get_map_from_file(char *file_content, int width, int height)
 {
 	char	**map;
-	int	x;
-	int	y;
-	int	i;
-	int j;
-	(void)file_content;
-	x = 0;
-	y = 0,
-	j = 0;
-	i = 0;
+
+	map = allocate_map(width, height);
+	fill_map(map, file_content, width, height);
+	return (map);
+}
+
+char	**allocate_map(int width, int height)
+{
+	char	**map;
+	int		i;
+	int		j;
+
 	map = (char **)malloc((height + 1) * sizeof(char *));
+	i = 0;
 	while (i < height)
 	{
 		map[i] = (char *)malloc((width + 1) * sizeof(char));
@@ -22,41 +41,24 @@ char	**get_map_from_file(char *file_content, int width, int height)
 			map[i][j] = ' ';
 			j++;
 		}
-		map[i][j] = '\0'; 
+		map[i][width] = '\0';
 		i++;
 	}
 	map[height] = NULL;
-	
-	/*
-	sono arrivato a questa funzione effettuando molte prove
-	di seguito la spiegazione dettagliata
-	*/
+	return (map);
+}
+
+void	fill_map(char **map, char *file_content, int width, int height)
+{
+	int	x;
+	int	y;
+	int	i;
+
 	i = 0;
-	//mentre y è minore di height. se h è 10 significa che
-	//ci sono 10 righe e ovviamente qii si dice miore di 10
-	//perchè 10 righe sono rappresentate da 9 digits 
-	//in una numerazione che parte da zero
+	y = 0;
 	while (y < height)
 	{
-		//qui la x riparte sempre da capo
 		x = 0;
-		/*alla fine ho optato per questa condizione
-		perchè fornive più garanzie. Quando ho malloccato la mappa
-		ho fatto in modo di azzerare il garbage impostanto un 
-		valore di fondo ' ' e poi ho messo un null terminator.
-		quindi tutte le righe hanno un null terminator. E quindi posso 
-		meglio gestirle facendo riferimento al loro null terminator
-		sia cheiaro che terminao tute allo stesso punto.
-		Ora però c'è da riflettere sullo stringone che gestisco, ovvero
-		il file_contnt. Ebbene questo chiaramente ha menomeoria 
-		rispetto a quella del malloc fatto con map. 
-		quando lo vedo stampato in un file.cub posso vedere che
-		alcune righe vanno a capo prima. hanno cioè uno \n.
-		questo dovrò gestirlo nella map...allora so che le righe hanno tutte
-		uguale lunghezza e che finiscono con null terminator.
-		a questo punto devo solo intercettare, riga per riga
-		il \n. Quando lo becco da quel momento faccio teminare la righa della mappa
-		fino allo \0....e salto letterlamente lo \n della stringa file_content.*/
 		while (map[y][x])
 		{
 			if (file_content[i] != '\n')
@@ -65,18 +67,10 @@ char	**get_map_from_file(char *file_content, int width, int height)
 				while (map[y][x])
 					x++;
 			i++;
-			x++;
-			/*questo era un passaggio che non riuscivo a trovare
-			dopo che ho aumentato la x potrei torivarmi in una condizione 
-			particolare. ovvero quella in cui la x è il \0 della map
-			ebbene se quando ho questo \0, ho anche la \n sul
-			file_content, allora semplicemente devo skippare in questo momento
-			la \n, altrimenti quando riparte da capo la riga successiva
-			mi ritrovo la n\ stampata nella nuova riga della map.*/
 			if (file_content[i] == '\n' && !map[y][x])
 				i++;
+			x++;
 		}
 		y++;
 	}
-	return (map);
 }

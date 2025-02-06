@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:58:33 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 17:32:26 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:17:04 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	move_face_west(t_move move, t_point *position, int step_decr)
 		position->y -= (FOOT_STEP - step_decr);
 }
 
-void	move_player_mains(int direction, t_move move, t_point *position, int step_decr)
+void	move_player_mains(int direction, t_move move, \
+t_point *position, int step_decr)
 {
 	if (direction == N)
 		move_face_north(move, position, step_decr);

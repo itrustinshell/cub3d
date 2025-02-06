@@ -1,54 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 16:35:54 by lpennisi          #+#    #+#             */
+/*   Updated: 2025/02/06 16:36:24 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
 
 /*questa funzione è inutilizzata...serve per scopi di testing.
-se vuoi usarla la inserisci al posto di draw_3d_wall_height_with_textute_colors.
+se vuoi usarla la inserisc al posto di draw_3d_wall_height_with_textute_colors.
 quindi va inserita nell'ambito di visualize_3d.
-In ogni caso questa funione ha lo scopo di disegnare le linee verticali nella mappa 3d.
-ma adifferenza dell'altra funzione, non va a prendere i colori dalla texture, bensi 
+In ogni caso questa funione ha lo scopo di disegnare
+le linee verticali nella mappa 3d.
+ma adifferenza dell'altra funzione, non va a prendere
+i colori dalla texture, bensi
 più semplicemente colora ogni cosa di un solo colore, ad esempio
-il colore rosso. Tutte le altezze disegnate nella mappa 3d quindi avrebbero 
+il colore rosso. Tutte le altezze disegnate nella mappa 3d quindi avrebbero
 un solo colore.*/
-void draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, t_c3d *c3d)
+void	draw_3d_wall_height_with_one_color(double x_3d, double h, t_c3d *c3d)
 {
-	double y;
-	y = c3d->win_2d.dimension.w / 2 - (line_heigth / 2);
-    double tmp = y + line_heigth;
+	double	y;
+	double	tmp;
+
+	tmp = y + h;
+	y = c3d->win_2d.dimension.w / 2 - (h / 2);
 	while (y < tmp)
 	{
-
-    	mlx_pixel_put(c3d->mlx_connection, c3d->win_3d.mlx_win, x_3d, y, RED); //for 3d win
+		mlx_pixel_put(c3d->mlx_connection, c3d->win_3d.mlx_win, x_3d, y, RED);
 		y++;
 	}
 }
 
-/*if you know a point and an angle, you can determin the line passing for that point
-along that direction. You can use the linear equation of a line. Indeed the angula coefficient
+/*if you know a point and an angle, you can determin
+the line passing for that point
+along that direction. You can use the linear equation of a line.
+Indeed the angula coefficient
 in the equation (m) is the tan(angle).
 The linear equation is: y = mx + c
 where c is the impact point on y axis.
 */
 void	draw_line(t_point point, double angle, int color, t_c3d *c3d)
 {
-	double m;
-	double c;
+	double	m;
+	double	c;
 
 	m = tan(angle);
-	c = point.y - (m * point.x);	
+	c = point.y - (m * point.x);
 	while (point.x < 10 * TILE_SIZE)
 	{
 		point.y = m * point.x + c;
-		mlx_pixel_put(c3d->mlx_connection, c3d->win_2d.mlx_win, point.x, point.y, color);
+		mlx_pixel_put(c3d->mlx_connection, c3d->win_2d.mlx_win, \
+		point.x, point.y, color);
 		point.x++;
 	}
 }
 
-
-/*questa stampa le celle senza margine*/
-void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d)
+/*questa stampa le celle senza margine
+commento che stava dopo il print di aaaaa:
+	//ft_color(img_data_addr, xy.x + j, xy.y + i, c3d, color);
+*/
+void	draw_tile(char **img_data_addr, t_point xy, int color, t_c3d *c3d)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < TILE_SIZE)
 	{
@@ -56,7 +76,6 @@ void draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d)
 		while (j < TILE_SIZE)
 		{
 			printf("aaaaaa\n");
-		  	//ft_color(img_data_addr, x + j, y + i, c3d, color);
 			j++;
 		}
 		i++;

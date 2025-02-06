@@ -1,121 +1,125 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda_checks.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 17:18:50 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/12/07 17:19:20 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
 
-static int check_NE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int	check_ne(char **map_grid, double card_dir, t_point point_to_verify)
 {
-    t_point p; //to better imporve readability
-    int px; //for readability: è il p.x castato ad int
-    int py; //for readability: è il p.y castato ad int
+	t_point	p;
+	int		px;
+	int		py;
 
-    p.x = 0; //inizializzo p
-    p.y = 0; //inizializzo p
-    p = point_to_verify; //associo point_to_verify a p
-    px = (int)p.x; //associo a px il valore castato dell'ascissa di p 
-    py = (int)p.y; //associo a py il valore castato dell'ordinata di p 
-    if (cardinal_direction == NE)
-    {
-        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' && map_grid[(py + 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
-        {
-            p.x = p.x - 1;
-            p.y = p.y + 1;
-          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, RED);
-            return (True);
-        }
-    }
-    return (False);
+	p.x = 0;
+	p.y = 0;
+	p = point_to_verify;
+	px = (int)p.x;
+	py = (int)p.y;
+	if (card_dir == NE)
+	{
+		if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' \
+		&& map_grid[(py + 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
+		{
+			p.x = p.x - 1;
+			p.y = p.y + 1;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
-static int check_NW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int	check_nw(char **map_grid, double card_dir, t_point point_to_verify)
 {
-    t_point p; //to better imporve readability
-    int px; //for readability: è il p.x castato ad int
-    int py; //for readability: è il p.y castato ad int
+	t_point	p;
+	int		px;
+	int		py;
 
-    p.x = 0; //inizializzo p
-    p.y = 0; //inizializzo p
-    p = point_to_verify; //associo point_to_verify a p
-    px = (int)p.x; //associo a px il valore castato dell'ascissa di p 
-    py = (int)p.y; //associo a py il valore castato dell'ordinata di p 
-
-    if (cardinal_direction == NW)
-    {
-        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && \
+	p.x = 0;
+	p.y = 0;
+	p = point_to_verify;
+	px = (int)p.x;
+	py = (int)p.y;
+	if (card_dir == NW)
+	{
+		if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && \
 		map_grid[(py + 1) / TILE_SIZE][px / TILE_SIZE] == '1')
-        {
-            p.x = p.x - 1;
-            p.y = p.y + 1;
-          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (True);
-        }
-    }
-    return (False);
+		{
+			p.x = p.x - 1;
+			p.y = p.y + 1;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
-static int check_SE_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int	check_se(char **map_grid, double card_dir, t_point point_to_verify)
 {
-    t_point p; //to better imporve readability
-    int px; //for readability: è il p.x castato ad int
-    int py; //for readability: è il p.y castato ad int
+	t_point	p;
+	int		px;
+	int		py;
 
-    p.x = 0; //inizializzo p
-    p.y = 0; //inizializzo p
-    p = point_to_verify; //associo point_to_verify a p
-    px = (int)p.x; //associo a px il valore castato dell'ascissa di p 
-    py = (int)p.y; //associo a py il valore castato dell'ordinata di p 
-
-    if (cardinal_direction == SE)
-    {
-        if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' && map_grid[(py - 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
-        {
-            p.x = p.x - 1;
-            p.y = p.y + 1;
-          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (True);
-        }
-    }
-    return (False);
+	p.x = 0;
+	p.y = 0;
+	p = point_to_verify;
+	px = (int)p.x;
+	py = (int)p.y;
+	if (card_dir == SE)
+	{
+		if (map_grid[py / TILE_SIZE][(px - 1) / TILE_SIZE] == '1' && \
+		map_grid[(py - 1) / TILE_SIZE][(px / TILE_SIZE)] == '1')
+		{
+			p.x = p.x - 1;
+			p.y = p.y + 1;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
-static int check_SW_for_is_it_passing_between_two_walls(char **map_grid, double cardinal_direction, t_point point_to_verify)
+static int	check_sw(char **map_grid, double card_dir, t_point point_to_verify)
 {
-    t_point p; //to better imporve readability
-    int px; //for readability: è il p.x castato ad int
-    int py; //for readability: è il p.y castato ad int
+	t_point	p;
+	int		px;
+	int		py;
 
-    p.x = 0; //inizializzo p
-    p.y = 0; //inizializzo p
-    p = point_to_verify; //associo point_to_verify a p
-    px = (int)p.x; //associo a px il valore castato dell'ascissa di p 
-    py = (int)p.y; //associo a py il valore castato dell'ordinata di p 
-
-    if (cardinal_direction == SW)
-    {
-        if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && map_grid[(py - 1) / TILE_SIZE][px / TILE_SIZE] == '1')
-        {
-            p.x = p.x - 1;
-            p.y = p.y + 1;
-          //bresenham(c3d, c3d->player.position.x, c3d->player.position.y, point_to_verify.x, point_to_verify.y, YELLOW);
-            return (True);
-        }
-    }
-    return (False);
+	p.x = 0;
+	p.y = 0;
+	p = point_to_verify;
+	px = (int)p.x;
+	py = (int)p.y;
+	if (card_dir == SW)
+	{
+		if (map_grid[py / TILE_SIZE][(px + 1) / TILE_SIZE] == '1' && \
+		map_grid[(py - 1) / TILE_SIZE][px / TILE_SIZE] == '1')
+		{
+			p.x = p.x - 1;
+			p.y = p.y + 1;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
-/*gli passo un punto per frlo verificare. Se il muro ha attraversato due muri, setta il corrispettivo end_point
-da stampare  e ritprna 1 per fare il break.
-vedere poi se è megliofare una eventuale verisone che mette piu precisione magari con double
-sulla mappa*/
-int is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point point_to_verify)
+int	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point p)
 {
-    double direction;
+	double	direction;
 
-    direction = ray->cardinal_direction;
-    if (check_NE_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (True);
-    else if(check_SE_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (True);
-    else if (check_NW_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (True);
-    else if(check_SW_for_is_it_passing_between_two_walls(map_grid, direction, point_to_verify))
-        return (True);
-    return (False);
+	direction = ray->cardinal_direction;
+	if (check_ne(map_grid, direction, p))
+		return (TRUE);
+	else if (check_se(map_grid, direction, p))
+		return (TRUE);
+	else if (check_nw(map_grid, direction, p))
+		return (TRUE);
+	else if (check_sw(map_grid, direction, p))
+		return (TRUE);
+	return (FALSE);
 }

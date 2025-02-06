@@ -6,13 +6,13 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:05 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/02 19:54:53 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:28:19 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c3d.h"
 
-void inizialize_map_fm_file(t_map *map)
+void	inizialize_map_fm_file(t_map *map)
 {
 	map->texture_data = NULL;
 	map->map_data = NULL;
@@ -21,15 +21,15 @@ void inizialize_map_fm_file(t_map *map)
 	map->grid = NULL;
 	map->player_orientation = 0;
 	map->player_position = (t_point){0, 0};
-	map->NO_texture = 0;
-	map->SO_texture = 0;
-	map->WE_texture = 0;
-	map->EA_texture = 0;
-	map->F_color = 0;
-	map->C_color = 0;
+	map->no_texture = 0;
+	map->so_texture = 0;
+	map->we_texture = 0;
+	map->ea_texture = 0;
+	map->f_color = 0;
+	map->c_color = 0;
 }
 
-void initialize_player(t_player *player)
+void	initialize_player(t_player *player)
 {
 	player->direction = 0;
 	player->perpendicular_direction = 0;
@@ -51,9 +51,9 @@ void initialize_player(t_player *player)
 	player->fov.angle = FOV_ANGLE;
 	player->fov.half_left = 0;
 	player->fov.half_right = 0;
-	
 }
-void initialize_img(t_img *img)
+
+void	initialize_img(t_img *img)
 {
 	img->bits_per_pixel = 0;
 	img->data_addr = NULL;
@@ -64,7 +64,7 @@ void initialize_img(t_img *img)
 	img->size_line = 0;
 }
 
-void initialize_ray(t_ray *ray)
+void	initialize_ray(t_ray *ray)
 {
 	ray->cardinal_direction = 0;
 	ray->first_side_point.x = 0;
@@ -87,7 +87,7 @@ void initialize_ray(t_ray *ray)
 	ray->last_increment = 0;
 }
 
-void initialization(t_c3d *c3d)
+void	initialization(t_c3d *c3d)
 {
 	initialize_img(&c3d->map);
 	initialize_img(&c3d->texture[0]);

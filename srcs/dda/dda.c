@@ -1,7 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 17:20:01 by lpennisi          #+#    #+#             */
+/*   Updated: 2024/12/07 19:58:15 by lpennisi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c3d.h"
 
-void	enstabilish_orientation(t_ray *ray, int ray_direction, int last_increment)
+void	enstabilish_orient(t_ray *ray, int last_increment)
 {
+	int	ray_direction;
+
+	ray_direction = ray->cardinal_direction;
 	if (last_increment == INCREMENT_X)
 	{
 		if (ray_direction == NW || ray_direction == SW || ray_direction == W)
@@ -18,39 +33,50 @@ void	enstabilish_orientation(t_ray *ray, int ray_direction, int last_increment)
 	}
 }
 
-//questa funcione riceve un punto di partenza e un angolo e quindi calcola per un singolo raggio il suo percorso fino a che non incontra un muro
-t_ray dda(t_point start_point, double alpha, t_c3d *c3d)
+static t_point	calculate_end_point(t_ray *ray, double alpha, t_c3d *c3d)
 {
-	t_ray   ray;
- 	initialize_ray(&ray);
+	if (fabs(ray->path.x) < fabs(ray->path.y))
+	{
+		c3d->player.ray.last_increment = INCREMENT_X;
+		return \
+		(trigonometric_point_calc(ray->first_point, ray->path.x, alpha));
+	}
+	else
+	{
+		c3d->player.ray.last_increment = INCREMENT_Y;
+		return \
+		(trigonometric_point_calc(ray->first_point, ray->path.y, alpha));
+	}
+}
 
+static int	check_wall_collision(t_ray *ray, t_c3d *c3d)
+{
+	if (is_it_passing_between_two_walls(ray, c3d->raw_map.grid, ray->end_point))
+		return (TRUE);
+	if (is_it_a_wall(ray->end_point, c3d->raw_map.grid))
+		return (TRUE);
+	return (FALSE);
+}
+
+t_ray	dda(t_point start_point, double alpha, t_c3d *c3d)
+{
+	t_ray	ray;
+
+	initialize_ray(&ray);
 	ray.cardinal_direction = get_cardinal_direction(alpha);
-	ray.first_point = start_point; //associo il mio endpoin al primo punto di impatto. aggiornerò man mano il mio end point
-	// printf("\n\n\ninizia un nuovo raggio\n");
+	ray.first_point = start_point;
 	while (is_it_inside_map_perimeter(ray.first_point, c3d->raw_map.dimension))
 	{
-		// printf("attuale primo punto: %f, %f\n", ray.first_point.x, ray.first_point.y);
-		ray.first_side_point = chose_side_point(ray.first_point, ray.cardinal_direction); //individua uno dei vertici interni della cella
-		// printf("side_point per calcolo delta: %f, %f\n", ray.first_side_point.x, ray.first_side_point.y);
-
-		ray.delta = calculate_delta(ray.first_point, ray.first_side_point, ray.cardinal_direction); //dx viene calcolato solo qui perchè poi saranno solo incrementi fissi di TILE_SIZE
+		ray.first_side_point = chose_side_point(ray.first_point, \
+		ray.cardinal_direction);
+		ray.delta = calc_delta(ray.first_point, \
+		ray.first_side_point, ray.cardinal_direction);
 		ray.path = calculate_path(ray.delta, alpha);
-		if (fabs(ray.path.x) < fabs(ray.path.y))
-		{
-			c3d->player.ray.last_increment = INCREMENT_X;	//per colorare bene in prospettiva....
-			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.x, alpha);
-		}
-		else	
-		{
-			c3d->player.ray.last_increment = INCREMENT_Y;	
-			ray.end_point = trigonometric_pointCalculation(ray.first_point, ray.path.y, alpha);
-		}
-		if(is_it_passing_between_two_walls(&ray, c3d->raw_map.grid, ray.end_point))
-			break;
-		if (is_it_a_wall(ray.end_point, c3d->raw_map.grid))
-			break;
+		ray.end_point = calculate_end_point(&ray, alpha, c3d);
+		if (check_wall_collision(&ray, c3d))
+			break ;
 		ray.first_point = ray.end_point;
 	}
-	enstabilish_orientation(&ray, ray.cardinal_direction, c3d->player.ray.last_increment);
+	enstabilish_orient(&ray, c3d->player.ray.last_increment);
 	return (ray);
 }
