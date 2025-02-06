@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:38 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/07 23:32:38 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:14:56 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ must be the last element in the file.\n"
 
 #define M_PI 3.14159265358979323846
 #define PI_FIX 0.00000001
-#define DEGREE 0.0785
+#define DEGREE 0.0785398163 // 2 * M_PI / 80
 
 #define CIRCUMFERENCE_CHECKS 8
 
 #define TILE_SIZE 64
-#define RAY_LENGTH 16
+#define RAY_LENGTH 16 // Radius * 8
 #define FOOT_STEP 5
 #define RADIUS 2
 
-#define CAMERA_DISTANCE 20
-#define FOV_ANGLE 1.256
+#define CAMERA_DISTANCE 20 // RADIUS * 10
+#define FOV_ANGLE 1.25664 // M_PI / 2.5
 
 #define SCALE_FACTOR 10000
 
@@ -110,6 +110,14 @@ typedef struct s_point
 	double	x;
 	double	y;
 }	t_point;
+
+typedef struct s_bras_params
+{
+	t_point	xy0;
+	t_point	dx;
+	t_point	sx;
+	int		color;
+}	t_bras_params;
 
 typedef struct s_map
 {
@@ -251,7 +259,7 @@ int		is_it_a_wall(t_point point_to_verify, char **map_grid);
 void	draw_2d_map(t_img *img, t_c3d *c3d);
 void	draw_player(t_c3d *c3d, t_point center, int radius, int color);
 void	draw_player_in_img(t_c3d *c3d);
-void	draw_player_direction(t_c3d *c3d, int x0, int y0, double alpha, \
+void	draw_player_direction(t_c3d *c3d, t_point xy, double alpha, \
 int color);
 void	bresenham(t_c3d *c3d, int x1, int y1, int color);
 void	draw_line(t_point point, double angle, int color, t_c3d *c3d);
@@ -275,13 +283,13 @@ void	move_player_oblq(int direction, t_move move, t_point *position, \
 int step_decr);
 int		update_alpha_rotation(void *param);
 int		update_movement(void *param);
-int		is_collision(double player_next_x, double player_next_y, t_c3d *c3d); 
+int		is_collision(double player_next_x, double player_next_y, t_c3d *c3d);
 t_point	tile_reference(t_point point);
 void	set_player_orientation(t_c3d *c3d);
 
 void	draw_3d_wall_height_with_one_color(double x_3d, double line_heigth, \
 t_c3d *c3d);
-void	draw_tile(char **img_data_addr, int x, int y, int color, t_c3d *c3d);
+void	draw_tile(char **img_data_addr, t_point xy, int color, t_c3d *c3d);
 void	check_shorter_rows(t_c3d *c3d, char **map_lines, int height);
 void	check_map_closed(t_c3d *c3d, char **map_lines);
 void	remove_extra_space(char **lines);

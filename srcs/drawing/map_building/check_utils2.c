@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:58:58 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/07 21:20:34 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:55:06 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	checks(char **lines, t_map *raw_map, int i, int j)
 	{
 		if (!raw_map->player_orientation)
 		{
-			raw_map->player_position = (t_point)\
-			{j * TILE_SIZE + TILE_SIZE/2, i * TILE_SIZE + TILE_SIZE/2};
+			raw_map->player_position = (t_point) \
+			{j * TILE_SIZE + TILE_SIZE / 2, i * TILE_SIZE + TILE_SIZE / 2};
 			raw_map->player_orientation = get_orientation(lines[i][j]);
 		}
 		else

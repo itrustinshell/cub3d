@@ -2,7 +2,7 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -I$(MLXDIR) -Iincludes -I$(LIBFTDIR) -g #-fsanitize=address #-Wall -Wextra -Werror
 
-MAP_PATH = res/maps/matrix_corridor.cub
+MAP_PATH = res/maps/subject.cub
 EXE = $(NAME) $(MAP_PATH)
 
 LIBFTDIR = ./libft
@@ -49,7 +49,7 @@ test: all
 	./$(EXE)
 
 norm:
-	norminette $(SRCS) includes
+	norminette libft includes $(SRCS)
 	
 valgrind: all
 	valgrind --leak-check=full ./$(EXE)

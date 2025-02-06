@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:00:44 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 17:32:22 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:17:20 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	move_face_south_west(t_move move, t_point *position, int step_decr)
 	}
 }
 
-void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr)
+void	move_player_oblq(int direction, t_move move, \
+t_point *position, int step_decr)
 {
 	if (direction == NE)
 		move_face_north_east(move, position, step_decr);
