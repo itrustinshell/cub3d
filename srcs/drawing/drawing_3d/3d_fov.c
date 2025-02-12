@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:38:08 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/07 20:49:56 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:15:09 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ static void	set_pixels(int x_texture, t_c3d *c3d, t_ray ray)
 		y_texture = (c3d->texture[get_orientation_id(ray.orientation)].\
 		img_dimension.h * (y - y_min)) / \
 		c3d->player.ray.view3d.height_wall_line;
-		color = get_pixel(&c3d->texture[get_orientation_id(ray.orientation)], \
-		x_texture, y_texture);
+		if (SHOW_WITH_COLORS)
+			color = get_oriented_texture_color(ray.orientation);
+		else
+			color = get_pixel(&c3d->texture[get_orientation_id(ray.orientation)], \
+			x_texture, y_texture);
 		put_pixel(&c3d->scene_3d, c3d->player.ray.view3d.x_wall_line, y, color);
 		y++;
 	}
