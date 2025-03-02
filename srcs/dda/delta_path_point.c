@@ -72,7 +72,7 @@ t_point	trigonometric_point_calc(t_point point, double path, double alpha)
 
 	point_to_return.x = 0;
 	point_to_return.y = 0;
-	point_to_return.x = point.x + round(fabs(path) * cos(alpha));
-	point_to_return.y = point.y + round(fabs(path) * sin(alpha));
+	point_to_return.x = point.x + (fabs(path) * cos(alpha));
+	point_to_return.y = point.y + (fabs(path) * sin(alpha));
 	return (point_to_return);
 }

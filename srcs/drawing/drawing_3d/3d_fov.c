@@ -114,6 +114,7 @@ void	draw_3d_fov(t_c3d *c3d)
 		ray = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
 		if (SHOW_2D)
 			bresenham(c3d, ray.end_point.x, ray.end_point.y, PINK);
+		
 		draw_3d_vertical_line(c3d, ray, saved_left_half_fov);
 		c3d->player.fov.half_left += angle_variation;
 	}
