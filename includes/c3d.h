@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:38 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/12 16:15:17 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:13:50 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define SHOW_2D 1
-#define SHOW_WITH_COLORS 1
+#define SHOW_2D 0
+#define SHOW_WITH_COLORS 0
 
 #define INVALID_PATH "Error\nInvalid path!\n"
 #define INVALID_PARAMS "Error\nThe only allowed parameter is the path\
@@ -242,6 +242,10 @@ void	point_init(t_point *point_to_initialize);
 
 void	set_connection_and_windows(t_c3d *c3d);
 
+int		n_corner(int x, int y, t_c3d *c3d);
+int		north(int x, int y, t_c3d *c3d);
+int		west(int x, int y, t_c3d *c3d);
+t_point	calculate_end_point(t_ray *ray, double alpha, t_c3d *c3d);
 t_ray	dda(t_point start_point, double alpha, t_c3d *c3d);
 t_point	chose_side_point(t_point first_point, int cardinal_direction);
 int		get_cardinal_direction(double angle);

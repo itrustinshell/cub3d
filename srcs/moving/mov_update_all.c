@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:22:16 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/06 16:23:19 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 10:39:36 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,6 @@ int	update_alpha_rotation(void *param)
 	has_rotated = 0;
 	has_rotated = set_rotation(c3d);
 	c3d->player.perpendicular_direction = c3d->player.direction - (M_PI / 2);
-	/*#TESTING TEESTING## SE VUOI VEDERE LA retta
-	perpendicolare alla direzionedel giocatore
-	tieni rivelata la seguente funzione*/
-	//draw_line(c3d->player.position, c3d->player.perpendicular_direction, RED, c3d);
 	c3d->player.fov.half_left = c3d->player.direction - (FOV_ANGLE / 2);
 	c3d->player.fov.half_right = c3d->player.direction + (FOV_ANGLE / 2);
 	return (has_rotated);

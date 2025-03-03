@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:27:58 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/06 15:34:49 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 10:40:29 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	draw_player_in_img(t_c3d *c3d)
 			{
 				put_pixel(&c3d->map, c3d->player.position.x + point.x, \
 				c3d->player.position.y + point.y, BLACK);
-				//mlx_pixel_put(c3d->mlx_connection, c3d->win_2d.mlx_win, \
-				//center.x + point.x, center.y + point.y, color);
 			}
 			point.x++;
 		}

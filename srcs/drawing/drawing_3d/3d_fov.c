@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:38:08 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/12 16:15:09 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 10:43:32 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	set_pixels(int x_texture, t_c3d *c3d, t_ray ray)
 		if (SHOW_WITH_COLORS)
 			color = get_oriented_texture_color(ray.orientation);
 		else
-			color = get_pixel(&c3d->texture[get_orientation_id(ray.orientation)], \
-			x_texture, y_texture);
+			color = get_pixel(&c3d->texture[\
+				get_orientation_id(ray.orientation)], x_texture, y_texture);
 		put_pixel(&c3d->scene_3d, c3d->player.ray.view3d.x_wall_line, y, color);
 		y++;
 	}
@@ -114,7 +114,6 @@ void	draw_3d_fov(t_c3d *c3d)
 		ray = dda(c3d->player.position, c3d->player.fov.half_left, c3d);
 		if (SHOW_2D)
 			bresenham(c3d, ray.end_point.x, ray.end_point.y, PINK);
-		
 		draw_3d_vertical_line(c3d, ray, saved_left_half_fov);
 		c3d->player.fov.half_left += angle_variation;
 	}
