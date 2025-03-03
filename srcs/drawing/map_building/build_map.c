@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:02:59 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/03 18:42:29 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:42:50 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	process_line(int fd, char **content_file, int *before_cont, int *blank_line)
 		return (0);
 	}
 	if (*blank_line)
-		return (2);
+		return (free(line), 2);
 	*before_cont = 0;
 	*content_file = ft_strjoin_free(*content_file, line, 3);
 	return (0);
@@ -96,7 +96,10 @@ char	*read_map_data(t_c3d *c3d, int fd)
 		if (status == 1)
 			break ;
 		else if (status == 2)
+		{
+			free(content_file);
 			error_exit(c3d, INVALID_MAP);
+		}
 	}
 	return (content_file);
 }

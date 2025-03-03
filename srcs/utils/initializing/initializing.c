@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:05 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/06 16:28:19 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:39:40 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ void	initialization(t_c3d *c3d)
 	initialize_win(&c3d->win_3d);
 	inizialize_map_fm_file(&c3d->raw_map);
 	c3d->mlx_connection = NULL;
+	c3d->map_lines = NULL;
 }

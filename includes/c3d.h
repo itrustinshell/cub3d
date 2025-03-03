@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:38 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/03/03 11:13:50 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:35:51 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ typedef struct s_c3d
 	t_img		texture[4];
 	t_img		scene_3d;
 	t_player	player;
+	char		**map_lines;
 }	t_c3d;
 
 int		get_direction(double perpendicular_direction);

@@ -52,7 +52,7 @@ norm:
 	norminette libft includes $(SRCS)
 	
 valgrind: all
-	valgrind --leak-check=full ./$(EXE)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE)
 
 clean:
 	rm -rf $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:55:11 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/03 18:01:50 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:59:29 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	check_texture_data(t_c3d *c3d)
 
 	raw_map = &c3d->raw_map;
 	lines = ft_split(raw_map->texture_data, '\n');
+	c3d->map_lines = lines;
 	i = -1;
 	remove_extra_space(lines);
 	while (lines[++i])
@@ -69,7 +70,6 @@ void	check_texture_data(t_c3d *c3d)
 	}
 	if (!are_information_set(*raw_map))
 		error_exit(c3d, MISSING_INFORMATION);
-	ft_free_matrix(lines, -1);
 }
 
 void	parse_and_check(t_c3d *c3d)
@@ -81,11 +81,11 @@ void	parse_and_check(t_c3d *c3d)
 	check_texture_data(c3d);
 	raw_map = &c3d->raw_map;
 	map_lines = ft_split(raw_map->map_data, '\n');
+	c3d->raw_map.grid = map_lines;
 	if (check_map_characters(raw_map, map_lines))
 		error_exit(c3d, INVALID_CHARACTER);
 	c3d->player.position = raw_map->player_position;
 	c3d->player.tile = tile_reference(c3d->player.position);
 	set_player_orientation(c3d);
 	check_map_closed(c3d, map_lines);
-	c3d->raw_map.grid = map_lines;
 }

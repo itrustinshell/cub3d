@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:31:51 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/06 16:31:51 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:36:56 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_raw_map(t_c3d *c3d)
 		free(c3d->raw_map.f_color);
 	if (c3d->raw_map.c_color)
 		free(c3d->raw_map.c_color);
+	if (c3d->map_lines)
+		ft_free_matrix(c3d->map_lines, -1);
 }
 
 int	on_destroy(t_c3d *c3d)

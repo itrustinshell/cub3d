@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 23:30:17 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/02/03 18:52:00 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:28:48 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	check_previous_row(t_c3d *c3d, char **map_lines, int prev_r_len, int i)
 	int	j;
 	int	row_length;
 
-	j = row_length;
 	row_length = strlen(map_lines[i]);
+	j = row_length;
 	while (j < prev_r_len)
 	{
 		if (map_lines[i - 1][j] != '1')
@@ -33,8 +33,8 @@ void	check_next_row(t_c3d *c3d, char **map_lines, int next_r_len, int i)
 	int	j;
 	int	row_length;
 
-	j = row_length;
 	row_length = strlen(map_lines[i]);
+	j = row_length;
 	while (j < next_r_len)
 	{
 		if (map_lines[i + 1][j] != '1')
