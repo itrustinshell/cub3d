@@ -6,7 +6,7 @@
 /*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:38 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/03/15 17:13:07 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:31:30 by lpennisi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define SHOW_2D 1
+#define SHOW_2D 0
 #define SHOW_WITH_COLORS 0
 
 #define INVALID_PATH "Error\nInvalid path!\n"
