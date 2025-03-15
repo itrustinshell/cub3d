@@ -23,7 +23,7 @@ static int	check_ne(char **map_grid, double card_dir, t_point p)
 	{
 		if ((int)p.y / TILE_SIZE >= w || ((int)p.x - 1) / TILE_SIZE >= h \
 		|| ((int)p.y + 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
-			return (ft_printf("HELLLLOOOOO\n"), FALSE);
+			return (FALSE);
 		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x - 1) / TILE_SIZE] == '1' \
 		&& map_grid[((int)p.y + 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
 		{
@@ -46,7 +46,7 @@ static int	check_nw(char **map_grid, double card_dir, t_point p)
 	{
 		if ((int)p.y / TILE_SIZE >= w || ((int)p.x + 1) / TILE_SIZE >= h \
 		|| ((int)p.y + 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
-			return (ft_printf("HELLLLOOOOO\n"), FALSE);
+			return (FALSE);
 		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x + 1) / TILE_SIZE] == '1' \
 		&& map_grid[((int)p.y + 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
 		{
@@ -69,7 +69,7 @@ static int	check_se(char **map_grid, double card_dir, t_point p)
 	{
 		if ((int)p.y / TILE_SIZE >= w || ((int)p.x - 1) / TILE_SIZE >= h \
 		|| ((int)p.y - 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
-			return (ft_printf("HELLLLOOOOO\n"), FALSE);
+			return (FALSE);
 		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x - 1) / TILE_SIZE] == '1' \
 		&& map_grid[((int)p.y - 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
 		{
@@ -92,7 +92,7 @@ static int	check_sw(char **map_grid, double card_dir, t_point p)
 	{
 		if ((int)p.y / TILE_SIZE >= w || ((int)p.x + 1) / TILE_SIZE >= h \
 		|| ((int)p.y - 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
-			return (ft_printf("HEAAAAAAOOO\n"), FALSE);
+			return (FALSE);
 		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x + 1) / TILE_SIZE] == '1' \
 		&& map_grid[((int)p.y - 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
 		{
