@@ -22,7 +22,7 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define SHOW_2D 0
+#define SHOW_2D 1
 #define SHOW_WITH_COLORS 0
 
 #define INVALID_PATH "Error\nInvalid path!\n"
