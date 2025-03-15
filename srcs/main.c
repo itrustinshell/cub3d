@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 
-void	parse_parameters(int argc, char **argv)
+void	parse_parameters(int argc)
 {
 	if (argc != 2)
 		error_exit(NULL, INVALID_PARAMS);
@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 	t_c3d	c3d;
 
 	initialization(&c3d);
-	parse_parameters(argc, argv);
+	parse_parameters(argc);
 	build_map(argv[MAP_PATH], &c3d);
 	set_connection_and_windows(&c3d);
 	set_texture(&c3d);

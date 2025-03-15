@@ -59,7 +59,6 @@ void	check_space(t_c3d *c3d, char **map_lines, int i, int height)
 void	check_first_last_column(t_c3d *c3d, char **map_lines, int height)
 {
 	int	i;
-	int	j;
 	int	row_length;
 
 	i = 0;
@@ -74,7 +73,6 @@ void	check_first_last_column(t_c3d *c3d, char **map_lines, int height)
 		if (map_lines[i][row_length - 1] != '1' && map_lines[i] \
 		[row_length - 1] != ' ' && map_lines[i][row_length - 1] != '\t')
 			error_exit(c3d, "Error\nMap is not closed: last column");
-		j = 1;
 		check_space(c3d, map_lines, i, height);
 		i++;
 	}

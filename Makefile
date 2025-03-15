@@ -1,7 +1,6 @@
-NAME = cub3d
+NAME = cub3D
 CC = gcc
-CFLAGS = -I$(MLXDIR) -Iincludes -I$(LIBFTDIR) -gdwarf-2
- #-fsanitize=address #-Wall -Wextra -Werror
+CFLAGS = -I$(MLXDIR) -Iincludes -I$(LIBFTDIR) -gdwarf-2 -Wall -Wextra -Werror #-fsanitize=address 
 
 MAP_PATH = res/maps/subject.cub
 EXE = $(NAME) $(MAP_PATH)
@@ -11,7 +10,7 @@ LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 LIBFT_FLAGS = -L$(LIBFTDIR) -lft
 
-MLXDIR = ./mlx
+MLXDIR = ./minilibx-linux
 MLXLIB = $(MLXDIR)/libmlx.a
 INCLUDES = -I/usr/include -I$(MLXDIR) -I$(LIBFTDIR) 
 MLX_FLAGS = -L$(MLXDIR) -lmlx -L/usr/lib/X11 -lXext -lX11
