@@ -53,6 +53,25 @@ norm:
 	norminette libft includes $(SRCS)
 
 invalid_test: all
+	./$(NAME) res/maps/invalid/empty_line.cub
+	./$(NAME) res/maps/invalid/empty.cub
+	./$(NAME) res/maps/invalid/foo.txt
+	./$(NAME) res/maps/invalid/invalid_rgb.cub
+	./$(NAME) res/maps/invalid/invalid_rgb2.cub
+	./$(NAME) res/maps/invalid/invalid_textures.cub
+	./$(NAME) res/maps/invalid/missing_texture.cub
+	./$(NAME) res/maps/invalid/no_ceiling_rgb.cub
+	./$(NAME) res/maps/invalid/no_ceiling.cub
+	./$(NAME) res/maps/invalid/no_floor_rgb.cub
+	./$(NAME) res/maps/invalid/no_floor.cub
+	./$(NAME) res/maps/invalid/no_player.cub
+	./$(NAME) res/maps/invalid/out_of_map_elements.cub
+	./$(NAME) res/maps/invalid/player_on_borders.cub
+	./$(NAME) res/maps/invalid/unclosed_map.cub
+	./$(NAME) res/maps/invalid/unknown_char.cub
+	./$(NAME) res/maps/invalid/duplicate_player.cub
+
+valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/empty_line.cub
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/empty.cub
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/foo.txt
@@ -70,8 +89,6 @@ invalid_test: all
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/unclosed_map.cub
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/unknown_char.cub
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) res/maps/invalid/duplicate_player.cub
-
-valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE)
 
 clean:

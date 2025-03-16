@@ -1,5 +1,6 @@
-cub3d
+cub3D
 objs
 *.o
 .*
 *.a
+minilibx-linux
