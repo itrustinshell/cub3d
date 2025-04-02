@@ -42,20 +42,20 @@ void	remove_consecutives_space(char **lines)
 
 void	remove_last_space(char **lines)
 {
-    int	i;
-    int	j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (lines[i])
-    {
-        j = ft_strlen(lines[i]) - 1;
-        while (j >= 0 && lines[i][j] == ' ')
-        {
-            lines[i][j] = '\0';
-            j--;
-        }
-        i++;
-    }
+	i = 0;
+	while (lines[i])
+	{
+		j = ft_strlen(lines[i]) - 1;
+		while (j >= 0 && lines[i][j] == ' ')
+		{
+			lines[i][j] = '\0';
+			j--;
+		}
+		i++;
+	}
 }
 
 void	remove_extra_space(char **lines)
